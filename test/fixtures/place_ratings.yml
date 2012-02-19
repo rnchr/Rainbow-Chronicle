@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  overall: 1
+  same_sex: 1
+  lgbt_group: 1
+  lgbt_comfort: 1
+  customer_attitude: 1
+  lgbt_popularity: 1
+  comment: MyText
+
+two:
+  overall: 1
+  same_sex: 1
+  lgbt_group: 1
+  lgbt_comfort: 1
+  customer_attitude: 1
+  lgbt_popularity: 1
+  comment: MyText

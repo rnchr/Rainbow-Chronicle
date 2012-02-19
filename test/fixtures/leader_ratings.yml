@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  voting_record: 1
+  public_views: 1
+  inclusion: 1
+  personal_experience: 1
+  aggregate: 1
+  comment: MyText
+
+two:
+  voting_record: 1
+  public_views: 1
+  inclusion: 1
+  personal_experience: 1
+  aggregate: 1
+  comment: MyText

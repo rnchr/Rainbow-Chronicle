@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  phone: MyString
+  address: MyText
+  website: MyString
+  lat: 1.5
+  lng: 1.5
+  picture: 1
+  start: 2012-02-19
+  end: 2012-02-19
+  timespan: MyString
+
+two:
+  title: MyString
+  phone: MyString
+  address: MyText
+  website: MyString
+  lat: 1.5
+  lng: 1.5
+  picture: 1
+  start: 2012-02-19
+  end: 2012-02-19
+  timespan: MyString

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @leader.title %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @leader.phone %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @leader.address %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%= @leader.website %>
+</p>
+
+<p>
+  <b>Lat:</b>
+  <%= @leader.lat %>
+</p>
+
+<p>
+  <b>Lng:</b>
+  <%= @leader.lng %>
+</p>
+
+<p>
+  <b>Picture:</b>
+  <%= @leader.picture %>
+</p>
+
+
+<%= link_to 'Edit', edit_leader_path(@leader) %> |
+<%= link_to 'Back', leaders_path %>
