@@ -6,7 +6,7 @@ class CreateLeaderRatings < ActiveRecord::Migration
       t.integer :public_views
       t.integer :inclusion
       t.integer :personal_experience
-      t.integer :aggregate
+      t.integer :overall
       t.text :comment
 
       t.timestamps

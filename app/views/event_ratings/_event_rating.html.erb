@@ -1,0 +1,7 @@
+<% # For some reason empty ratings were being passed.. solution: %>
+<% unless event_rating.id.nil? %>
+<div class="rating event-rating">
+	<p><strong>Overall Rating:</strong> <%= event_rating.overall %></p>
+	<p><strong>Comments:</strong> <%= event_rating.comment %></p>
+</div>
+<% end %>

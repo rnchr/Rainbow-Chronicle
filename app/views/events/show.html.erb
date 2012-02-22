@@ -1,49 +1,15 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
 	<div class="span5">
-		<h3><%= @event.title %></h3>
-		<p>
-		  <b>Phone:</b>
-		  <%= @event.phone %>
-		</p>
-
-		<address>
-		  <%= @event.address %>
-		</address>
-
-		<% if @event.website.present? %>
-			<p>
-			  <b>Website:</b>
-			  <%=link_to @event.website, @event.website %>
-			</p>
-		<% end %>
-		<p>
-		  <b>Start:</b>
-		  <%= @event.start %>
-		</p>
-
-		<p>
-		  <b>End:</b>
-		  <%= @event.end %>
-		</p>
-
-		<p>
-		  <b>Timespan:</b>
-		  <%= @event.timespan %>
-		</p>
+		<%= render @event %>
+		<%= render @event.ratings %>
+		<%= link_to "Add rating", new_event_event_rating_path(@event, @event_rating)  %>
 	</div>
 	<div class="span4">
-<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.lat}%2C#{@event.lng}" %>
+		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.lat}%2C#{@event.lng}" %>
 	</div>
+	
 </div>
-
-<h3>Nearby locations</h3>
-<ul>
-<% for location in @event.nearbys(10) %>
-  <li><%= link_to location.address, location %> (<%= location.distance.round(2) %> miles)</li>
-<% end %>
-</ul>
-
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

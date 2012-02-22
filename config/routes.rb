@@ -4,7 +4,7 @@ RcRails::Application.routes.draw do
   devise_for :users
 
   match '/' => 'places#index'
-
+  match '/map'  => 'pages#rainbow_map'
   resources :events do
     resources :event_ratings
   end

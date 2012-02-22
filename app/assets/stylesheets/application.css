@@ -12,4 +12,6 @@
  *= require_tree .
 */
 
-* `require gmaps4rails`
+*= require "gmaps4rails"
+*= require "formtastic"
+*= require "rainbow"

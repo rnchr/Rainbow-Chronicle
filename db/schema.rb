@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219212105) do
+ActiveRecord::Schema.define(:version => 20120222222750) do
 
   create_table "comments", :force => true do |t|
     t.integer  "news_id"
@@ -22,12 +22,14 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
   end
 
   create_table "event_ratings", :force => true do |t|
-    t.integer  "overall"
     t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "event_id"
+    t.string   "ip_address"
+    t.integer  "rating_id"
+    t.integer  "rating"
   end
 
   create_table "events", :force => true do |t|
@@ -41,22 +43,25 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
     t.date     "start"
     t.date     "end"
     t.string   "timespan"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "user_id"
+    t.text     "description"
+    t.boolean  "gmaps"
+    t.integer  "views"
+    t.string   "owner"
+    t.float    "cached_rating"
   end
 
   create_table "leader_ratings", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "voting_record"
-    t.integer  "public_views"
-    t.integer  "inclusion"
-    t.integer  "personal_experience"
-    t.integer  "aggregate"
     t.text     "comment"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "leader_id"
+    t.string   "ip_address"
+    t.integer  "rating_id"
+    t.integer  "rating"
   end
 
   create_table "leaders", :force => true do |t|
@@ -67,9 +72,12 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "picture"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "user_id"
+    t.boolean  "gmaps"
+    t.integer  "views"
+    t.float    "cached_rating"
   end
 
   create_table "news", :force => true do |t|
@@ -77,22 +85,22 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
     t.integer  "user_id"
     t.string   "link"
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "views"
+    t.string   "photo"
+    t.integer  "lock",       :default => 0
   end
 
   create_table "place_ratings", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "overall"
-    t.integer  "same_sex"
-    t.integer  "lgbt_group"
-    t.integer  "lgbt_comfort"
-    t.integer  "customer_attitude"
-    t.integer  "lgbt_popularity"
     t.text     "comment"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "place_id"
+    t.string   "ip_address"
+    t.integer  "rating_id"
+    t.integer  "rating"
   end
 
   create_table "places", :force => true do |t|
@@ -108,6 +116,19 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "user_id"
+    t.boolean  "gmaps"
+    t.integer  "views"
+    t.float    "cached_rating"
+    t.string   "type"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.string   "text"
+    t.string   "for"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "set"
+    t.integer  "order"
   end
 
   create_table "users", :force => true do |t|
@@ -123,6 +144,12 @@ ActiveRecord::Schema.define(:version => 20120219212105) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
+    t.integer  "admin"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "display_name"
+    t.string   "url"
+    t.string   "login"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

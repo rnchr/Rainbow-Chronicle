@@ -1,0 +1,17 @@
+<h3><%= event.title %></h3>
+<p><strong>Rating:</strong> <%= event.rating %></p>
+<address>
+  <%= event.address %>
+</address>
+<% if event.website.present? %>
+<p>
+  <b>Website:</b>
+  <%=link_to event.website, event.website %>
+</p>
+<% end %>
+<b>Start:</b>
+<%= event.start %>
+<b>End:</b>
+<%= event.end %>
+<b>Timespan:</b>
+<%= event.timespan %>

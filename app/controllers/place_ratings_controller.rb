@@ -1,0 +1,3 @@
+class PlaceRatingsController < ApplicationController
+
+end

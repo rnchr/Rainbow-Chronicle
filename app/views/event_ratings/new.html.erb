@@ -1,0 +1,6 @@
+<header>
+	<p>Add Review for <%= @event_rating.event.title %></p>
+</header>
+
+<%= render 'form' %>
+<%= link_to raw("&larr; Back to Event"), event_path(@event_rating.event) %>

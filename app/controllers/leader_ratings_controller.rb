@@ -1,0 +1,3 @@
+class LeaderRatingsController < ApplicationController
+
+end

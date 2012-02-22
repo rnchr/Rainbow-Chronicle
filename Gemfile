@@ -10,6 +10,12 @@ gem 'devise'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'formtastic'
+gem 'cancan'
+
+gem 'sequel'
+gem 'awesome_print'
+gem 'mysql'
 
 # Gems used only for assets and not required
 # in production environments by default.
