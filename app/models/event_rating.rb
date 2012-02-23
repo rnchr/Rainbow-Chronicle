@@ -4,7 +4,7 @@ class EventRating < ActiveRecord::Base
   belongs_to :rating
   validates :user_id, :presence => true
   
-  def text
-    rating.text
+  def full_rating
+    {:text => rating.text, :value => value}
   end
 end

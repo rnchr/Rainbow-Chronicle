@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222222750) do
+ActiveRecord::Schema.define(:version => 20120223054430) do
+
+  create_table "auxiliary_ratings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "linked_id"
+    t.integer  "rating_id"
+    t.integer  "value"
+    t.string   "for"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.integer  "news_id"
@@ -24,12 +34,12 @@ ActiveRecord::Schema.define(:version => 20120222222750) do
   create_table "event_ratings", :force => true do |t|
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "event_id"
     t.string   "ip_address"
-    t.integer  "rating_id"
-    t.integer  "rating"
+    t.float    "overall"
+    t.integer  "auxiliary_rating_id"
   end
 
   create_table "events", :force => true do |t|
@@ -56,12 +66,12 @@ ActiveRecord::Schema.define(:version => 20120222222750) do
   create_table "leader_ratings", :force => true do |t|
     t.integer  "user_id"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "leader_id"
     t.string   "ip_address"
-    t.integer  "rating_id"
-    t.integer  "rating"
+    t.float    "overall"
+    t.integer  "auxiliary_rating_id"
   end
 
   create_table "leaders", :force => true do |t|
@@ -95,12 +105,12 @@ ActiveRecord::Schema.define(:version => 20120222222750) do
   create_table "place_ratings", :force => true do |t|
     t.integer  "user_id"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "place_id"
     t.string   "ip_address"
-    t.integer  "rating_id"
-    t.integer  "rating"
+    t.float    "overall"
+    t.integer  "auxiliary_rating_id"
   end
 
   create_table "places", :force => true do |t|
@@ -119,7 +129,8 @@ ActiveRecord::Schema.define(:version => 20120222222750) do
     t.boolean  "gmaps"
     t.integer  "views"
     t.float    "cached_rating"
-    t.string   "type"
+    t.string   "rating_set"
+    t.string   "owner"
   end
 
   create_table "ratings", :force => true do |t|

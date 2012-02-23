@@ -2,12 +2,14 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @places }
-    end
+     if params[:zip].present?
+        @places = Place.near(params[:zip], 50, :order => :distance).page(params[:page]).per(10)
+        @city = Geocoder.search(params[:zip])
+      else
+        @city = Geocoder.search("Eiffel Tower")
+        @places = Place.near("02155").page(params[:page]).per(10)
+      end
+      @json = @places.to_gmaps4rails
   end
 
   # GET /places/1

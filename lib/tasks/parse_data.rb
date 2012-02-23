@@ -2,7 +2,7 @@
 require_relative './user'
 
 module MigrationTasks
-  def migrate!
+  def MigrationTasks.migrate!
     users = []; errors = []
     DB[:rb11_users].map do |user|
     	ru = RainbowUser.new(user)
@@ -12,38 +12,42 @@ module MigrationTasks
       ru.events.each do |e|
          begin
            Event.create!(RainbowUser.gen_event_hash(e)) unless Event.exists? e[:post_ID]
-           puts "created #{e[:title]}" unless Event.exists? e[:post_ID]
-         rescue
-           puts "couldn't create #{e[:title]}"
+         rescue Exception => ex  
+           puts ex.message  
+           puts "Error on:"
+           ap e
            errors << e
          end
       end
       ru.places.each do |e|
         begin
            Place.create!(RainbowUser.gen_place_hash(e)) unless Place.exists? e[:post_ID]
-           puts "created #{e[:title]}" unless Place.exists? e[:post_ID]
-         rescue
-           puts "couldn't create #{e[:title]}"
+         rescue Exception => ex
+           puts ex.message  
+           puts "Error on:"
+           ap e
            errors << e
          end
       end
   
       ru.leaders.each do |e|
         begin
-           Event.create!(RainbowUser.gen_leader_hash(e)) unless Leader.exists? e[:post_ID]
-           puts "created #{e[:title]}" unless Leader.exists? e[:post_ID]
-         rescue
-           puts "couldn't create #{e[:title]}"
+           Leader.create!(RainbowUser.gen_leader_hash(e)) unless Leader.exists? e[:post_ID]
+         rescue Exception => ex  
+           puts ex.message  
+           puts "Error on:"
+           ap e
            errors << e
          end
       end
   
-      ru.news.each do |n|
+      ru.news.each do |e|
         begin
            News.create!(RainbowUser.gen_news_hash(e)) unless News.exists? e[:post_ID]
-           puts "created #{e[:title]}" unless News.exists? e[:post_ID]
-         rescue
-           puts "couldn't create #{e[:title]}"
+         rescue Exception => ex
+           puts ex.message  
+           puts "Error on:"
+           ap e
            errors << e
          end
       end

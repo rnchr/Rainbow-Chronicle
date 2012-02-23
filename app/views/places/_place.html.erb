@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+<h3><%= link_to place.title, place %></h3>
+<address><%= place.address %></address>
+
+<%= link_to 'Show', place %>
+<%= link_to 'Edit', edit_place_path(place) %>
+<%= link_to 'Destroy', place, confirm: 'Are you sure?', method: :delete %>

@@ -1,0 +1,58 @@
+Encoding::UndefinedConversionError: "\x92" from ASCII-8BIT to UTF-8: INSERT INTO "news" ("body", "created_at", "id", "link", "lock", "photo", "title", "updated_at", "user_id", "views") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Error on:
+{
+       :post_ID[0;37m => [0m[1;34m5666[0m,
+        :author[0;37m => [0m[1;34m3[0m,
+         :title[0;37m => [0m[0;33m"Greedy? Sued For Fraud? Youre the HRCS Newest Spokesperson"[0m,
+          :body[0;37m => [0m[0;33m"We cant stop discussing marriage equality.The recent victoryin Washington State,weddings in New York, and evencards in Whole Foodsare just a sampling of the proof that queer civil rights are finally securing their deserved place in the cultural lexicon.\r\n<div></div>"[0m,
+    :created_at[0;37m => [0m[0;32m2012-02-16 09:40:22 -0500[0m,
+         :views[0;37m => [0m[1;34m3[0m,
+          :lock[0;37m => [0m[1;31mfalse[0m,
+    :post_image[0;37m => [0m"rc-news",
+     :post_link[0;37m => [0m"http://unicornbooty.com/blog/2012/02/15/greedy-sued-for-fraud-you\x92re-the-hrc\x92s-newest-spokesperson/"
+}
+"\xE9"
+Error on:
+{
+          :post_ID[0;37m => [0m[1;34m1748[0m,
+           :author[0;37m => [0m[1;34m84[0m,
+            :title[0;37m => [0m"La Boite Caf\xE9",
+             :body[0;37m => [0m"",
+       :created_at[0;37m => [0m[0;32m2012-01-06 10:52:35 -0500[0m,
+            :views[0;37m => [0m[1;34m0[0m,
+             :lock[0;37m => [0m[1;31mfalse[0m,
+      :fri_time_to[0;37m => [0m"4:30 PM",
+    :fri_time_from[0;37m => [0m"7:30 AM",
+      :thu_time_to[0;37m => [0m"4:30 PM",
+    :thu_time_from[0;37m => [0m"7:30 AM",
+      :wed_time_to[0;37m => [0m"4:30 PM",
+    :wed_time_from[0;37m => [0m"7:30 AM",
+      :tue_time_to[0;37m => [0m"4:30 PM",
+    :tue_time_from[0;37m => [0m"7:30 AM",
+      :mon_time_to[0;37m => [0m"4:30 PM",
+    :mon_time_from[0;37m => [0m"7:30 AM",
+      :sun_time_to[0;37m => [0m"4:00 PM",
+    :sun_time_from[0;37m => [0m"8:00 AM",
+          :website[0;37m => [0m"laboitecafe.com/",
+          :address[0;37m => [0m"1700 S Lamar Blvd, Austin, TX 78704",
+      :review_type[0;37m => [0m"local",
+            :phone[0;37m => [0m"(512) 377-6198",
+    :sat_time_from[0;37m => [0m"8:00 AM",
+      :sat_time_to[0;37m => [0m"4:00 PM",
+          :_geoLat[0;37m => [0m"30.251606",
+         :_geoLong[0;37m => [0m"-97.766487"
+}
+"\xF6.\""
+Error on:
+{
+       :post_ID[0;37m => [0m[1;34m4756[0m,
+        :author[0;37m => [0m[1;34m99[0m,
+         :title[0;37m => [0m"Finland's Gay Presidential Candidate Loses Race",
+          :body[0;37m => [0m"\"Pekka Haavisto, the openly gay candidate in Finland\x92s presidential race, has lost to opponent Sauli Niinist\xF6.\"",
+    :created_at[0;37m => [0m[0;32m2012-02-07 18:22:14 -0500[0m,
+         :views[0;37m => [0m[1;34m23[0m,
+          :lock[0;37m => [0m[1;31mfalse[0m,
+    :post_image[0;37m => [0m"rc-news",
+     :post_link[0;37m => [0m"http://www.pinknews.co.uk/2012/02/07/finland-gay-candidate-loses-presidential-race/"
+}
+THERE WERE 3 ERRORS

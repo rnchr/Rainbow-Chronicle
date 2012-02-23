@@ -1,0 +1,7 @@
+<div class="span8">
+	<h3><%= link_to raw(news.title), news %></h3>
+	<blockquote>
+		<%= raw news.body %>
+		<small><%= news.user.display_name %></small>
+	</blockquote>
+</div>

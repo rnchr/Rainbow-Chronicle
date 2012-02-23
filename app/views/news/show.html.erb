@@ -1,25 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @news.title %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @news.user_id %>
-</p>
-
-<p>
-  <b>Link:</b>
-  <%= @news.link %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @news.body %>
-</p>
-
-
+<h2><%= @news.title %></h2>
+<% if @news.link %>
+	<span><%= link_to "View Linked Story", @news.link %></span><br />
+<% end %>
+<small>Posted by: <%= @news.user.display_name %></small>
+<blockquote>
+	<%= @news.body %>
+</blockquote>
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>

@@ -7,12 +7,12 @@ class Event < ActiveRecord::Base
   
   # for migration script
   attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner,
-                  :picture, :created_at, :timespan
+                  :picture, :created_at, :timespan, :type, :views, :website
   
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
   
-  def rating
-    ratings.average(:overall).to_f
+  def aggregate
+    ratings.average(:rating).to_f
   end
   
   def gmaps4rails_infowindow

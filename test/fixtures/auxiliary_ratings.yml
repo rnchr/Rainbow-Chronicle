@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  linked_id: 1
+  rating_id: 1
+  value: 1
+  for: MyString
+
+two:
+  user_id: 1
+  linked_id: 1
+  rating_id: 1
+  value: 1
+  for: MyString

@@ -1,25 +1,13 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @place.name %>
-</p>
-
-<p>
-  <b>Desc:</b>
-  <%= @place.desc %>
-</p>
-
-<p>
-  <b>Lat:</b>
-  <%= @place.lat %>
-</p>
-
-<p>
-  <b>Lng:</b>
-  <%= @place.lng %>
-</p>
-
+<div class="row">
+	<div class="span5">
+		<%= render @place %>
+	</div>
+	<div class="span4">
+		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.lat}%2C#{@place.lng}" %>
+	</div>
+	
+</div>
 
 <%= link_to 'Edit', edit_place_path(@place) %> |
 <%= link_to 'Back', places_path %>

@@ -1,6 +1,7 @@
 require 'json'
 require 'sequel'
 require 'ap'
+require 'iconv'
 
 Global_keep = [:website, :phone, :address, :author, :post_ID, :_geoLat, :_geoLong, :photo]
 Time_keep = [:sun_time_from, :sun_time_to, :mon_time_from, :mon_time_to,
@@ -72,7 +73,9 @@ class RainbowUser
   end
   
   def get_views(id)
-    DB[:rb11_post_views][:ID => id][:total_views]
+    p = DB[:rb11_post_views][:ID => id]
+    return p[:total_views] if p
+    0
   end
 
   def self.format_hours(h)
@@ -121,25 +124,38 @@ class RainbowUser
     end
   end
   
+  def self.uni_helper!(p)
+    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    if p[:body]
+      p[:body] = ic.iconv p[:body]
+    end
+    if p[:title]
+      p[:title] = ic.iconv p[:title]
+    end
+  end
+  
   def self.gen_event_hash(p)
+    uni_helper! p
     {:id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :start => dhelp(p[:date_starts]), :end => dhelp(p[:date_ends]), :owner => p[:owner],
       :picture => p[:photo], :created_at => p[:created_at], 
-      :timespan => format_hours(p), :views => p[:views], :}
+      :timespan => format_hours(p), :views => p[:views]}
   end
   
   def self.gen_place_hash(p)
+    uni_helper! p
     {
-      :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
+     :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
      :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
      :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
-     :hours_of_operation => format_hours(p), :website => p[:website].
-     :type => p[:review_type]
+     :hours_of_operation => format_hours(p), :website => p[:website],
+     :type => p[:review_type], :owner => p[:owner]
     }
   end
   
   def self.gen_leader_hash(p)
+    uni_helper! p
     {
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
@@ -149,15 +165,12 @@ class RainbowUser
   end
 
   def self.gen_news_hash(p)
+    uni_helper! p
     {
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title],
       :views => p[:views], :photo => p[:post_image], :link => p[:post_link],
       :body => p[:body], :lock => p[:lock]
     }
-  end
-  
-  def get_ratings
-    DB[:rb11_ratings].where(:rating_userid => @id).select_all
   end
 end
 
