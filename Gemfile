@@ -13,6 +13,7 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'formtastic'
 gem 'cancan'
 gem 'kaminari'
+gem 'redis'
 
 # gem 'iconv'
 gem 'sequel'
