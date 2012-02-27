@@ -71,6 +71,10 @@ class PlacesController < ApplicationController
     end
   end
 
+  def category
+    
+  end
+
   # DELETE /places/1
   # DELETE /places/1.json
   def destroy

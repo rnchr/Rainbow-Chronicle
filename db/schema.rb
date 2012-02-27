@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120223182419) do
+ActiveRecord::Schema.define(:version => 20120226203554) do
+
+  create_table "categories", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "category_hierarchies", :id => false, :force => true do |t|
+    t.integer "ancestor_id",   :null => false
+    t.integer "descendant_id", :null => false
+    t.integer "generations",   :null => false
+  end
+
+  add_index "category_hierarchies", ["ancestor_id", "descendant_id"], :name => "index_category_hierarchies_on_ancestor_id_and_descendant_id", :unique => true
+  add_index "category_hierarchies", ["descendant_id"], :name => "index_category_hierarchies_on_descendant_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "news_id"
@@ -19,6 +36,11 @@ ActiveRecord::Schema.define(:version => 20120223182419) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "event_categories", :force => true do |t|
+    t.integer "event_id"
+    t.integer "event_type_id"
   end
 
   create_table "event_ratings", :force => true do |t|
@@ -51,6 +73,11 @@ ActiveRecord::Schema.define(:version => 20120223182419) do
     t.integer  "views"
     t.string   "owner"
     t.float    "cached_rating"
+  end
+
+  create_table "leader_categories", :force => true do |t|
+    t.integer "leader_id"
+    t.integer "leader_type_id"
   end
 
   create_table "leader_ratings", :force => true do |t|
@@ -90,6 +117,11 @@ ActiveRecord::Schema.define(:version => 20120223182419) do
     t.integer  "views"
     t.string   "photo"
     t.integer  "lock",       :default => 0
+  end
+
+  create_table "place_categories", :force => true do |t|
+    t.integer "place_id"
+    t.integer "place_type_id"
   end
 
   create_table "place_ratings", :force => true do |t|

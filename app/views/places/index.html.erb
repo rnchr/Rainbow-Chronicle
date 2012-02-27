@@ -1,6 +1,15 @@
-<h1>Listing places</h1>
+<h1>Places near Medford, MA</h1>
 <%= gmaps4rails(@json) %>
-<%= paginate @places %>
-<%= render @places %>
+<div class="row">
+	<div class="span3">
+		<%= link_to 'New Place', new_place_path , :class => "btn btn-danger"%>	
+		<%= render :partial => 'category_helper', :locals =>  {:objs => @places } %>
+	</div>
 
-<%= link_to 'New Place', new_place_path %>
+	<div class="span4">
+	<%= render @places %>
+	<%= paginate @places %>
+	
+	</div>
+
+</div>

@@ -73,6 +73,18 @@ namespace :app do
     end
   end
   
+  desc "Migrate all post categories"
+  task :migrate_categories => [:environment, :open_db] do
+    [Place, Event, Leader].each do |klass|
+      klass.all.map do |t|
+        puts t.title
+        MigrationTasks.get_all_categories(t.id).each do |cat|
+          t.tags << MigrationTasks.return_category_type(t.id).find_or_create_by_path(cat)
+        end
+      end
+    end
+  end
+  
   namespace :out do
     desc "Output all models to CSV"
     task :csv => :environment do

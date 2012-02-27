@@ -140,4 +140,79 @@ module MigrationTasks
     end
     raise 'PNF'
   end
+
+  def self.return_category_type(post_id)
+    t = DB[:rb11_posts][:ID => post_id]
+    case t[:post_type]
+    when 'places'
+      return PlaceType
+    when 'leaders'
+      return LeaderType
+    when 'events'
+      return EventType
+    end
+  end
+  
+  def self.get_parent_cat(term_id)
+    query = "SELECT t.term_id, t.name from rb11_term_taxonomy b \
+          inner join rb11_terms t on b.parent=t.term_id where b.term_id=#{term_id}"
+    r = DB[query].first
+
+    query_parent = "SELECT parent from rb11_term_taxonomy where term_id=#{r[:term_id]}"
+    parent = DB[query_parent].first
+    [r[:name], r[:term_id], parent[:parent]]
+  end
+  
+  def self.get_all_categories(post_id)
+    query = "SELECT b.parent, t.term_id, t.name from rb11_term_relationships a \
+    inner join rb11_term_taxonomy b using(term_taxonomy_id) \
+    inner join rb11_terms t on b.term_id=t.term_id where a.object_id=#{post_id} and b.taxonomy like \"%cats\""
+    
+    # puts "#{post_id}: #{DB[:rb11_posts][:ID => post_id][:post_title]}"
+    
+    resp = DB[query]
+    arr = []
+    resp.each do |r|
+      arr << [r[:name], r[:term_id], r[:parent]]
+    end
+    # puts "initial arr: #{arr.inspect}"
+    unused = []
+    paths = []
+    
+    # sometimes all levels are not present.. add them until they are
+    unless arr.inject(0) {|s,v| v[2]==0 ? s+1 : s+0} != 0
+      parents = []
+      arr.each do |a|
+        parents << get_parent_cat(a[1])
+      end
+      arr << parents.flatten
+      # puts "added #{parents.count} parents"
+    end
+    arr.uniq!
+    arr.collect do |p|
+      if p.last == 0
+    	  [arr.find_all {|i| i[2]==p[1]}.count, 1].max.times { paths << [p[0..1]] }
+    	else
+    		unused << p
+    	end
+    end
+    
+    # puts "unused: #{unused.inspect}"
+    l = unused.length
+    l.times do
+    	paths.each do |p|
+    		child = unused.select { |t| t.last == p.last.last }.first
+    		if child
+    			unused.delete child
+    			p << child[0..1]
+    		else
+    		end
+    	end
+    end
+    ret = []
+    paths.each do |p|
+    	ret <<	p.map! {|m| m[0] }
+    end
+    ret
+  end
 end
