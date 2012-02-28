@@ -13,7 +13,7 @@ module ApplicationHelper
       end
     end
     
-    ret = "<ul class=\"unstyled\">"
+    ret = "<ul class=\"category-side-bar\">"
     
     list = list.sort {|a,b| b[1][:count] <=> a[1][:count] }
     list[0..5].each do |cat|
@@ -21,9 +21,10 @@ module ApplicationHelper
       cat[1][:sub].each do |v|
         b[v] += 1
       end
-      ret << "<li>#{cat[0]} (#{cat[1][:sub].count})</li><ul>"
+      ret << "<li class=\"title\">#{cat[0]} (#{cat[1][:sub].count})</li><ul>"
+      b = b.reject {|o| o.nil?}
       b.each do |k, v|
-        ret << "<li>#{k} (#{v})</li>\n"
+        ret << "<li><i class=\"icon-chevron-right\"></i>#{k} (#{v})</li>\n"
       end
       ret << "</ul>"
     end

@@ -1,4 +1,8 @@
 class NewsController < ApplicationController
+  def popular
+    @news = News.popular.page(params[:page]).per(10)
+  end
+  
   # GET /news
   # GET /news.json
   def index
@@ -14,7 +18,9 @@ class NewsController < ApplicationController
   # GET /news/1.json
   def show
     @news = News.find(params[:id])
-
+    @news.views ||= 0
+    @news.views +=1
+    @news.save
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @news }

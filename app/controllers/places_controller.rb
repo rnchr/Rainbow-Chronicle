@@ -3,13 +3,14 @@ class PlacesController < ApplicationController
   # GET /places.json
   def index
      if params[:zip].present?
-        @places = Place.near(params[:zip], 50, :order => :distance).page(params[:page]).per(10)
+        @all_places = Place.near(params[:zip], 15, :order => :distance)
         @city = Geocoder.search(params[:zip])
       else
         @city = Geocoder.search("Eiffel Tower")
-        @places = Place.near("02155").page(params[:page]).per(10)
+        @all_places = Place.near([42.413454,-71.1088269], 15)
       end
-      @json = @places.to_gmaps4rails
+      @places = @all_places.page(params[:page]).per(10)
+      @json = @all_places.to_gmaps4rails
   end
 
   # GET /places/1

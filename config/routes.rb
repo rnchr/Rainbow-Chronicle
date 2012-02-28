@@ -1,10 +1,12 @@
 RcRails::Application.routes.draw do
-  resources :news
 
   devise_for :users
 
   match '/' => 'places#index'
   match '/map'  => 'pages#rainbow_map'
+  match '/news/popular' => 'news#popular'
+  
+  resources :news
   resources :events do
     resources :event_ratings
   end

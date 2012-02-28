@@ -1,9 +1,15 @@
 <h1>Places near Medford, MA</h1>
 <%= gmaps4rails(@json) %>
 <div class="row">
+	<div class="span9">
+		Know about a place we don't?<br />
+		<%= link_to 'Add a New Place', new_place_path , :class => "btn btn-danger"%>	
+	</div>
+</div>
+
+<div class="row">
 	<div class="span3">
-		<%= link_to 'New Place', new_place_path , :class => "btn btn-danger"%>	
-		<%= render :partial => 'category_helper', :locals =>  {:objs => @places } %>
+		<%= render :partial => 'category_helper', :locals =>  {:objs => @all_places } %>
 	</div>
 
 	<div class="span4">
