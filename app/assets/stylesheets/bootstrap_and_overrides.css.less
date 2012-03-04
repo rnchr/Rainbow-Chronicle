@@ -61,8 +61,11 @@ body {
         color: @grayLighter;
         padding-left: 5px;
         padding-right: 5px;
+
     }
     .show-name {
+        word-spacing: 5px;
+
         float: left;
         display: inline-block;
         margin: 0 0 0 0;
@@ -77,9 +80,11 @@ body {
 }
 
 .index-list-item {
-    border-top: 1px solid @grayLighter;
-    margin-top: 5px;
+    border-bottom: 1px solid @grayLighter;
+/*    margin-top: 5px;
+    margin-bottom: 5px;*/
     padding-top: 5px;
+    clear: both;
     .colored-icon {
         width: 75px;
         float: left;
@@ -115,22 +120,36 @@ body {
     }
 }
 
-ul.foot-links {
-  list-style: none;
-  li {
-      display: inline;
-  }
+footer {
+    border-top: 1px solid @grayLight;
+    font-size: .9em;
+    .copyright {
+        float: left;
+        font-size: .9em;
+    }
+    ul.foot-links {
+        float: right;
+      list-style: none;
+      li {
+          display: inline;
+      }
+    }
 }
 .category-list {
     ul.category-side-bar {
         list-style: none;
-        margin-left: 0;
+        margin-left: 0 !important;
+        padding-left: 0px;
+        & > li > a {
+            color: @grayDark;
+        }
         li.title {
             font-family: sans-serif,'Headline';
             font-size: 1.5em;
             padding: 5px;
         }
         li {
+            margin-left: 0;
             &:before {
             }
         }
@@ -157,6 +176,10 @@ ul.foot-links {
     margin-top: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+    a {
+/*     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+     font-size: @baseFontSize;
+    }
 }
 
 .page-header {
@@ -213,9 +236,20 @@ ul.foot-links {
             background-color: darken(red, 5%) !important;
         }
         .dropdown {
-            li > a {
+            li {
                 color: @gray;
+                font-size: @baseFontSize;
                 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                a {
+                    color: @grayDark;
+                    font-size: @baseFontSize;
+                    font-weight: bold;
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    &:hover {
+                        background-color: @grayLight;
+                        text-shadow: none;
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   respond_to :html
+  before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy]
   
   def index
     if params[:zip].present?

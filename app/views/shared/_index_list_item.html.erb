@@ -1,0 +1,19 @@
+<div class="index-list-item">
+	<div class="colored-icon">
+		<%= raw icon_for obj.cached_rating, type %>
+		<span class="rating-string"><%= obj.rating_string %></span>
+	</div>
+	<div class="body">
+		<h4 class="list-title-small">
+			<%= link_to obj.title, obj %>
+		</h4>
+		<address class="addr pull-left"><%= raw obj.split_addr %></address>
+		<div class="distance pull-right">
+			<%= obj.phone %><br />
+			<span class="list-distance"><strong>Distance</strong> <%= obj.distance.round(2) %> miles</span>
+		</div>
+		<br style="clear:both;" />
+	</div>
+			<br style="clear:both;" />
+</div>
+

@@ -1,4 +1,5 @@
 class NewsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy]
   def popular
     @news = News.popular.page(params[:page]).per(10)
   end

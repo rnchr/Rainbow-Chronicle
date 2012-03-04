@@ -28,10 +28,14 @@
 					<label class="span4"><%= r.text %> (<span class="rating-value" id="label-slider-<%= r.id %>">0</span>)</label>
 					<div class="slider span4" id="slider-<%= r.id %>"></div><br />
 					<input type="hidden" name="rating[<%= r.id %>]" id="rating-slider-<%= r.id %>" value="0">
-					</div>
+				</div>
 				<% end %>
-				<div class="span8">
-					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
+				<div class="span9">
+					<label class="span4">Comments:</label>
+					<div class="span4 submission">
+						<textarea class="input-xlarge span4" id="textarea" rows="4"></textarea>
+						<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
+					</div>
 				</div>
 			</form>
 		</div>

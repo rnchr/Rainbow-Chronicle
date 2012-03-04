@@ -1,6 +1,6 @@
 
 <form class="form-inline">
-	<input type="text" class="span6 search-query" leaderholder="Search by location" />
+	<input type="text" class="span6 search-query" placeholder="Search by location" />
 	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
 	<a class="btn btn-large btn-danger pull-right">Unsafe leaders</a>
 </form>
@@ -20,6 +20,7 @@
 	<div class="span4">
 		<h3 class="list-title" style="display:inline-block;">Leaders</h3> <a>(<strong>Add</strong> a new one?)</a>
 		<%= render @leaders %>
+		<br style="clear: both;" />
 		<%= paginate @leaders %>
 	</div>
 

@@ -4,11 +4,11 @@
 	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
 	<a class="btn btn-large btn-danger pull-right">Unsafe Places</a>
 </form>
-
+<div style="margin:auto;">
 <%= gmaps4rails(@json) %>
-
+</div>
 <div class="row">
-	<div class="span3 category-list pull-left">
+	<div class="span2 category-list pull-left">
 		<h3 class="list-title">Categories</h3>
 		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_places } %>
 	</div>
@@ -18,8 +18,9 @@
 	</div>
 
 	<div class="span4">
-		<h3 class="list-title" style="display:inline-block;">Places</h3> <a>(<strong>Add</strong> a new one?)</a>
+		<h3 class="list-title" style="display:inline-block;">Places <a>(<strong>Add</strong> a new one?)</a></h3>
 		<%= render @places %>
+		<br style="clear: both;" />
 		<%= paginate @places %>
 	</div>
 

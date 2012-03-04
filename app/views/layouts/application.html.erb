@@ -35,13 +35,23 @@
 				<li><a href="<%= events_path %>">Events</a></li>
 				<li><a>Rainbow Map</a></li>
 				<li class="dropdown">
+					<% unless user_signed_in? %>
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						Accounts <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="<%= new_user_registration_path %>">Sign up</a></li>
+						<li><a href="<%= new_user_session_path %>">Sign in</a></li>
+					</ul>
+					<% else %>
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						Your Account <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a>Sign in</a></li>
-						<li><a>Sign up</a></li>
+					  <li>Logged in as <strong><%= current_user.email %></strong>.</li>
+						<li><%= link_to "Log out?", destroy_user_session_path, :method => :delete %></li>
 					</ul>
+					<% end %>
 				</li>
 				<li style="float: right;">
 					<form class="form-search">
@@ -53,8 +63,12 @@
 			</ul>
 		</div> <!-- /header -->
 
+		<div class="row span12">
+			
+		</div>
 		<div class="row">
 			<div class="span9 main-content">
+
 				<%= yield %>
 			</div>
 			<div class="span3 sidebar-nav">
@@ -79,17 +93,14 @@
 			</div>
 
 			<footer>
-				<div class="span4">
-					<p>&copy; 2010-2012 The Rainbow Chronicle LLC</p>
-					<p>All rights reserved</p>
+				<div class="copyright">
+						<p>&copy; 2010-2012 The Rainbow Chronicle LLC</p>
+						<p>All rights reserved</p>
 				</div>
-				<div class="span4">
 					<ul class="foot-links">
-						<li><a href="#">Site Map</a></li>
-						<li><a href="#">Terms of Service</a></li>
-						<li><a href="#">Privacy Policy</a></li>
+						<li><%= link_to 'Terms of Service', :controller => 'pages', :action => 'tos' %> |</li>
+						<li><%= link_to 'Privacy Policy', :controller => 'pages', :action => 'privacy' %></li>
 					</ul>
-				</div>
 			</footer>
 		</div> <!-- /container -->
 

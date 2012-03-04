@@ -1,4 +1,6 @@
 class LeadersController < ApplicationController
+  before_filter :authenticate_user!, :only => [:new, :create, :update, :edit]
+
   # GET /leaders
   # GET /leaders.json
   def index

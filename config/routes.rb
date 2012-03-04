@@ -6,6 +6,8 @@ RcRails::Application.routes.draw do
   match '/map'  => 'pages#rainbow_map'
   match '/news/popular' => 'news#popular'
   
+  match 'pages/:action', :controller => 'pages'
+  
   resources :news
   resources :events do
     resources :event_ratings

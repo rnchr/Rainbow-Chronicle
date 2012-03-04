@@ -1,6 +1,6 @@
 
 <form class="form-inline">
-	<input type="text" class="span6 search-query" eventholder="Search by location" />
+	<input type="text" class="span6 search-query" placeholder="Search by location" />
 	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
 	<a class="btn btn-large btn-danger pull-right">Unsafe events</a>
 </form>
@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="span4">
-		<h3 class="list-title" style="display:inline-block;">events</h3> <a>(<strong>Add</strong> a new one?)</a>
+		<h3 class="list-title">Events <a>(<strong>Add</strong> a new one?)</a></h3> 
 		<%= render @events %>
 		<%= paginate @events %>
 	</div>

@@ -1,4 +1,5 @@
 class PlaceRatingsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index]
   def index
     redirect_to place_path (params[:place_id])
   end

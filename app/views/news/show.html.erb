@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<h2><%= @news.title %></h2>
+<div class="show-header">
+	<h2 class="date-created"><%= @news.ts %></h2>
+	<h2 class="show-name"><%= @news.title %></h2>
+	<br style="clear: both;" />
+</div>
 <% if @news.link %>
 	<span><%= link_to "View Linked Story", @news.link %></span><br />
 <% end %>

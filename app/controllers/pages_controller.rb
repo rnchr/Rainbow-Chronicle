@@ -10,4 +10,27 @@ class PagesController < ApplicationController
     # @json = Event.all.to_gmaps4rails
     render 'map.html'
   end
+  def tos
+    
+  end
+  
+  def about
+    
+  end
+  
+  def faq
+    
+  end
+  
+  def contact
+  end
+  
+  def advertising
+  end
+  
+  def donate
+  end
+  
+  def privacy
+  end
 end
