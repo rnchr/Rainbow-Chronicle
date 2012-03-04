@@ -1,100 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Rainbow Chronicle</title>
-    <%= csrf_meta_tags %>
+<head>
+	<meta charset="utf-8">
+	<title>Rainbow Chronicle</title>
+	<%= csrf_meta_tags %>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-    <![endif]-->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+	<![endif]-->
 
-    <!-- Le styles -->
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <%= stylesheet_link_tag "application", :media => "all" %>
+	<!-- Le styles -->
+	<style>
+	body {
+		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+	}
+	</style>
+	<%= stylesheet_link_tag "application", :media => "all" %>
 
-    <!-- Le fav and touch icons -->
-    <link href="/favicon.ico" rel="shortcut icon">
-    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
-  </head>
-  <body>
+	<!-- Le fav and touch icons -->
+	<link href="/favicon.ico" rel="shortcut icon">
+	<link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
+	<link href="/images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+	<link href="/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+</head>
+<body>
+	<div class="container">
+		<div class="page-header row">
+			<h1><span class="rainbow">Rainbow</span> Chronicle</h1>	<span class="slogan">User-Generated ratings of People, Places, and Events according to LGBT Friendliness</span>
+			<ul class="nav nav-pills">
+				<li><a href="<%= news_index_path %>">News</a></li>
+				<li class="active"><a href="<%= places_path %>">Places</a></li>
+				<li><a href="<%= leaders_path %>">Leaders</a></li>
+				<li><a href="<%= events_path %>">Events</a></li>
+				<li><a>Rainbow Map</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						Your Account <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a>Sign in</a></li>
+						<li><a>Sign up</a></li>
+					</ul>
+				</li>
+				<li style="float: right;">
+					<form class="form-search">
+						<input type="text" class="input-medium search-query">
+						<button type="submit" class="btn">Search</button>
+					</form>
+				</li>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-          <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar">Hello</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand">Rainbow Chronicle</a>
-          <div class="container nav-collapse">
-            <ul class="nav">
-	            <li><%= link_to "News", news_index_path %></li>
-                <li><%= link_to "Places", places_path %></li>
-                <li><%= link_to "Events", events_path %></li>
-                <li><%= link_to "Leaders", leaders_path %></li>
-                <li><%= link_to "Rainbow Map", "#"  %></li>
-            </ul>
-			<form class="navbar-search pull-right" action="">
-			    <input type="text" class="search-query span2" placeholder="Search">
-			</form>
-		
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+			</ul>
+		</div> <!-- /header -->
 
-    <div class="container">
-        <div class="content">
-          <div class="row">
-            <div class="span9">
-            <%= yield %>
-            </div>
-            <div class="span1">&nbsp;</div>
-            <div class="span3">
-              <div class="well sidebar-nav">
-                <h3>Recent News</h3>
-                 <ul class="nav nav-list">
-                	<% @recent.each do |news| %>
+		<div class="row">
+			<div class="span9 main-content">
+				<%= yield %>
+			</div>
+			<div class="span3 sidebar-nav">
+				<!-- <div class="well sidebar-nav"> -->
+					<h2 class="sidebar-title">Recent News</h2>
+					<ul class="nav nav-list">
+						<% @recent.each do |news| %>
 						<li><%= link_to news.title, news %></li>
-					<% end %>
-				</ul>
-            </div>
-           </div>
-          </div>
-        </div>
-
-
-		<footer>
-	  		<div class="span4">
-	        	<p>&copy; 2010-2012 The Rainbow Chronicle LLC</p>
-				<p>All rights reserved</p>
+						<% end %>
+					</ul>
+				<!-- </div> -->
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script>
+					<div class="fb-like-box" data-href="https://www.facebook.com/pages/Rainbow-Chronicle/297693440261117" data-width="160" data-show-faces="true" data-stream="true" data-header="true"></div>
+				</div>
 			</div>
-			<div class="span4">
-				<ul class="foot-links">
-					<li><a href="#">Site Map</a></li>
-					<li><a href="#">Terms of Service</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-				</ul>
-			</div>
-		</footer>
 
+			<footer>
+				<div class="span4">
+					<p>&copy; 2010-2012 The Rainbow Chronicle LLC</p>
+					<p>All rights reserved</p>
+				</div>
+				<div class="span4">
+					<ul class="foot-links">
+						<li><a href="#">Site Map</a></li>
+						<li><a href="#">Terms of Service</a></li>
+						<li><a href="#">Privacy Policy</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div> <!-- /container -->
 
-    </div> <!-- /container -->
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<%= javascript_include_tag "application" %>
+		<%= yield :scripts %>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag "application" %>
-	<%= yield :scripts %>
-
-  </body>
-</html>
+	</body>
+	</html>

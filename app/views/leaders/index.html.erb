@@ -1,35 +1,26 @@
-<h1>Listing leaders</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Phone</th>
-    <th>Address</th>
-    <th>Website</th>
-    <th>Lat</th>
-    <th>Lng</th>
-    <th>Picture</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<form class="form-inline">
+	<input type="text" class="span6 search-query" leaderholder="Search by location" />
+	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
+	<a class="btn btn-large btn-danger pull-right">Unsafe leaders</a>
+</form>
 
-<% @leaders.each do |leader| %>
-  <tr>
-    <td><%= leader.title %></td>
-    <td><%= leader.phone %></td>
-    <td><%= leader.address %></td>
-    <td><%= leader.website %></td>
-    <td><%= leader.lat %></td>
-    <td><%= leader.lng %></td>
-    <td><%= leader.picture %></td>
-    <td><%= link_to 'Show', leader %></td>
-    <td><%= link_to 'Edit', edit_leader_path(leader) %></td>
-    <td><%= link_to 'Destroy', leader, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= gmaps4rails(@json) %>
 
-<br />
+<div class="row">
+	<div class="span3 category-list pull-left">
+		<h3 class="list-title">Categories</h3>
+		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_leaders } %>
+	</div>
+	<div class="span2 city-list">
+		<h3 class="list-title">Nearby Cities</h3>
+		<br />
+	</div>
 
-<%= link_to 'New Leader', new_leader_path %>
+	<div class="span4">
+		<h3 class="list-title" style="display:inline-block;">Leaders</h3> <a>(<strong>Add</strong> a new one?)</a>
+		<%= render @leaders %>
+		<%= paginate @leaders %>
+	</div>
+
+</div>

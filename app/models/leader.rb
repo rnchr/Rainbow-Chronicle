@@ -17,4 +17,14 @@ class Leader < ActiveRecord::Base
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 
   before_create :geocode
+  
+  acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
+  
+  def gmaps4rails_marker_picture
+   {
+    "picture" => rating_icon('leader'),          # string, mandatory
+     "width" =>  41,          # string, mandatory
+     "height" => 41,          # string, mandatory
+   }
+  end
 end

@@ -1,24 +1,26 @@
+
+<form class="form-inline">
+	<input type="text" class="span6 search-query" eventholder="Search by location" />
+	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
+	<a class="btn btn-large btn-danger pull-right">Unsafe events</a>
+</form>
+
 <%= gmaps4rails(@json) %>
 
-<h1>Nearby events</h1>
+<div class="row">
+	<div class="span3 category-list pull-left">
+		<h3 class="list-title">Categories</h3>
+		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_events } %>
+	</div>
+	<div class="span2 city-list">
+		<h3 class="list-title">Nearby Cities</h3>
+		<br />
+	</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-	<th></th>
-	<th></th>
-  </tr>
+	<div class="span4">
+		<h3 class="list-title" style="display:inline-block;">events</h3> <a>(<strong>Add</strong> a new one?)</a>
+		<%= render @events %>
+		<%= paginate @events %>
+	</div>
 
-<% @events.each do |event| %>
-  <tr>
-    <td><%= link_to event.title, event %>, <%= event.distance.round(2) %> miles</td>
-
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Event', new_event_path %>
+</div>

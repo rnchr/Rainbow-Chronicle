@@ -2,23 +2,26 @@ class LeadersController < ApplicationController
   # GET /leaders
   # GET /leaders.json
   def index
-    @leaders = Leader.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @leaders }
-    end
+     if params[:zip].present?
+        @all_leaders = Leader.near(params[:zip], 15, :order => :distance)
+        @city = Geocoder.search(params[:zip])
+      else
+        @city = Geocoder.search("Eiffel Tower")
+        @all_leaders = Leader.near([42.413454,-71.1088269], 15)
+      end
+      @leaders = @all_leaders.page(params[:page]).per(10)
+      @json = @all_leaders.to_gmaps4rails
   end
 
   # GET /leaders/1
   # GET /leaders/1.json
   def show
     @leader = Leader.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @leader }
+    @ratings = @leader.ratings.map do |r|
+      rating_helper r
     end
+    @rating = @leader.ratings.new 
+    @rating_questions = Rating.where(:for => "leaders")
   end
 
   # GET /leaders/new

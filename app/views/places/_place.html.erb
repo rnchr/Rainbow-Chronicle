@@ -1,7 +1,21 @@
-<p id="notice"><%= notice %></p>
-<h3><%= link_to place.title, place %></h3>
-<address><%= place.address %></address>
+<div class="index-list-item">
+	<div class="colored-icon">
+		<%= raw icon_for place.cached_rating, 'place' %>
+		<span class="rating-string"><%= place.rating_string %></span>
+	</div>
+	<div class="body">
+		<h4 class="list-title-small">
+			<%= link_to place.title, place %>
+		</h4>
+		<address class="addr pull-left"><%= raw place.split_addr %></address>
+		<div class="distance pull-right">
+			<%= place.phone %><br />
+			<span class="list-distance"><strong>Distance</strong> <%= place.distance.round(2) %> miles</span>
+		</div>
+		<br style="clear:both;" />
+	</div>
+	
+</div>
 
-<%= link_to 'Show', place %>
-<%= link_to 'Edit', edit_place_path(place) %>
+<hr />
 <%= link_to 'Destroy', place, confirm: 'Are you sure?', method: :delete %>

@@ -134,12 +134,16 @@ class RainbowUser
     end
   end
   
+  def self.to_url(u)
+    u =~ /^www/ ? "http://#{u}" : u
+  end
+  
   def self.gen_event_hash(p)
     uni_helper! p
     {:id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :start => dhelp(p[:date_starts]), :end => dhelp(p[:date_ends]), :owner => p[:owner],
-      :picture => p[:photo], :created_at => p[:created_at], 
+      :picture => p[:photo], :created_at => p[:created_at], :website => to_url(p[:website]),
       :timespan => format_hours(p), :views => p[:views]}
   end
   
@@ -149,8 +153,8 @@ class RainbowUser
      :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
      :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
      :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
-     :hours_of_operation => format_hours(p), :website => p[:website],
-     :type => p[:review_type], :owner => p[:owner]
+     :hours_of_operation => format_hours(p), :website => to_url(p[:website]),
+     :type => p[:review_type], :owner => p[:owner], :phone => p[:phone]
     }
   end
   
@@ -160,7 +164,7 @@ class RainbowUser
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
-      :website => p[:website]
+      :website => to_url(p[:website]), :phone => p[:phone]
     }
   end
 
@@ -168,8 +172,8 @@ class RainbowUser
     uni_helper! p
     {
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title],
-      :views => p[:views], :photo => p[:post_image], :link => p[:post_link],
-      :body => p[:body], :lock => p[:lock]
+      :views => p[:views], :photo => p[:post_image], :link => to_url(p[:post_link]),
+      :body => p[:body], :lock => p[:lock], :phone => p[:phone]
     }
   end
 end

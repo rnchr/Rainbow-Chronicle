@@ -19,4 +19,12 @@ class Event < ActiveRecord::Base
   end
   
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
+  
+  def gmaps4rails_marker_picture
+   {
+    "picture" => rating_icon('event'),          # string, mandatory
+     "width" =>  41,          # string, mandatory
+     "height" => 41,          # string, mandatory
+   }
+  end
 end

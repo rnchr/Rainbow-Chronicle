@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120228055532) do
+ActiveRecord::Schema.define(:version => 20120304072921) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -76,7 +76,13 @@ ActiveRecord::Schema.define(:version => 20120228055532) do
     t.integer  "views"
     t.string   "owner"
     t.float    "cached_rating"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zipcode"
   end
+
+  add_index "events", ["lat"], :name => "index_events_on_lat"
+  add_index "events", ["lng"], :name => "index_events_on_lng"
 
   create_table "leader_categories", :force => true do |t|
     t.integer "leader_id"
@@ -108,7 +114,13 @@ ActiveRecord::Schema.define(:version => 20120228055532) do
     t.boolean  "gmaps"
     t.integer  "views"
     t.float    "cached_rating"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zipcode"
   end
+
+  add_index "leaders", ["lat"], :name => "index_leaders_on_lat"
+  add_index "leaders", ["lng"], :name => "index_leaders_on_lng"
 
   create_table "news", :force => true do |t|
     t.string   "title"
@@ -157,7 +169,13 @@ ActiveRecord::Schema.define(:version => 20120228055532) do
     t.float    "cached_rating"
     t.string   "rating_set"
     t.string   "owner"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zipcode"
   end
+
+  add_index "places", ["lat"], :name => "index_places_on_lat"
+  add_index "places", ["lng"], :name => "index_places_on_lng"
 
   create_table "ratings", :force => true do |t|
     t.string   "text"

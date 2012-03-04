@@ -1,5 +1,6 @@
 class Place < ActiveRecord::Base
   include CommonHelper
+  include PlacesHelper
   
   has_many :ratings, :dependent => :destroy, :class_name => "PlaceRating"
   has_many :place_categories
@@ -18,5 +19,13 @@ class Place < ActiveRecord::Base
   before_create :geocode
   
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
+  
+  def gmaps4rails_marker_picture
+   {
+    "picture" => rating_icon('place'),          # string, mandatory
+     "width" =>  41,          # string, mandatory
+     "height" => 41,          # string, mandatory
+   }
+  end
   
 end

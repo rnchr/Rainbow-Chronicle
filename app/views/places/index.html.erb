@@ -1,21 +1,26 @@
-<h1>Places near Medford, MA</h1>
+
+<form class="form-inline">
+	<input type="text" class="span6 search-query" placeholder="Search by location" />
+	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
+	<a class="btn btn-large btn-danger pull-right">Unsafe Places</a>
+</form>
+
 <%= gmaps4rails(@json) %>
-<div class="row">
-	<div class="span9">
-		Know about a place we don't?<br />
-		<%= link_to 'Add a New Place', new_place_path , :class => "btn btn-danger"%>	
-	</div>
-</div>
 
 <div class="row">
-	<div class="span3">
-		<%= render :partial => 'category_helper', :locals =>  {:objs => @all_places } %>
+	<div class="span3 category-list pull-left">
+		<h3 class="list-title">Categories</h3>
+		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_places } %>
+	</div>
+	<div class="span2 city-list">
+		<h3 class="list-title">Nearby Cities</h3>
+		<br />
 	</div>
 
 	<div class="span4">
-	<%= render @places %>
-	<%= paginate @places %>
-	
+		<h3 class="list-title" style="display:inline-block;">Places</h3> <a>(<strong>Add</strong> a new one?)</a>
+		<%= render @places %>
+		<%= paginate @places %>
 	</div>
 
 </div>

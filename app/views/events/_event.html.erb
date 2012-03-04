@@ -1,17 +1,21 @@
-<h3><%= event.title %></h3>
-<p><strong>Rating:</strong> <%= event.rating %></p>
-<address>
-  <%= event.address %>
-</address>
-<% if event.website.present? %>
-<p>
-  <b>Website:</b>
-  <%=link_to event.website, event.website %>
-</p>
-<% end %>
-<b>Start:</b>
-<%= event.start %>
-<b>End:</b>
-<%= event.end %>
-<b>Timespan:</b>
-<%= event.timespan %>
+<div class="index-list-item">
+	<div class="colored-icon">
+		<%= raw icon_for event.cached_rating, 'event' %>
+		<span class="rating-string"><%= event.rating_string %></span>
+	</div>
+	<div class="body">
+		<h4 class="list-title-small">
+			<%= link_to event.title, event %>
+		</h4>
+		<address class="addr pull-left"><%= raw event.split_addr %></address>
+		<div class="distance pull-right">
+			<%= event.phone %><br />
+			<span class="list-distance"><strong>Distance</strong> <%= event.distance.round(2) %> miles</span>
+		</div>
+		<br style="clear:both;" />
+	</div>
+	
+</div>
+
+<hr />
+<%= link_to 'Destroy', event, confirm: 'Are you sure?', method: :delete %>

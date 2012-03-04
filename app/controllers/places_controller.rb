@@ -17,10 +17,14 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @place }
+    @ratings = @place.ratings.map do |r|
+      rating_helper r
+    end
+    @rating = @place.ratings.new 
+    if @place.rating_set.eql? "corporate"
+      @rating_questions = Rating.where(:for => "places")
+    else
+      @rating_questions = Rating.where(:for => "places", :set => 0)
     end
   end
 

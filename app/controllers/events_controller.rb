@@ -3,18 +3,23 @@ class EventsController < ApplicationController
   
   def index
     if params[:zip].present?
-      @events = Event.near(params[:zip], 50, :order => :distance)
-      @city = Geocoder.search(params[:zip])
-    else
-      @city = Geocoder.search("Eiffel Tower")
-      @events = Event.near("02155")
-    end
-    @json = @events.to_gmaps4rails
+        @all_events = Event.near(params[:zip], 15, :order => :distance)
+        @city = Geocoder.search(params[:zip])
+      else
+        @city = Geocoder.search("Eiffel Tower")
+        @all_events = Event.near([42.413454,-71.1088269], 15)
+      end
+      @events = @all_events.page(params[:page]).per(10)
+      @json = @all_events.to_gmaps4rails
   end
 
   def show
     @event = Event.find(params[:id])
-    @event_rating = @event.ratings.new
+    @ratings = @event.ratings.map do |r|
+      rating_helper r
+    end
+    @rating = @event.ratings.new 
+    @rating_questions = Rating.where(:for => "events")
   end
 
   def new

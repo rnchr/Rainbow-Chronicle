@@ -1,15 +1,62 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
-	<div class="span5">
-		<%= render @event %>
-		<%= render @event.ratings %>
-		<%= link_to "Add rating", new_event_event_rating_path(@event, @event_rating)  %>
+<div>
+	<div class="show-header">
+		<h2 class="date-created"><%= @event.created_at.strftime("%b %d") %></h2>
+		<h2 class="show-name"><%= @event.title %></h2>
+		<br style="clear: both;" />
 	</div>
-	<div class="span4">
+	<div class="span4 well">
+
+			<span class="author">Posted by: <%= @event.user.display_name %></span><br />
+			<span class="tags">Category: <%= @event.tags.map {|t| t.ancestry_path}.uniq.join(', ') %></span><br />
+			
+			<dl>
+				<%= raw display_if_present(@event, [:owner, :phone, :website, :address, :hours]) %>
+			</dl>
+
+	</div>
+	<div class="span4 static-map">
 		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.lat}%2C#{@event.lng}" %>
+	</div>
+	<div class="span9">
+		<div class="rating-form">
+			<h3 class="new-rating-form">Add A Rating</h3>
+			<form method="POST" action="<%= event_event_ratings_path @event, @rating %>">
+				
+				<% @rating_questions.each do |r| %>
+				<div class="span9">
+					<label class="span4"><%= r.text %> (<span class="rating-value" id="label-slider-<%= r.id %>">0</span>)</label>
+					<div class="slider span4" id="slider-<%= r.id %>"></div><br />
+					<input type="hidden" name="rating[<%= r.id %>]" id="rating-slider-<%= r.id %>" value="0">
+					</div>
+				<% end %>
+				<div class="span8">
+					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="show-ratings span9">
+		<h3>Ratings (<%= @event.rating_string %> overall)</h2>
+		
+		<% @ratings.each do |rating| %>
+			<div class="single-rating well">
+				<p>
+					<strong class="user-review-name"><%= rating[:name] %></strong> rated it a <%= raw color_rating(rating[:overall])%> <span class="timestamp"><%= rating[:time] %></span>
+				</p>
+				<ul class="span9">
+				<% rating[:metrics].each do |m| %>
+					<li class="span4"><%= raw "<strong>#{m[:key]}:</strong> #{m[:val]}<br />" %></li>
+				<% end %>
+				</ul>
+				
+				<% unless rating[:comment].blank? %>
+					<p><strong>Comments:</strong> <%= raw rating[:comment] %></p>
+				<% end %>
+				<br style="clear: both;" />
+			</div>
+		<% end %>
 	</div>
 	
 </div>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
