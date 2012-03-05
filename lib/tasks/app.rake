@@ -97,13 +97,17 @@ namespace :app do
       num = 0
       comments.each do |c|
         if c[:user_id] != 0
-          comment = News.find(c[:comment_post_ID]).comments.new
-          comment.user = User.find(c[:user_id])
-          comment.body = c[:comment_content]
-          comment.ip_address = c[:comment_author_IP]
-          comment.created_at = c[:comment_date]
-          comment.user_agent = c[:comment_agent]
-          num += 1 if comment.save
+          begin
+            comment = News.find(c[:comment_post_ID]).comments.new
+            comment.user = User.find(c[:user_id])
+            comment.body = c[:comment_content]
+            comment.ip_address = c[:comment_author_IP]
+            comment.created_at = c[:comment_date]
+            comment.user_agent = c[:comment_agent]
+            num += 1 if comment.save
+          rescue
+            
+          end
         end
       end
       puts "#{num} comments migrated!"
