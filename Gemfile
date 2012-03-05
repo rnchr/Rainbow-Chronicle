@@ -14,7 +14,7 @@ gem 'formtastic'
 gem 'cancan'
 gem 'kaminari'
 gem 'redis'
-gem 'closure_tree'
+gem 'closure_tree', :git => 'https://github.com/mceachen/closure_tree.git'
 
 # gem 'iconv'
 gem 'sequel'
