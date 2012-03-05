@@ -154,7 +154,7 @@ class RainbowUser
      :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
      :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
      :hours_of_operation => format_hours(p), :website => to_url(p[:website]),
-     :type => p[:review_type], :owner => p[:owner], :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
+     :rating_set => p[:review_type], :owner => p[:owner], :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
     }
   end
   
