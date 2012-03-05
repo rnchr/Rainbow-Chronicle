@@ -12,7 +12,7 @@ class Leader < ActiveRecord::Base
   belongs_to :user
   
   attr_accessible :id, :user_id, :title, :lat, :lng, :address,
-                  :picture, :created_at, :type, :views, :website, :cached_rating
+                  :picture, :created_at, :type, :views, :website, :cached_rating, :state, :city, :zipcode
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 

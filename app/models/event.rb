@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
   
   # for migration script
   attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner,
-                  :picture, :created_at, :timespan, :type, :views, :website, :cached_rating
+                  :picture, :created_at, :timespan, :type, :views, :website, :cached_rating, :state, :city, :zipcode
   
   def tags
     event_types

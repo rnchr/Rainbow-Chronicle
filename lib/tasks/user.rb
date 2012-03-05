@@ -3,7 +3,7 @@ require 'sequel'
 require 'ap'
 require 'iconv'
 
-Global_keep = [:website, :phone, :address, :author, :post_ID, :_geoLat, :_geoLong, :photo]
+Global_keep = [:website, :phone, :address, :author, :post_ID, :_geoLat, :_geoLong, :photo, :_stateShort, :_city, :_zipcode]
 Time_keep = [:sun_time_from, :sun_time_to, :mon_time_from, :mon_time_to,
   :tue_time_from,:tue_time_to,:wed_time_from,:wed_time_to,:thu_time_from,:thu_time_to,
   :fri_time_from,:fri_time_to,:sat_time_from,:sat_time_to]
@@ -144,7 +144,7 @@ class RainbowUser
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :start => dhelp(p[:date_starts]), :end => dhelp(p[:date_ends]), :owner => p[:owner],
       :picture => p[:photo], :created_at => p[:created_at], :website => to_url(p[:website]),
-      :timespan => format_hours(p), :views => p[:views]}
+      :timespan => format_hours(p), :views => p[:views], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]}
   end
   
   def self.gen_place_hash(p)
@@ -154,7 +154,7 @@ class RainbowUser
      :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
      :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
      :hours_of_operation => format_hours(p), :website => to_url(p[:website]),
-     :type => p[:review_type], :owner => p[:owner], :phone => p[:phone]
+     :type => p[:review_type], :owner => p[:owner], :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
     }
   end
   
@@ -164,7 +164,7 @@ class RainbowUser
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
-      :website => to_url(p[:website]), :phone => p[:phone]
+      :website => to_url(p[:website]), :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
     }
   end
 
@@ -173,7 +173,7 @@ class RainbowUser
     {
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title],
       :views => p[:views], :photo => p[:post_image], :link => to_url(p[:post_link]),
-      :body => p[:body], :lock => p[:lock], :phone => p[:phone]
+      :body => p[:body], :lock => p[:lock]
     }
   end
 end

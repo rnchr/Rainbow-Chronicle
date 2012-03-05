@@ -12,7 +12,7 @@ class Place < ActiveRecord::Base
   
   belongs_to :user
   attr_accessible :id, :user_id, :title, :lat, :lng, :address, :hours_of_operation, :owner,
-                  :picture, :created_at, :type, :views, :description, :website, :cached_rating
+                  :picture, :created_at, :type, :views, :description, :website, :cached_rating, :state, :city, :zipcode
                   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   
