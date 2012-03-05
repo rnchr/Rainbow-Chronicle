@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   
-  before_create :geocode
+  # before_create :geocode
   
   # for migration script
   attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,

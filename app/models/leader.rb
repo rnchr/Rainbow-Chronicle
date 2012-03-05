@@ -16,7 +16,7 @@ class Leader < ActiveRecord::Base
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 
-  before_create :geocode
+  # before_create :geocode
   
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
   
