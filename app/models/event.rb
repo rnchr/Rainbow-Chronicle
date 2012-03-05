@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   before_create :geocode
   
   # for migration script
-  attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner,
+  attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,
                   :picture, :created_at, :timespan, :type, :views, :website, :cached_rating, :state, :city, :zipcode
   
   def tags
