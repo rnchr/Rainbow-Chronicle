@@ -6,6 +6,7 @@ class News < ActiveRecord::Base
   
   scope :latest, order("created_at DESC")
   scope :popular, order("views DESC")
+  scope :controversial, where("comment_count >= 2").latest
   
   def short_time
     created_at.strftime("%b %d")

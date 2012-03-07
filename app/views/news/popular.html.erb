@@ -1,4 +1,8 @@
-<span>View Filter: All / <strong>Popular</strong> / Controversial</span>
+<%= link_to 'Post a Story', new_news_path, :class => 'btn' %>
+<span>View Filter: <%= link_to 'All', news_index_path %> / 
+	<strong><%= link_to 'Popular', news_popular_path %></strong> / 
+	<%= link_to 'Controversial', news_controversial_path %></span>
+
 <%= render @news %>
 
 <%= paginate @news %>

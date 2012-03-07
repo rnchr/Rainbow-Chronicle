@@ -5,6 +5,8 @@ RcRails::Application.routes.draw do
   match '/' => 'places#index'
   match '/map'  => 'pages#rainbow_map'
   match '/news/popular' => 'news#popular'
+  match '/news/controversial' => 'news#controversial'
+  
   
   match 'pages/:action', :controller => 'pages'
   

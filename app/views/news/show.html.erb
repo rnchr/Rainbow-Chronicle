@@ -1,20 +1,29 @@
 <%= raw show_header @news %>
+
 <% if @news.link %>
 <%= link_to "#{@news.link}", @news.link %><br />
 <% end %>
+
 Posted by: <strong><%= @news.user.display_name %></strong><br />
 <blockquote>
-	<%= @news.body %>
+	<%= raw @news.body %>
 </blockquote>
+
 <h3>Comments</h3>
-<%= render @comments %>
+	<% if @comments.empty? %>
+<p>No comments yet! Add the first!</p>
+<% else %> 
+	<%= render @comments %>
+<% end %>
 
 <h3>Add a comment</h3>
 <% if user_signed_in? %>
-<%= render :partial => 'comments/new'%>
+	<%= render :partial => 'comments/new'%>
 <% else %>
   <p>You must be <%= link_to 'logged in', new_user_session_path %> to do this! 
 	Don't have an account? <%= link_to 'Sign up!', new_user_registration_path %>
 <% end %>
+
 <br />
+
 <%= link_to 'Back to news', news_index_path %>

@@ -4,6 +4,10 @@ class NewsController < ApplicationController
     @news = News.popular.page(params[:page]).per(10)
   end
   
+  def controversial
+    @news = News.controversial.page(params[:page]).per(10)
+  end
+  
   # GET /news
   # GET /news.json
   def index
