@@ -22,6 +22,7 @@ class NewsController < ApplicationController
     @news.views ||= 0
     @news.views +=1
     @news.save
+    @comments = @news.comments
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @news }

@@ -1,22 +1,18 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy]
+  before_filter :authenticate_user!, :only => [:new, :create]
+  before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
 
-  # GET /places
-  # GET /places.json
   def index
      if params[:zip].present?
-        @all_places = Place.near(params[:zip], 15, :order => :distance)
+        @all_places = Place.near(params[:zip], 15)
         @city = Geocoder.search(params[:zip])
       else
-        @city = Geocoder.search("Eiffel Tower")
         @all_places = Place.near([42.413454,-71.1088269], 15)
       end
       @places = @all_places.page(params[:page]).per(10)
       @json = @all_places.to_gmaps4rails
   end
 
-  # GET /places/1
-  # GET /places/1.json
   def show
     @place = Place.find(params[:id])
     @ratings = @place.ratings.map do |r|
@@ -30,8 +26,6 @@ class PlacesController < ApplicationController
     end
   end
 
-  # GET /places/new
-  # GET /places/new.json
   def new
     @place = Place.new
 
@@ -41,29 +35,19 @@ class PlacesController < ApplicationController
     end
   end
 
-  # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
   end
 
-  # POST /places
-  # POST /places.json
   def create
     @place = Place.new(params[:place])
-
-    respond_to do |format|
-      if @place.save
-        format.html { redirect_to @place, notice: 'Place was successfully created.' }
-        format.json { render json: @place, status: :created, location: @place }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
+    if @place.save
+      redirect_to @place, notice: 'Place was successfully created.'
+    else
+      render action: "new"
     end
   end
 
-  # PUT /places/1
-  # PUT /places/1.json
   def update
     @place = Place.find(params[:id])
 
@@ -81,16 +65,30 @@ class PlacesController < ApplicationController
   def category
     
   end
+  
+  def popular
+    @all_places = Place.where("cached_rating > 1").order("cached_rating DESC").near([42.413454,-71.1088269], 15)
+    @json = @all_places.to_gmaps4rails
+    @places = @all_places.page(params[:page]).per(10)
+  end
+  
+  def unsafe
+    @all_places = Place.where("cached_rating < 1").order("cached_rating ASC").near([42.413454,-71.1088269], 15)
+    @json = @all_places.to_gmaps4rails
+    @places = @all_places.page(params[:page]).per(10)
+  end
 
-  # DELETE /places/1
-  # DELETE /places/1.json
   def destroy
     @place = Place.find(params[:id])
     @place.destroy
-
-    respond_to do |format|
-      format.html { redirect_to places_url }
-      format.json { head :no_content }
+  end
+  
+  private
+  def authenticate_and_check_permission
+    authenticate!
+    @place = Place.find(params[:id])
+    unless current_user.admin? or current_user.eql? @place.user
+      redirect_to @place, notice: "You don't have permission to modify this record."
     end
   end
 end

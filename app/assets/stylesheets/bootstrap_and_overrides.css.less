@@ -18,13 +18,15 @@
 
 #map img { max-width:none; }
 
+@siteWidth: 960px;
 @linkColor: @red;
 @linkColorHover: @linkColor;
 @linkColorHover: lighten(@linkColor, 20%);
 @navbarBackground: darken(red, 5%);
-@headerTextSize: 4em;
+@headerTextSize: 50px;
 @heightForTopNav: 1em;
 @baseLineHeight: 17px;
+
 
 @font-face {
     font-family: 'Headline'; 
@@ -55,6 +57,7 @@ body {
     background-color: @grayLighter;
     margin-bottom: 10px;
     .date-created {
+        text-align: center;
         float: left;
         display: inline-block;
         .ie7-inline-block();
@@ -81,10 +84,13 @@ body {
     float: right;
 }
 
+.pagination {
+    clear: both;
+    font-size: 90%;
+}
+
 .index-list-item {
     border-bottom: 1px solid @grayLighter;
-/*    margin-top: 5px;
-    margin-bottom: 5px;*/
     padding-top: 5px;
     clear: both;
     .colored-icon {
@@ -115,8 +121,10 @@ body {
         .addr {
             text-align: left;
             float: left;
+            width: 150px;
         }
         .distance {
+            width: 130px;
             float: right;
             text-align: right;
         }
@@ -126,6 +134,7 @@ body {
 footer {
     border-top: 1px solid @grayLight;
     font-size: .9em;
+    clear: both;
     .copyright {
         float: left;
         font-size: .9em;
@@ -291,6 +300,21 @@ footer {
     }
 }
 
-footer {
+.comment {
     clear: both;
+    .comment-meta {
+        float:left;
+        font-size: 120%;
+        text-align: right;
+        padding-top: 19px;
+    }
+    .comment-body {
+        float: left;
+        text-align: left;
+        .well();
+    }
+}
+
+.clear {
+    clear:both;
 }

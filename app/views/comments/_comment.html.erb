@@ -1,0 +1,8 @@
+<div class="comment">
+	<div class="comment-meta span2">
+<span class="comment-author"><strong><%= comment.user.display_name %></strong> 
+	on <%= comment.updated_at.strftime("%b %d at %R%p") %></span>
+	</div>
+	<div class="comment-body span6"><%= comment.body %></div>
+<br class="clear" />
+</div>

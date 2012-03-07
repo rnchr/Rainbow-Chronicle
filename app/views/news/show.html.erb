@@ -1,14 +1,20 @@
-<div class="show-header">
-	<h2 class="date-created"><%= @news.ts %></h2>
-	<h2 class="show-name"><%= @news.title %></h2>
-	<br style="clear: both;" />
-</div>
+<%= raw show_header @news %>
 <% if @news.link %>
-	<span><%= link_to "View Linked Story", @news.link %></span><br />
+<%= link_to "#{@news.link}", @news.link %><br />
 <% end %>
-<small>Posted by: <%= @news.user.display_name %></small>
+Posted by: <strong><%= @news.user.display_name %></strong><br />
 <blockquote>
 	<%= @news.body %>
 </blockquote>
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
+<h3>Comments</h3>
+<%= render @comments %>
+
+<h3>Add a comment</h3>
+<% if user_signed_in? %>
+<%= render :partial => 'comments/new'%>
+<% else %>
+  <p>You must be <%= link_to 'logged in', new_user_session_path %> to do this! 
+	Don't have an account? <%= link_to 'Sign up!', new_user_registration_path %>
+<% end %>
+<br />
+<%= link_to 'Back to news', news_index_path %>

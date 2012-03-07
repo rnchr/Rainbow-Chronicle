@@ -1,10 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div>
-	<div class="show-header">
-		<h2 class="date-created"><%= @place.created_at.strftime("%b %d") %></h2>
-		<h2 class="show-name"><%= @place.title %></h2>
-		<br style="clear: both;" />
-	</div>
+<%= raw show_header @place %>
 	<div class="span4 well">
 
 			<span class="author">Posted by: <%= @place.user.display_name %></span><br />

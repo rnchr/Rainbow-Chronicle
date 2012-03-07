@@ -7,7 +7,7 @@ class News < ActiveRecord::Base
   scope :latest, order("created_at DESC")
   scope :popular, order("views DESC")
   
-  def ts
+  def short_time
     created_at.strftime("%b %d")
   end
 end

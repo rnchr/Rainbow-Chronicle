@@ -3,7 +3,7 @@ require 'sequel'
 require 'ap'
 require 'iconv'
 
-Global_keep = [:website, :phone, :address, :author, :post_ID, :_geoLat, :_geoLong, :photo, :_stateShort, :_city, :_zipcode]
+Global_keep = [:website, :phone, :address, :author, :post_ID, :_geoLat, :_geoLong, :photo, :_state_short, :_city, :_zipcode]
 Time_keep = [:sun_time_from, :sun_time_to, :mon_time_from, :mon_time_to,
   :tue_time_from,:tue_time_to,:wed_time_from,:wed_time_to,:thu_time_from,:thu_time_to,
   :fri_time_from,:fri_time_to,:sat_time_from,:sat_time_to]

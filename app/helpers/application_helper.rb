@@ -87,5 +87,11 @@ module ApplicationHelper
     "<img src=\"/images/#{file}\" height=\"42\" width=\"42\" alt=\"#{rating}\" />"
   end
   
-  
+  def show_header(obj)
+      "<div class=\"show-header\">
+      	<h2 class=\"date-created span1\">#{obj.short_time}</h2>
+      	<h2 class=\"show-name span8\">#{obj.title}</h2>
+      	<br style=\"clear: both;\" />
+      </div>"
+  end
 end

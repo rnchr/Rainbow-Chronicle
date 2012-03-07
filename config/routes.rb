@@ -8,7 +8,12 @@ RcRails::Application.routes.draw do
   
   match 'pages/:action', :controller => 'pages'
   
-  resources :news
+  match 'places/popular' => 'places#popular'
+  
+  resources :news do
+    resources :comments
+  end
+  
   resources :events do
     resources :event_ratings
   end

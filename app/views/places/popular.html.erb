@@ -1,0 +1,35 @@
+<form class="form-inline">
+	<input type="text" class="span6 search-query" placeholder="Search by location" />
+	<a href="<%= places_popular_path %>" class="btn btn-large btn-danger pull-right">Hall of Fame</a>
+	<a class="btn btn-large btn-danger pull-right">Unsafe Places</a>
+</form>
+<div style="margin:auto;">
+<%= gmaps4rails(@json) %>
+</div>
+<div class="row">
+
+	<div class="span8">
+		<h3 class="list-title" style="display:inline-block;">Hall of Fame</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Last Updated</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @places.each do |place| %>
+				<tr>
+					<td><%= link_to place.title, place %></td>
+					<td><%= place.updated_at.strftime("%B %d, %Y") %></td>
+					<td><%= place.cached_rating.round(2) %>, <%= pluralize place.ratings.count, 'vote' %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<br style="clear: both;" />
+		<%= paginate @places %>
+	</div>
+
+</div>

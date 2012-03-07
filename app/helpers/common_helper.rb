@@ -21,6 +21,10 @@ module CommonHelper
     address.insert( address.index(',')+1, "<br />")
   end
   
+  def short_time
+    created_at.strftime("%b %d")
+  end
+  
   def rating_icon(type)
     if cached_rating.round.eql? 0
       "/images/#{type}s-zero.png"

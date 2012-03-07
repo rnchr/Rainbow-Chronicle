@@ -7,13 +7,13 @@ class Event < ActiveRecord::Base
   belongs_to :user
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
-  
-  # before_create :geocode
-  
-  # for migration script
-  attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,
-                  :picture, :created_at, :timespan, :type, :views, :website, :cached_rating, :state, :city, :zipcode
-  
+  # 
+  # # before_create :geocode
+  # 
+  # # for migration script
+  # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,
+  #                 :picture, :created_at, :timespan, :type, :views, :website, :cached_rating, :state, :city, :zipcode
+  # 
   def tags
     event_types
   end
