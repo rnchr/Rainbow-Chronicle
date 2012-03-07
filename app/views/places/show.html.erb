@@ -1,62 +1,31 @@
 <p id="notice"><%= notice %></p>
-<div>
+
 <%= raw show_header @place %>
-	<div class="span4 well">
 
-			<span class="author">Posted by: <%= @place.user.display_name %></span><br />
-			<span class="tags">Category: <%= @place.tags.map {|t| t.ancestry_path}.uniq.join(', ') %></span><br />
+<%= render :partial => 'shared/show_info', :locals => {:obj => @place, :show => [:owner, :phone, :website, :address, :hours]} %>
+
+<div class="span9">
+	<div class="rating-form">
+		<h3 class="new-rating-form">Add A Rating</h3>
+		<!-- <form method="POST" action="<%= place_place_ratings_path @place, @rating %>"> -->
+		<%= form_for [@place, @rating] do |f| %>
 			
-			<dl>
-				<%= raw display_if_present(@place, [:owner, :phone, :website, :address, :hours]) %>
-			</dl>
-
-	</div>
-	<div class="span4 static-map">
-		<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@place.lat}%2C#{@place.lng}" %>
-	</div>
-	<div class="span9">
-		<div class="rating-form">
-			<h3 class="new-rating-form">Add A Rating</h3>
-			<form method="POST" action="<%= place_place_ratings_path @place, @rating %>">
-				
-				<% @rating_questions.each do |r| %>
-				<div class="span9">
-					<label class="span4"><%= r.text %> (<span class="rating-value" id="label-slider-<%= r.id %>">0</span>)</label>
-					<div class="slider span4" id="slider-<%= r.id %>"></div><br />
-					<input type="hidden" name="rating[<%= r.id %>]" id="rating-slider-<%= r.id %>" value="0">
+			<%= render :partial => 'ratings/rating_question', :collection => @rating_questions, :as => :r %>
+			<div class="span9">
+				<label class="span4">Comments:</label>
+				<div class="span4 submission">
+					<textarea class="input-xlarge span4" id="textarea" name="comment" rows="4"></textarea>
+					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
 				</div>
-				<% end %>
-				<div class="span9">
-					<label class="span4">Comments:</label>
-					<div class="span4 submission">
-						<textarea class="input-xlarge span4" id="textarea" rows="4"></textarea>
-						<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-	
-	<div class="show-ratings span9">
-		<h3>Ratings (<%= @place.rating_string %> overall)</h2>
-		
-		<% @ratings.each do |rating| %>
-			<div class="single-rating well">
-				<p>
-					<strong class="user-review-name"><%= rating[:name] %></strong> rated it a <%= raw color_rating(rating[:overall])%> <span class="timestamp"><%= rating[:time] %></span>
-				</p>
-				<ul class="span9">
-				<% rating[:metrics].each do |m| %>
-					<li class="span4"><%= raw "<strong>#{m[:key]}:</strong> #{m[:val]}<br />" %></li>
-				<% end %>
-				</ul>
-				
-				<% unless rating[:comment].blank? %>
-					<p><strong>Comments:</strong> <%= raw rating[:comment] %></p>
-				<% end %>
-				<br style="clear: both;" />
 			</div>
-		<% end %>
+		<!-- </form> -->
+		<% end  %>
 	</div>
-	
 </div>
+
+<div class="show-ratings span9">
+	<h3>Ratings (<%= @place.rating_string %> overall)</h2>
+	<%= render :partial => 'ratings/rating', :collection => @ratings %>
+</div>
+
+

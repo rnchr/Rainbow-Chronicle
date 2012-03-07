@@ -5,12 +5,16 @@ class PlacesController < ApplicationController
   def index
      if params[:zip].present?
         @all_places = Place.near(params[:zip], 15)
+        @nearbys = Place.near(params[:zip], 50)
         @city = Geocoder.search(params[:zip])
       else
         @all_places = Place.near([42.413454,-71.1088269], 15)
+        @nearbys = Place.near([42.413454,-71.1088269], 50)
       end
       @places = @all_places.page(params[:page]).per(10)
       @json = @all_places.to_gmaps4rails
+      
+      
   end
 
   def show
@@ -91,4 +95,5 @@ class PlacesController < ApplicationController
       redirect_to @place, notice: "You don't have permission to modify this record."
     end
   end
+
 end

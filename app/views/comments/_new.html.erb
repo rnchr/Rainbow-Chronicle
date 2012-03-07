@@ -1,6 +1,6 @@
 <div class="pull-right">
-<form action="" method="POST">
+<%= form_for [news, comment] do |f| %>
 	<textarea class="input-xlarge" name="comment[body]" id="new-comment-body"></textarea><br />
-	<input type="submit" value="Add Comment" />
-</form>
+	<%= f.submit %>
+<% end %>
 </div>

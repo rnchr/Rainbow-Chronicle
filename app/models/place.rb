@@ -5,7 +5,7 @@ class Place < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy, :class_name => "PlaceRating"
   has_many :place_categories
   has_many :place_types, :through => :place_categories
-  
+  has_many :users, :through => :ratings
   def tags
     place_types
   end

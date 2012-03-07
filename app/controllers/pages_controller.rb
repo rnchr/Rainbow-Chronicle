@@ -33,4 +33,8 @@ class PagesController < ApplicationController
   
   def privacy
   end
+  
+  def test
+    
+  end
 end

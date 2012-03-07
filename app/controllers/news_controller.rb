@@ -27,6 +27,7 @@ class NewsController < ApplicationController
     @news.views +=1
     @news.save
     @comments = @news.comments
+    @comment = Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @news }
@@ -53,7 +54,7 @@ class NewsController < ApplicationController
   # POST /news.json
   def create
     @news = News.new(params[:news])
-
+    @news.user = current_user
     respond_to do |format|
       if @news.save
         format.html { redirect_to @news, notice: 'News was successfully created.' }

@@ -62,10 +62,11 @@
 
 			</ul>
 		</div> <!-- /header -->
-
-		<div class="row span12">
-			
+		<% unless user_signed_in? %>
+		<div class="row span11 alert alert-info">
+			  Hello! We have just completed an upgrade of our site. As part of this migration, if you had registered with us, you will need to reset your password. You can do that <%= link_to 'here.', new_user_password_path %> Sorry for the inconvenience.<br /> --Management
 		</div>
+		<% end %>
 		<div class="row">
 			<div class="span9 main-content">
 

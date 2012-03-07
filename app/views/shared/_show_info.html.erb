@@ -1,0 +1,12 @@
+<div class="span4 well">
+		<span class="author">Posted by: <%= obj.user.display_name %></span><br />
+		<span class="tags">Category: <%= obj.tags.map {|t| t.ancestry_path}.uniq.join(', ') %></span><br />	
+		<dl>
+			<%= raw display_if_present(obj, show) %>
+		</dl>
+</div>
+
+
+<div class="span4 static-map">
+	<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{obj.lat}%2C#{obj.lng}" %>
+</div>
