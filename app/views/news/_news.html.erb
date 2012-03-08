@@ -1,7 +1,8 @@
 <div class="span8">
 	<h3><%= link_to raw(news.title), news %></h3>
+	<p>By <strong><%= news.user.display_name %></strong> at <%= news.created_at.strftime("%b %d, %R%p") %>
 	<blockquote>
-		<%= raw news.body %>
-		<small><%= news.user.display_name %></small>
+		<%= strip_tags news.body %>
 	</blockquote>
+	<span style="text-align:right; float: right;"><%= link_to 'Read More', news %> | <%= pluralize news.comment_count, 'Comment' %></span>
 </div>

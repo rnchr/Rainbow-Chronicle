@@ -1,8 +1,7 @@
-<%= link_to 'Post a Story', new_news_path, :class => 'btn' %>
 <span>View Filter: <strong><%= link_to 'All', news_index_path %></strong> / 
 	<%= link_to 'Popular', news_popular_path %> / 
 	<%= link_to 'Controversial', news_controversial_path %></span>
-
+<%= link_to 'Submit a Story', new_news_path, :class => 'btn pull-right' %>
 <%= render @news %>
 
 <%= paginate @news %>

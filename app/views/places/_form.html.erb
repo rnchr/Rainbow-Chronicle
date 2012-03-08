@@ -1,4 +1,4 @@
-<%= form_for @place, :html => {:class => 'form-horizontal'} do |f| %>
+<%= form_for @place, :html => {:class => 'form-horizontal', :multipart => true} do |f| %>
   <% if @place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
@@ -14,44 +14,51 @@
   <div class="control-group">
 		<label class="control-label" for="place_title">Title</label>
 		<div class="controls">
-			<input type="text" id="place_title" name="place[title]" class="input-xlarge" />
+			<input type="text" id="place_title" name="place[title]" value="<%= @place.title %>" class="input-xlarge" />
 		</div>
   </div>
 	<div class="control-group">
 		<label class="control-label" for="place_description">Description</label>
 		<div class="controls">
-			<textarea id="place_description" name="place[description]" class="input-xlarge"></textarea>
+			<textarea id="place_description" name="place[description]" value="<%= @place.description %>" class="input-xlarge"></textarea>
 		</div>
   </div>
 	<div class="control-group">
 		<label class="control-label" for="place_owner">Owner</label>
 		<div class="controls">
-			<input type="text" id="place_owner" name="place[owner]" class="input-xlarge" />
+			<input type="text" id="place_owner" name="place[owner]" value="<%= @place.owner %>" class="input-xlarge" />
 		</div>
   </div>
 	<div class="control-group">
 		<label class="control-label" for="place_phone">Phone Number</label>
 		<div class="controls">
-			<input type="text" id="place_title" name="place[phone]" class="input-xlarge" />
+			<input type="text" id="place_title" name="place[phone]" value="<%= @place.phone %>" class="input-xlarge" />
 		</div>
   </div>
 	<div class="control-group">
 		<label class="control-label" for="place_address">Address</label>
 		<div class="controls">
-			<textarea id="place_address" name="place[address]" class="input-xlarge"></textarea>
+			<textarea id="place_address" name="place[address]" class="input-xlarge"><%= @place.address %></textarea>
 		</div>
   </div>
 	<div class="control-group">
 		<label class="control-label" for="place_rating_set">Business Type</label>
 		<div class="controls">
 			<label class="radio">
-				<input type="radio" id="place_rating_set_local" name="place[rating_set]" value="local" checked>
+				<input type="radio" id="place_rating_set_local" name="place[rating_set]" value="local" 
+				<%= "checked" if @place.rating_set.eql? "local" %>>
 				Local
 			</label>
 			<label class="radio">
-				<input type="radio" id="place_rating_set_corporate" name="place[rating_set]" value="corporate">
+				<input type="radio" id="place_rating_set_corporate" name="place[rating_set]" value="corporate" <%= "checked" if @place.rating_set.eql? "corporate" %>>
 				Corporate
 			</label>
+		</div>
+  </div>
+	<div class="control-group">
+		<label class="control-label" for="place_photo">Upload a photo: </label>
+		<div class="controls">
+			<%= f.file_field :photo %>
 		</div>
   </div>
 

@@ -15,6 +15,7 @@ gem 'cancan'
 gem 'kaminari'
 gem 'redis'
 gem 'closure_tree', :git => 'https://github.com/mceachen/closure_tree.git'
+gem "paperclip", "~> 2.7"
 
 # gem 'iconv'
 gem 'sequel'

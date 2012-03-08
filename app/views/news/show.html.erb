@@ -1,7 +1,7 @@
 <%= raw show_header @news %>
 
 <% if @news.link %>
-<%= link_to "#{@news.link}", @news.link %><br />
+Go to story: <%= link_to @news.link, @news.link %><br />
 <% end %>
 
 Posted by: <strong><%= @news.user.display_name %></strong><br />

@@ -94,4 +94,18 @@ module ApplicationHelper
       	<br style=\"clear: both;\" />
       </div>"
   end
+  
+  def find_top_cities(list)
+    ordered = Hash.new({:distance => 0, :count => 0})
+    puts list.count
+    list.each do |p|
+      ordered["#{p.city}, #{get_state p}"][:count] += 1
+      ordered["#{p.city}, #{get_state p}"][:distance] = p.distance
+    end
+    ordered.join
+  end
+  
+  def get_state(obj)
+    obj.address[/(\D+)/].split(',').last.strip
+  end
 end

@@ -9,6 +9,8 @@ class Leader < ActiveRecord::Base
     leader_types
   end
   
+  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>" }
+  
   belongs_to :user
   # 
   # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :phone, 

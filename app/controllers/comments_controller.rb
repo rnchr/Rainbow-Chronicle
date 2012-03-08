@@ -17,17 +17,28 @@ class CommentsController < ApplicationController
       redirect_to news, notice: "Couldn't save your comment."
     end
   end
-  
-  def new
-    
-  end
-  
-  def edit
-    
-  end
-  
+
   def destroy
+    comment = Comment.find(params[:id])
+    news = comment.news
     
+    if comment.user.eql? current_user or current_user.admin?
+      comment.destroy
+      News.transaction do
+        news.comment_count -= 1
+        news.save
+      end
+      redirect_to news
+    else
+      redirect_to news
+    end
   end
   
+  def report
+    comment = Comment.find(params[:id])
+    comment.reported = 1
+    comment.save
+
+    redirect_to News.find(params[:news_id]), notice: "Comment has been reported."
+  end
 end

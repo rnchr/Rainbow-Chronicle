@@ -3,18 +3,16 @@ class PlacesController < ApplicationController
   before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
 
   def index
-     if params[:zip].present?
-        @all_places = Place.near(params[:zip], 15)
-        @nearbys = Place.near(params[:zip], 50)
-        @city = Geocoder.search(params[:zip])
+     if params[:address].present?
+        @all_places = Place.near(params[:loc], 15)
+        @nearbys = Place.near(params[:loc], 50)
+        @city = Geocoder.search(params[:loc])
       else
-        @all_places = Place.near([42.413454,-71.1088269], 15)
-        @nearbys = Place.near([42.413454,-71.1088269], 50)
+        @all_places = Place.near(@location, 15)
+        @nearbys = Place.near(@location, 30)
       end
       @places = @all_places.page(params[:page]).per(10)
-      @json = @all_places.to_gmaps4rails
-      
-      
+      @json = @all_places.to_gmaps4rails 
   end
 
   def show
@@ -32,11 +30,6 @@ class PlacesController < ApplicationController
 
   def new
     @place = Place.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @place }
-    end
   end
 
   def edit
@@ -54,15 +47,10 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
-
-    respond_to do |format|
-      if @place.update_attributes(params[:place])
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
+    if @place.update_attributes(params[:place])
+      redirect_to @place, notice: 'Place was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -71,7 +59,7 @@ class PlacesController < ApplicationController
   end
   
   def popular
-    @all_places = Place.where("cached_rating > 1").order("cached_rating DESC").near([42.413454,-71.1088269], 15)
+    @all_places = Place.popular.near([42.413454,-71.1088269], 15)
     @json = @all_places.to_gmaps4rails
     @places = @all_places.page(params[:page]).per(10)
   end
@@ -85,11 +73,12 @@ class PlacesController < ApplicationController
   def destroy
     @place = Place.find(params[:id])
     @place.destroy
+    redirect_to places_path
   end
   
   private
   def authenticate_and_check_permission
-    authenticate!
+    authenticate_user!
     @place = Place.find(params[:id])
     unless current_user.admin? or current_user.eql? @place.user
       redirect_to @place, notice: "You don't have permission to modify this record."

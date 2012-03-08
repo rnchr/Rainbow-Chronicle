@@ -1,27 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <%= raw show_header @place %>
-
 <%= render :partial => 'shared/show_info', :locals => {:obj => @place, :show => [:owner, :phone, :website, :address, :hours]} %>
 
-<div class="span9">
-	<div class="rating-form">
-		<h3 class="new-rating-form">Add A Rating</h3>
-		<!-- <form method="POST" action="<%= place_place_ratings_path @place, @rating %>"> -->
-		<%= form_for [@place, @rating] do |f| %>
-			
-			<%= render :partial => 'ratings/rating_question', :collection => @rating_questions, :as => :r %>
-			<div class="span9">
-				<label class="span4">Comments:</label>
-				<div class="span4 submission">
-					<textarea class="input-xlarge span4" id="textarea" name="comment" rows="4"></textarea>
-					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
-				</div>
-			</div>
-		<!-- </form> -->
-		<% end  %>
-	</div>
-</div>
+<%= render :partial => 'shared/rating_form', :locals => {:obj => @place, :rating => @rating, :rating_questions => @rating_questions}%>
 
 <div class="show-ratings span9">
 	<h3>Ratings (<%= @place.rating_string %> overall)</h2>

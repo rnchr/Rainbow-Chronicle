@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304072921) do
+ActiveRecord::Schema.define(:version => 20120308061910) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -68,17 +68,21 @@ ActiveRecord::Schema.define(:version => 20120304072921) do
     t.date     "start"
     t.date     "end"
     t.string   "timespan"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
     t.text     "description"
     t.boolean  "gmaps"
     t.integer  "views"
     t.string   "owner"
-    t.float    "cached_rating"
+    t.float    "cached_rating",      :default => 0.0
     t.string   "state"
     t.string   "city"
     t.string   "zipcode"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "events", ["lat"], :name => "index_events_on_lat"
@@ -108,15 +112,19 @@ ActiveRecord::Schema.define(:version => 20120304072921) do
     t.float    "lat"
     t.float    "lng"
     t.integer  "picture"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
     t.boolean  "gmaps"
     t.integer  "views"
-    t.float    "cached_rating"
+    t.float    "cached_rating",      :default => 0.0
     t.string   "state"
     t.string   "city"
     t.string   "zipcode"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "leaders", ["lat"], :name => "index_leaders_on_lat"
@@ -161,17 +169,21 @@ ActiveRecord::Schema.define(:version => 20120304072921) do
     t.float    "lng"
     t.integer  "picture"
     t.text     "hours_of_operation"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "user_id"
     t.boolean  "gmaps"
     t.integer  "views"
-    t.float    "cached_rating"
+    t.float    "cached_rating",      :default => 0.0
     t.string   "rating_set"
     t.string   "owner"
     t.string   "state"
     t.string   "city"
     t.string   "zipcode"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "places", ["lat"], :name => "index_places_on_lat"

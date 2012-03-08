@@ -1,12 +1,12 @@
 
 <form class="form-inline">
-	<input type="text" class="span6 search-query" placeholder="Search by location" />
+	Search: <input type="text" class="span4 search-query" placeholder="<%= @city %>" />
 	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
 	<a class="btn btn-large btn-danger pull-right">Unsafe Places</a>
 </form>
-<div style="margin:auto;">
+
 <%= gmaps4rails(@json) %>
-</div>
+
 <div class="row">
 	<div class="span2 category-list pull-left">
 		<h3 class="list-title">Categories</h3>
@@ -14,7 +14,6 @@
 	</div>
 	<div class="span2 city-list">
 		<h3 class="list-title">Nearby Cities</h3>
-		<br />
 	</div>
 
 	<div class="span4">

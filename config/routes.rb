@@ -2,29 +2,43 @@ RcRails::Application.routes.draw do
 
   devise_for :users
 
-  match '/' => 'places#index'
+  root :to => 'places#index'
   match '/map'  => 'pages#rainbow_map'
-  match '/news/popular' => 'news#popular'
-  match '/news/controversial' => 'news#controversial'
   
   
   match 'pages/:action', :controller => 'pages'
-  
-  match 'places/popular' => 'places#popular'
-  
+    
   resources :news do
-    resources :comments
+    collection do
+      get 'popular'
+      get 'controversial'
+    end
+    resources :comments do
+      match 'report' => 'comments#report'
+    end
   end
   
   resources :events do
+    collection do
+      get 'popular'
+      get 'unsafe'
+    end
     resources :event_ratings
   end
 
   resources :leaders do
+    collection do
+      get 'popular'
+      get 'unsafe'
+    end
     resources :leader_ratings
   end
 
   resources :places do
+    collection do
+      get 'popular'
+      get 'unsafe'
+    end
     resources :place_ratings
   end
 
