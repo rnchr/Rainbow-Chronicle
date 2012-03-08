@@ -16,7 +16,7 @@ class Leader < ActiveRecord::Base
   # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :phone, 
   #                 :picture, :created_at, :type, :views, :website, :cached_rating, :state, :city, :zipcode
   # 
-  geocoded_by :address, :latitude => :lat, :longitude => :lng
+  # geocoded_by :address, :latitude => :lat, :longitude => :lng
 
   # before_create :geocode
   

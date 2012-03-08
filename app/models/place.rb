@@ -18,7 +18,7 @@ class Place < ActiveRecord::Base
   # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :hours_of_operation, :owner, :rating_set, :phone,
                   # :picture, :created_at, :type, :views, :description, :website, :cached_rating, :state, :city, :zipcode
                   
-  geocoded_by :address, :latitude => :lat, :longitude => :lng
+  # geocoded_by :address, :latitude => :lat, :longitude => :lng
   
   # before_create :geocode
   

@@ -11,7 +11,9 @@ module MigrationTasks
       users << ru
       ru.events.each do |e|
          begin
-           Event.create!(RainbowUser.gen_event_hash(e)) unless Event.exists? e[:post_ID]
+           it = Event.create!(RainbowUser.gen_event_hash(e)) unless Event.exists? e[:post_ID]
+           it.id = e[:post_ID]
+           it.save!
          rescue Exception => ex  
            puts ex.message  
            puts "Error on:"
@@ -21,7 +23,9 @@ module MigrationTasks
       end
       ru.places.each do |e|
         begin
-           Place.create!(RainbowUser.gen_place_hash(e)) unless Place.exists? e[:post_ID]
+           it=Place.create!(RainbowUser.gen_place_hash(e)) unless Place.exists? e[:post_ID]
+           it.id = e[:post_ID]
+           it.save!
          rescue Exception => ex
            puts ex.message  
            puts "Error on:"
@@ -32,7 +36,9 @@ module MigrationTasks
   
       ru.leaders.each do |e|
         begin
-           Leader.create!(RainbowUser.gen_leader_hash(e)) unless Leader.exists? e[:post_ID]
+           it=Leader.create!(RainbowUser.gen_leader_hash(e)) unless Leader.exists? e[:post_ID]
+           it.id = e[:post_ID]
+           it.save!
          rescue Exception => ex  
            puts ex.message  
            puts "Error on:"
@@ -43,7 +49,9 @@ module MigrationTasks
   
       ru.news.each do |e|
         begin
-           News.create!(RainbowUser.gen_news_hash(e)) unless News.exists? e[:post_ID]
+           it=News.create!(RainbowUser.gen_news_hash(e)) unless News.exists? e[:post_ID]
+           it.id = e[:post_ID]
+           it.save!
          rescue Exception => ex
            puts ex.message  
            puts "Error on:"
