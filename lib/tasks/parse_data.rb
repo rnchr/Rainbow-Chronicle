@@ -17,6 +17,7 @@ module MigrationTasks
            unless Event.exists? e[:post_ID]
              ev = Event.new
              ev.id = e[:post_ID]
+             ev.created_at = e[:created_at]
              ev.update_attributes RainbowUser.gen_event_hash(e)
            end
          rescue Exception => ex  
@@ -31,6 +32,7 @@ module MigrationTasks
            unless Place.exists? e[:post_ID]
               ev = Place.new
               ev.id = e[:post_ID]
+              ev.created_at = e[:created_at]
               ev.update_attributes RainbowUser.gen_place_hash(e)
             end
          rescue Exception => ex
@@ -46,6 +48,7 @@ module MigrationTasks
           unless Leader.exists? e[:post_ID]
              ev = Leader.new
              ev.id = e[:post_ID]
+             ev.created_at = e[:created_at]
              ev.update_attributes RainbowUser.gen_leader_hash(e)
            end
          rescue Exception => ex  
@@ -61,6 +64,7 @@ module MigrationTasks
            unless News.exists? e[:post_ID]
               ev = News.new
               ev.id = e[:post_ID]
+              ev.created_at = e[:created_at]
               ev.update_attributes RainbowUser.gen_news_hash(e)
             end
          rescue Exception => ex
