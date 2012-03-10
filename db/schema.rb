@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308061910) do
+ActiveRecord::Schema.define(:version => 20120309232137) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -217,6 +217,9 @@ ActiveRecord::Schema.define(:version => 20120308061910) do
     t.string   "display_name"
     t.string   "url"
     t.string   "login"
+    t.string   "location"
+    t.float    "lat"
+    t.float    "lng"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

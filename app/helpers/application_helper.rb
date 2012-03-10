@@ -108,4 +108,12 @@ module ApplicationHelper
   def get_state(obj)
     obj.address[/(\D+)/].split(',').last.strip
   end
+  
+  def category_path(cat, item)
+    "/#{item.class.table_name}/categories/#{cat}"
+  end
+  
+  def location_path(loc)
+    "?location=#{loc}"
+  end
 end

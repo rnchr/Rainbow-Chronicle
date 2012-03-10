@@ -7,7 +7,8 @@ RcRails::Application.routes.draw do
   
   
   match 'pages/:action', :controller => 'pages'
-    
+  match '/search/:query' => 'pages#search'
+  match '/search' => 'pages#search_helper'
   resources :news do
     collection do
       get 'popular'
@@ -33,6 +34,8 @@ RcRails::Application.routes.draw do
     end
     resources :leader_ratings
   end
+
+  match '/:type/categories/:category' => 'categories#show'
 
   resources :places do
     collection do

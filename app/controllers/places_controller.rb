@@ -3,16 +3,14 @@ class PlacesController < ApplicationController
   before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
 
   def index
-     if params[:address].present?
-        @all_places = Place.near(params[:loc], 15)
-        @nearbys = Place.near(params[:loc], 50)
-        @city = Geocoder.search(params[:loc])
-      else
-        @all_places = Place.near(@location, 15)
-        @nearbys = Place.near(@location, 30)
-      end
+      @all_places = Place.near(@location)
       @places = @all_places.page(params[:page]).per(10)
-      @json = @all_places.to_gmaps4rails 
+      @json = @all_places.to_gmaps4rails
+      state = Place.where(:state => @state)
+      @in_state = state.ordered_cities
+      @state_count = state.count
+      @nearbys = @all_places.ordered_cities
+      @top_national = Place.top_national
   end
 
   def show
@@ -53,10 +51,6 @@ class PlacesController < ApplicationController
       render action: "edit"
     end
   end
-
-  def category
-    
-  end
   
   def popular
     @all_places = Place.popular.near([42.413454,-71.1088269], 15)
@@ -68,6 +62,7 @@ class PlacesController < ApplicationController
     @all_places = Place.where("cached_rating < 1").order("cached_rating ASC").near([42.413454,-71.1088269], 15)
     @json = @all_places.to_gmaps4rails
     @places = @all_places.page(params[:page]).per(10)
+    render 'popular'
   end
 
   def destroy

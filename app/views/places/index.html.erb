@@ -1,11 +1,20 @@
 
 <form class="form-inline">
-	Search: <input type="text" class="span4 search-query" placeholder="<%= @city %>" />
-	<a class="btn btn-large btn-danger pull-right">Hall of Fame</a>
-	<a class="btn btn-large btn-danger pull-right">Unsafe Places</a>
+	Search: <input type="text" class="span4 search-query" placeholder="<%= @city %>" name="location" />
+	<input type="submit" value="submit" />
+	<a href="<%= popular_places_path %>" class="btn btn-large pull-right">Hall of Fame</a>
+	<a href="<%= unsafe_places_path %>"class="btn btn-large pull-right">Unsafe Places</a>
 </form>
 
-<%= gmaps4rails(@json) %>
+<%= gmaps({:map_options => {
+						 :center_latitude => @location[0], :center_longitude => @location[1], :zoom => 10
+					 },
+					:markers => { "data" => @json }
+}) %>
+
+<div class="row">
+<%= render 'shared/top3', :object => @top_national %>
+</div>
 
 <div class="row">
 	<div class="span2 category-list pull-left">
@@ -13,7 +22,26 @@
 		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_places } %>
 	</div>
 	<div class="span2 city-list">
-		<h3 class="list-title">Nearby Cities</h3>
+		<h3 class="list-title">Cities</h3>
+		<div id="nearby-cities">
+			<h4>Top Cities Nearby</h4>
+			<ul>
+				<% @nearbys.each do |city| %>
+				<li><%= link_to "#{city.city}, #{@state} (#{city.c})", location_path("#{city.city},#{@state}") %></li>
+				<% end %>
+			</ul>
+			<a id="show-state">Show All Cities in State</a>
+		</div>
+		<div id="all-cities">
+			<h4>All Cities in <%= @state %> (<%= @state_count %>)</h4>
+			<ul>
+				<% @in_state.each do |city| %>
+				<li><%= link_to "#{city.city} (#{city.c})", location_path("#{city.city},#{@state}") %></li>
+				<% end %>
+			</ul>
+			<a id="show-nearby">Show Nearby Cities</a>
+		</div>
+		
 	</div>
 
 	<div class="span4">

@@ -6,14 +6,19 @@ module MigrationTasks
     users = []; errors = []
     DB[:rb11_users].map do |user|
     	ru = RainbowUser.new(user)
-      User.create!(ru.gen_user_hash) unless User.exists? ru.id
-      # puts "added #{ru.display_name}"
+    	unless User.exists? ru.id
+      	u = User.new
+      	u.id = ru.id
+      	u.update_attributes ru.gen_user_hash
+      end
       users << ru
       ru.events.each do |e|
          begin
-           it = Event.create!(RainbowUser.gen_event_hash(e)) unless Event.exists? e[:post_ID]
-           it.id = e[:post_ID]
-           it.save!
+           unless Event.exists? e[:post_ID]
+             ev = Event.new
+             ev.id = e[:post_ID]
+             ev.update_attributes RainbowUser.gen_event_hash(e)
+           end
          rescue Exception => ex  
            puts ex.message  
            puts "Error on:"
@@ -23,9 +28,11 @@ module MigrationTasks
       end
       ru.places.each do |e|
         begin
-           it=Place.create!(RainbowUser.gen_place_hash(e)) unless Place.exists? e[:post_ID]
-           it.id = e[:post_ID]
-           it.save!
+           unless Place.exists? e[:post_ID]
+              ev = Place.new
+              ev.id = e[:post_ID]
+              ev.update_attributes RainbowUser.gen_place_hash(e)
+            end
          rescue Exception => ex
            puts ex.message  
            puts "Error on:"
@@ -36,9 +43,11 @@ module MigrationTasks
   
       ru.leaders.each do |e|
         begin
-           it=Leader.create!(RainbowUser.gen_leader_hash(e)) unless Leader.exists? e[:post_ID]
-           it.id = e[:post_ID]
-           it.save!
+          unless Leader.exists? e[:post_ID]
+             ev = Leader.new
+             ev.id = e[:post_ID]
+             ev.update_attributes RainbowUser.gen_leader_hash(e)
+           end
          rescue Exception => ex  
            puts ex.message  
            puts "Error on:"
@@ -49,9 +58,11 @@ module MigrationTasks
   
       ru.news.each do |e|
         begin
-           it=News.create!(RainbowUser.gen_news_hash(e)) unless News.exists? e[:post_ID]
-           it.id = e[:post_ID]
-           it.save!
+           unless News.exists? e[:post_ID]
+              ev = News.new
+              ev.id = e[:post_ID]
+              ev.update_attributes RainbowUser.gen_news_hash(e)
+            end
          rescue Exception => ex
            puts ex.message  
            puts "Error on:"
@@ -62,6 +73,10 @@ module MigrationTasks
     end
 
     puts "THERE WERE #{errors.count} ERRORS" if errors.count
+    File.open("errors.txt", "a") do |f|
+      f << "Errors from #{DateTime.now}\n"
+      f << errors.join("\n\n")
+    end
   end
 
   def self.convert_ratings
@@ -159,6 +174,11 @@ module MigrationTasks
     when 'events'
       return EventType
     end
+  end
+  
+  def self.update_id(old_id, new_id, type)
+    statement = "UPDATE #{type} SET id=#{new_id} WHERE id=#{old_id}"
+    ActiveRecord::Base.connection.execute statement
   end
   
   def self.get_parent_cat(term_id)

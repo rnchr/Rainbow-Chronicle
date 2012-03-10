@@ -1,0 +1,12 @@
+<h2>Your search for <%= @query %> returned <%= pluralize  @results,'result' %>. </h2>
+<h3>News</h3>
+<ul>
+<%= render :partial => 'news_list', :locals => {:list => @news} %>
+</ul>
+<h3>Places</h3>
+<%= render :partial => 'search_list', :locals => {:list => @places} %>
+<h3>Leaders</h3>
+<%= render :partial => 'search_list', :locals => {:list => @leaders} %>
+<h3>Events</h3>
+<%= render :partial => 'search_list', :locals => {:list => @events} %>
+

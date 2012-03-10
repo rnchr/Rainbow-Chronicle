@@ -144,7 +144,7 @@ class RainbowUser
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :start => dhelp(p[:date_starts]), :end => dhelp(p[:date_ends]), :owner => p[:owner],
       :picture => p[:photo], :created_at => p[:created_at], :website => to_url(p[:website]),
-      :timespan => format_hours(p), :views => p[:views], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]}
+      :timespan => format_hours(p), :views => p[:views], :city => p[:_city], :state => p[:_state_short], :zipcode => p[:_zipcode]}
   end
   
   def self.gen_place_hash(p)
@@ -154,7 +154,7 @@ class RainbowUser
      :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
      :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
      :hours_of_operation => format_hours(p), :website => to_url(p[:website]),
-     :rating_set => p[:review_type], :owner => p[:owner], :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
+     :rating_set => p[:review_type], :owner => p[:owner], :phone => p[:phone], :city => p[:_city], :state => p[:_state_short], :zipcode => p[:_zipcode]
     }
   end
   
@@ -164,7 +164,7 @@ class RainbowUser
       :id => p[:post_ID], :user_id => p[:author], :title => p[:title], 
       :lat => p[:_geoLat], :lng => p[:_geoLong], :address => p[:address],
       :picture => p[:photo], :created_at => p[:created_at], :views => p[:views],
-      :website => to_url(p[:website]), :phone => p[:phone], :city => p[:_city], :state => p[:_stateShort], :zipcode => p[:_zipcode]
+      :website => to_url(p[:website]), :phone => p[:phone], :city => p[:_city], :state => p[:_state_short], :zipcode => p[:_zipcode]
     }
   end
 

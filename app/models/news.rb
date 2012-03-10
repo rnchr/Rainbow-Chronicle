@@ -5,10 +5,20 @@ class News < ActiveRecord::Base
   validates :title, :presence => true
   
   scope :latest, order("created_at DESC")
+  scope :recent, latest.limit(5)
   scope :popular, order("views DESC")
   scope :controversial, where("comment_count >= 2").latest
   
   def short_time
     created_at.strftime("%b %d")
+  end
+  
+  def posted
+    created_at.strftime("%B %d, '%y")
+  end
+  
+  def image
+    photo ||= 'rc-news'
+    "/images/#{photo}.png"
   end
 end

@@ -1,7 +1,9 @@
 <div class="span4 well">
 		<span class="author"><strong>Posted by:</strong> <%= obj.user.display_name %>
 		</span><br />
-		<span class="tags"><strong>Category:</strong> <%= obj.tags.map {|t| t.ancestry_path}.uniq.join(', ') %></span><br />	
+		<span class="tags"><strong>Category:</strong> 
+		<%= raw obj.tags.map {|tag| tag.ancestry_path.map {|t| link_to t, category_path(t, obj) }}.flatten.uniq.join(', ') %>
+		</span><br />	
 		<% if obj.photo.file? %>
 			<%= image_tag obj.photo.url(:medium) %>
 		<% end %>

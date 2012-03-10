@@ -1,0 +1,5 @@
+<div class="top-cities"><strong class="top-cities-label">Top Cities Nationwide:</strong> 
+<% object.each do |c| %>
+<%= link_to "#{c.city}, #{c.state}", "?location=#{c.city},#{c.state}", :class => "btn disabled" %>
+<% end %>
+</div>

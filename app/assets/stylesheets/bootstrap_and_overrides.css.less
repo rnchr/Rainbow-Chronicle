@@ -37,6 +37,20 @@
     width: 1170px;
 }
 
+.top-cities {
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    .top-cities-label {
+        text-transform: uppercase;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    a {
+        font-weight: bold;
+    }
+}
+
 body {
     padding-top: 10px;
     background: url('/images/bg_body_argyle.png') 40px -30px repeat-y;
@@ -181,6 +195,34 @@ footer {
     }
 }
 
+.search-list{
+    list-style: none;
+    li { display: block; padding: 4px; margin-left: 0}
+    .odd {
+        background-color: #eee;
+    }
+    .news-inline {
+        font-size: 1.2em;
+        display: block;
+        float: left;
+        padding-left: 0;
+        width: 500px;
+    }
+    .meta {
+        float: right;
+    }
+}
+
+.news-item {
+    blockquote {
+        width: 675px;
+        float: left;
+    }
+    img {
+        float: right;
+    }
+}
+
 .list-title {
     font-family: 'Headline';
     font-size: 2em;
@@ -302,6 +344,23 @@ footer {
                 float: left;
             }
         }
+    }
+}
+
+.city-list {
+    ul {
+        list-style: none;
+    }
+    h4 {
+        font-family: sans-serif,'Headline';
+        font-weight: normal;
+        font-size: 1.5em;
+        padding: 5px;
+    }
+    #nearby-cities {
+    }
+    #all-cities {
+        display: none;
     }
 }
 

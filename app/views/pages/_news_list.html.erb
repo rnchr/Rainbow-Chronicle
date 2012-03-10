@@ -1,0 +1,9 @@
+<ul class="search-list">
+<% list.each do |n| %>
+	<li class="<%= cycle("odd", "even") %>">
+	<%= link_to n.title, n, :class => 'news-inline' %>
+	<div class="meta">Posted <%= n.posted %> by <strong><%= n.user.display_name %></strong></div>
+	<br class="clear" />
+	</li>
+<% end %>
+</ul>

@@ -22,7 +22,7 @@ namespace :app do
   
   namespace :migrate do 
     desc "Perform all migration tasks"
-    task :all => [:environment, :open_db, :major_types, :prune_bad_addresses, :ratings_seed, :ratings, :update_cached_ratings, :categories, :comments] do
+    task :all => [:environment, :open_db, :major_types, :ratings_seed, :ratings, :update_cached_ratings, :categories, :comments] do
       puts "Migration successful!!"
     end
     

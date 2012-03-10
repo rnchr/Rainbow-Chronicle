@@ -8,9 +8,9 @@ class Event < ActiveRecord::Base
   
   has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>" }
   
-  # geocoded_by :address, :latitude => :lat, :longitude => :lng
-  # 
-  # # before_create :geocode
+  geocoded_by :address, :latitude => :lat, :longitude => :lng
+
+  before_create :geocode
   # 
   # # for migration script
   # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,

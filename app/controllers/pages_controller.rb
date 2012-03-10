@@ -1,25 +1,30 @@
 class PagesController < ApplicationController
-  respond_to :html
   def rainbow_map
-    ActiveRecord::Base.connection.execute(
-    "select title, lat, lng, (select 'event') as type from events UNION "+
-    "select title, lat, lng, (select 'place') as type from places UNION "+
-    "select title, lat, lng, (select 'leader') as type from leaders;") do |result|
-      @json = result.to_gmaps4rails
-    end
-    # @json = Event.all.to_gmaps4rails
-    render 'map.html'
   end
-  def tos
+  
+  def search
+    @query = params[:query]
+    query = "%#{@query.gsub(/\s/,'%')}%"
     
+    @places = Place.where("title like ? or description like ?", query, query)
+    @events = Event.where("title like ? or description like ?", query, query)
+    @leaders = Leader.where("title like ?", query)
+    @news = News.where("title like ? or body like ?", query, query)
+    
+    @results = @news.count + @leaders.count + @places.count + @events.count
+  end
+  
+  def search_helper
+    redirect_to "search/#{params[:query]}"
+  end
+  
+  def tos
   end
   
   def about
-    
   end
   
   def faq
-    
   end
   
   def contact
@@ -35,6 +40,5 @@ class PagesController < ApplicationController
   end
   
   def test
-    
   end
 end
