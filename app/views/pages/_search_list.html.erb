@@ -1,7 +1,7 @@
 <ul class="search-list">
 <% list.each do |n| %>
 	<li class="<%= cycle "odd", "even" %>">
-		<strong><%= link_to n.title, n %>:</strong> <%= n.address %>, <%= n.phone %>, <span class="meta">Rating: <strong><%= n.rating_string %></strong></span>
+		<strong><%= link_to n.title, n %>:</strong> <%= n.address %>, <%= n.phone %> <span class="meta">Rating: <strong><%= n.rating_string %></strong></span>
 	</li>
 <% end %>
 </ul>

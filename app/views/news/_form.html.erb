@@ -29,6 +29,21 @@
     	<%= f.text_area :body, :class => 'input-xlarge span5' %>
 		</div>
   </div>
+	<% if current_user.admin? %>
+	<div class="control-group">
+		<label class="control-label">Display as Founders Post?</label>
+		<div class="controls">
+    	<label class="radio inline">
+				<input type="radio" id="news_founders_post_true" name="founders_post" value="true" >
+				Yes
+			</label>
+			<label class="radio inline">
+				<input type="radio" id="news_founders_post_false" name="founders_post" value="false" checked>
+				No
+			</label>
+		</div>
+  </div>
+	<% end %>
 </fieldset>
   <div class="actions">
     <%= f.submit %>

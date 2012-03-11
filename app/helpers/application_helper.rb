@@ -1,5 +1,9 @@
 module ApplicationHelper
+  # this is a big ugly view function that should be refactored
   def display_categories(objects)
+    return unless objects.count > 0
+    obj = objects.first
+
     list = {}
     objects.each do |o|
       o.tags.each do |t|
@@ -20,10 +24,10 @@ module ApplicationHelper
       cat[1][:sub].each do |v|
         b[v] += 1
       end
-      ret << "<li class=\"title\"><a>#{cat[0]} (#{cat[1][:sub].count})</a></li><ul>"
+      ret << "<li class=\"title\"><a href=\"#{category_path(cat[0], obj)}\">#{cat[0]} (#{cat[1][:sub].count})</a></li><ul>"
       b = b.reject {|o| o.nil?}
       b.each do |k, v|
-        ret << "<li><a><i class=\"icon-chevron-right hover-image\"></i>#{k} (#{v})</a></li>\n"
+        ret << "<li><a href=\"#{category_path(k, obj)}\">#{k} (#{v})</a></li>\n"
       end
       ret << "</ul>"
     end
@@ -106,14 +110,29 @@ module ApplicationHelper
   end
   
   def get_state(obj)
-    obj.address[/(\D+)/].split(',').last.strip
+    obj[/(\D+)/].split(',').last.strip
   end
   
   def category_path(cat, item)
-    "/#{item.class.table_name}/categories/#{cat}"
+    "/#{item.class.table_name}/categories/#{URI.escape(cat, "/?&")}"
   end
   
   def location_path(loc)
     "?location=#{loc}"
+  end
+  
+  def set_all_index_vars
+    @all_items = klass.near(@location[:ll])
+    @items = @all_items.page(params[:page]).per(10)
+    @json = @all_items.to_gmaps4rails
+    @state_items = klass.where(:state => @location[:state]).ordered_cities
+    @nearbys = @all_items.ordered_cities.sort {|a,b| b.c <=> a.c}[0...5]
+    @top_national = klass.top_national
+  end
+  
+  def set_show_vars
+    @item = klass.find(params[:id])
+    @ratings = @item.ratings.map {|r| rating_helper r }
+    @rating = @item.ratings.new
   end
 end

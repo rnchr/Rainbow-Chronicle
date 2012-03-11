@@ -1,26 +1,15 @@
 class EventsController < ApplicationController
   respond_to :html
   before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy]
+  before_filter :set_active
   
   def index
-    if params[:zip].present?
-        @all_events = Event.near(params[:zip], 15, :order => :distance)
-        @city = Geocoder.search(params[:zip])
-      else
-        @city = Geocoder.search("Eiffel Tower")
-        @all_events = Event.near([42.413454,-71.1088269], 15)
-      end
-      @events = @all_events.page(params[:page]).per(10)
-      @json = @all_events.to_gmaps4rails
+    set_all_index_vars
   end
 
   def show
-    @event = Event.find(params[:id])
-    @ratings = @event.ratings.map do |r|
-      rating_helper r
-    end
-    @rating = @event.ratings.new 
-    @rating_questions = Rating.where(:for => "events")
+    set_show_vars
+    @rating_questions = Rating.where(:for => 'events')
   end
 
   def new
@@ -57,5 +46,11 @@ class EventsController < ApplicationController
     @event.destroy
     
     redirect_to events_url
+  end
+  
+  private
+  def klass; Event; end
+  def set_active
+    @active = "Event"
   end
 end

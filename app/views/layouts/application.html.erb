@@ -29,12 +29,12 @@
 		<div class="page-header row">
 			<h1><span class="rainbow">Rainbow</span> Chronicle</h1>	<span class="slogan">User-Generated ratings of People, Places, and Events according to LGBT Friendliness</span>
 			<ul class="nav nav-pills">
-				<li><a href="<%= news_index_path %>">News</a></li>
-				<li class="active"><a href="<%= places_path %>">Places</a></li>
-				<li><a href="<%= leaders_path %>">Leaders</a></li>
-				<li><a href="<%= events_path %>">Events</a></li>
-				<li><a>Rainbow Map</a></li>
-				<li class="dropdown">
+				<li id="News"><a href="<%= news_index_path %>">News</a></li>
+				<li id="Place"><a href="<%= places_path %>">Places</a></li>
+				<li id="Leader"><a href="<%= leaders_path %>">Leaders</a></li>
+				<li id="Event"><a href="<%= events_path %>">Events</a></li>
+				<li id="Map"><a>Rainbow Map</a></li>
+				<li id="User" class="dropdown">
 					<% unless user_signed_in? %>
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						Accounts <b class="caret"></b>
@@ -111,6 +111,7 @@
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
+		<script>document.getElementById("<%= @active %>").className += "active";</script>
 		<%= javascript_include_tag "application" %>
 		<%= yield :scripts %>
 

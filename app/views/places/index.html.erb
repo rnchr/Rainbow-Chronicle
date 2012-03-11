@@ -1,56 +1,10 @@
-<% collection = @places.first.class.name.pluralize %>
-<form class="form-inline">
-	Search: <input type="text" class="span4 search-query" placeholder="<%= @city %>" name="location" />
-	<input type="submit" value="submit" />
-	<a href="<%= polymorphic_url(@places.first.class, :action => 'popular') %>" class="btn btn-large pull-right">Hall of Fame</a>
-	<a href="<%= polymorphic_url(@places.first.class, :action => 'unsafe') %>"class="btn btn-large pull-right">
-		Unsafe <%= collection %></a>
-</form>
 
-<%= gmaps({:map_options => {
-						 :center_latitude => @location[0], :center_longitude => @location[1], :zoom => 10
-					 },
-					:markers => { "data" => @json }
-}) %>
-
-<div class="row">
-<%= render 'shared/top3', :object => @top_national %>
-</div>
-
-<div class="row">
-	<div class="span2 category-list pull-left">
-		<h3 class="list-title">Categories</h3>
-		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => @all_places } %>
-	</div>
-	<div class="span2 city-list">
-		<h3 class="list-title">Cities</h3>
-		<div id="nearby-cities">
-			<h4>Top Cities Nearby</h4>
-			<ul>
-				<% @nearbys.each do |city| %>
-				<li><%= link_to "#{city.city}, #{@state} (#{city.c})", location_path("#{city.city},#{@state}") %></li>
-				<% end %>
-			</ul>
-			<a id="show-state">Show All Cities in State</a>
-		</div>
-		<div id="all-cities">
-																			 <% # dirty little bit to sum the cities inline %>
-			<h4>All Cities in <%= @state %> (<%= @in_state.inject(0) {|sum, city| sum + city.c} %>)</h4>
-			<ul>
-				<% @in_state.each do |city| %>
-				<li><%= link_to "#{city.city} (#{city.c})", location_path("#{city.city},#{@state}") %></li>
-				<% end %>
-			</ul>
-			<a id="show-nearby">Show Nearby Cities</a>
-		</div>
-		
-	</div>
-
-	<div class="span4">
-		<h3 class="list-title" style="display:inline-block;"><%= collection %> <a href="<%= new_polymorphic_url(@places.first.class) %>">(<strong>Add</strong> a new one?)</a></h3>
-		<%= render @places %>
-		<br style="clear: both;" />
-		<%= paginate @places %>
-	</div>
-
-</div>
+<%= render 'shared/generic_index', :location => @location,
+	:json => @json,
+	:all_items => @all_items,
+	:nearby_cities => @nearbys,
+	:state_items => @state_items,
+	:items => @items,
+	:top_national => @top_national,
+	:klass => Place
+%>

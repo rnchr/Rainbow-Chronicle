@@ -10,6 +10,10 @@ class Event < ActiveRecord::Base
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
 
+  scope :popular, where("cached_rating > 2.5").order("cached_rating DESC")
+  scope :ordered_cities, select("city, state, count(city) as c").group(:city).order("c desc")
+  scope :top_national, ordered_cities.limit(3)
+
   before_create :geocode
   # 
   # # for migration script

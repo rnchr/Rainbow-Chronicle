@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name,
                   :login, :first_name, :last_name, :url, :location
   
+  geocoded_by :location, :latitude => :lat, :longitude => :lng
+  
+  before_update :geocode
+  
   has_many :events
   has_many :places
   has_many :leaders

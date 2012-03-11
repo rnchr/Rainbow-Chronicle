@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309232137) do
+ActiveRecord::Schema.define(:version => 20120311033712) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -135,12 +135,13 @@ ActiveRecord::Schema.define(:version => 20120309232137) do
     t.integer  "user_id"
     t.string   "link"
     t.text     "body"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "views"
     t.string   "photo"
     t.integer  "lock",          :default => 0
     t.integer  "comment_count", :default => 0
+    t.boolean  "founders_post", :default => false
   end
 
   create_table "place_categories", :force => true do |t|

@@ -1,7 +1,18 @@
-<span>View Filter: <strong><%= link_to 'All', news_index_path %></strong> / 
-	<%= link_to 'Popular', popular_news_index_path %> / 
-	<%= link_to 'Controversial', controversial_news_index_path %></span>
-<%= link_to 'Submit a Story', new_news_path, :class => 'btn pull-right' %>
+<%= render 'filter' %>
+
+<div class="span8 news-item founders-post">
+	<div class="inner">
+		<h2>Founder's Post</h2><span class="author">By <strong><%= @fp.user.display_name %></strong> at <%= @fp.timestamp %></span>
+	
+		<h3><%= link_to @fp.title, @fp %></h3>
+		<blockquote>
+			<%= @fp.body %>
+		</blockquote>
+		<span style="text-align:right; float: right; clear: both;"><%= link_to 'Read More', @fp %> | <%= pluralize @fp.comment_count, 'Comment' %></span>
+		<br class="clear" />
+	</div>
+</div>
+
 <%= render @news %>
 
 <%= paginate @news %>

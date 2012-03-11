@@ -3,7 +3,7 @@ RcRails::Application.routes.draw do
   devise_for :users
 
   root :to => 'places#index'
-  match '/map'  => 'pages#rainbow_map'
+  match '/map'  => 'pages#map'
   
   
   match 'pages/:action', :controller => 'pages'

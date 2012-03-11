@@ -1,28 +1,16 @@
 class LeadersController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create, :update, :edit]
-
+  before_filter :set_active
   # GET /leaders
   # GET /leaders.json
   def index
-     if params[:zip].present?
-        @all_leaders = Leader.near(params[:zip], 15, :order => :distance)
-        @city = Geocoder.search(params[:zip])
-      else
-        @city = Geocoder.search("Eiffel Tower")
-        @all_leaders = Leader.near([42.413454,-71.1088269], 15)
-      end
-      @leaders = @all_leaders.page(params[:page]).per(10)
-      @json = @all_leaders.to_gmaps4rails
+     set_all_index_vars
   end
 
   # GET /leaders/1
   # GET /leaders/1.json
   def show
-    @leader = Leader.find(params[:id])
-    @ratings = @leader.ratings.map do |r|
-      rating_helper r
-    end
-    @rating = @leader.ratings.new 
+    set_show_vars
     @rating_questions = Rating.where(:for => "leaders")
   end
 
@@ -85,4 +73,11 @@ class LeadersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  private
+  def klass; Leader; end
+  def set_active
+    @active = "Leader"
+  end
+  
 end

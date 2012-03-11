@@ -8,6 +8,7 @@ class News < ActiveRecord::Base
   scope :recent, latest.limit(5)
   scope :popular, order("views DESC")
   scope :controversial, where("comment_count >= 2").latest
+  scope :last_founders_post, where(:founders_post => true).latest.limit(1)
   
   def short_time
     created_at.strftime("%b %d")
@@ -15,6 +16,10 @@ class News < ActiveRecord::Base
   
   def posted
     created_at.strftime("%B %d, '%y")
+  end
+  
+  def timestamp
+    created_at.strftime("%b %d, %R%p")
   end
   
   def image

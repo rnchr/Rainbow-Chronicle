@@ -1,24 +1,17 @@
 class PlacesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
   before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
-
+  before_filter :set_active
   def index
-      @all_places = Place.near(@location)
-      @places = @all_places.page(params[:page]).per(10)
-      @json = @all_places.to_gmaps4rails
-      state = Place.where(:state => @state)
-      @in_state = state.ordered_cities
-      @state_count = @in_state.inject(0) {|sum, city| sum + city.c}
-      @nearbys = @all_places.ordered_cities.sort {|a,b| b.c <=> a.c}[0...5]
-      @top_national = Place.top_national
+      set_all_index_vars
   end
 
   def show
     @place = Place.find(params[:id])
-    @ratings = @place.ratings.map do |r|
-      rating_helper r
-    end
+    @ratings = @place.ratings.map {|r| rating_helper r }
     @rating = @place.ratings.new 
+    
+    # this is ugly. fix it later.
     if @place.rating_set.eql? "corporate"
       @rating_questions = Rating.where(:for => "places")
     else
@@ -32,6 +25,10 @@ class PlacesController < ApplicationController
 
   def edit
     @place = Place.find(params[:id])
+    unless can? :edit, @place
+      redirect_to @place, notice: "You don't have permission to modify this record."
+      return
+    end
   end
 
   def create
@@ -73,6 +70,12 @@ class PlacesController < ApplicationController
   end
   
   private
+  def klass; Place; end
+  def class_name; 'places'; end
+  
+  def set_active
+    @active = "Place"
+  end
   def authenticate_and_check_permission
     authenticate_user!
     @place = Place.find(params[:id])
