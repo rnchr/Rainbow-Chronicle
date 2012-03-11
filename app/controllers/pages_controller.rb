@@ -15,7 +15,7 @@ class PagesController < ApplicationController
   end
   
   def search_helper
-    redirect_to "search/#{params[:query]}"
+    redirect_to "/search/#{params[:query]}"
   end
   
   def tos

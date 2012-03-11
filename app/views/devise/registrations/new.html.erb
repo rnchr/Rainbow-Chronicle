@@ -1,0 +1,69 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.email_field :email, :class => 'input-xlarge' %>
+			<span class="help-inline">(Required.)</span>
+		</div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.password_field :password, :class => 'input-xlarge' %>
+			<span class="help-inline">(Required.)</span>
+
+		</div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password_confirmation, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.password_field :password_confirmation, :class => 'input-xlarge' %>
+			<span class="help-inline">(Required.)</span>
+		</div>
+  </div>
+
+	<div class="control-group">
+    <%= f.label :first_name, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :first_name, :class => 'input-xlarge' %>
+		</div>
+  </div>
+	<div class="control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :last_name, :class => 'input-xlarge' %>
+		</div>
+  </div>
+	<div class="control-group">
+    <%= f.label :display_name, :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :display_name, :class => 'input-xlarge' %>
+			<span class="help-inline">This is the name we will show when you post.</span>
+		</div>
+  </div>
+
+	<div class="control-group">
+    <%= f.label "Default Location", :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :location, :class => 'input-xlarge' %>
+			<span class="help-inline">So we can show you relevant posts.</span>
+		</div>
+  </div>
+	<div class="control-group">
+    <%= f.label "Website", :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :url, :class => 'input-xlarge' %>
+			<span class="help-inline">Do you have a website? Share it on your profile.</span>
+		</div>
+  </div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "links" %>

@@ -49,14 +49,15 @@
 					</a>
 					<ul class="dropdown-menu">
 					  <li>Logged in as <strong><%= current_user.email %></strong>.</li>
+						<li><%= link_to "Edit Profile", edit_user_registration_path %>
 						<li><%= link_to "Log out?", destroy_user_session_path, :method => :delete %></li>
 					</ul>
 					<% end %>
 				</li>
 				<li style="float: right;">
-					<form class="form-search" action="/search/">
-						<input type="text" class="input-medium search-query" name="query">
-						<button type="submit" class="btn">Search</button>
+					<form class="form-search" method="GET" action="/search">
+						<input type="text" class="input-medium search-query" name="query" />
+						<input type="submit" value="Search!" />
 					</form>
 				</li>
 
