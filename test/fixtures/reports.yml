@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  user_id: 1
+  item_id: 1
+  report_type: MyString
+  report_content: MyText
+  ip_addres: MyString
+
+two:
+  type: 
+  user_id: 1
+  item_id: 1
+  report_type: MyString
+  report_content: MyText
+  ip_addres: MyString

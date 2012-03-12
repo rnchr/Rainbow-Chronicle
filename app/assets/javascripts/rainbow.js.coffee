@@ -15,3 +15,9 @@ $("#show-state").click (e) ->
 $("#show-nearby").click (e) ->
     $("#nearby-cities").toggle()
     $("#all-cities").toggle()
+    
+$(".root-cat").click (e) =>
+    alert "hello"
+    e.preventDefault()
+    alert $(this).children("span").val()
+    

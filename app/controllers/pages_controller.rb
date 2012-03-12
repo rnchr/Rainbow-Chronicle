@@ -22,6 +22,10 @@ class PagesController < ApplicationController
     redirect_to "/search/#{params[:query]}"
   end
   
+  def categories
+   
+  end
+  
   def tos
   end
   

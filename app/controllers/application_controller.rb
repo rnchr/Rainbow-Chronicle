@@ -49,4 +49,20 @@ class ApplicationController < ActionController::Base
     end
 
   end
+
+  def default_distance
+    15
+  end
+  
+  def verify_admin
+    authenticate_user! and current_user.admin? 
+  end
+  
+  def authenticate_and_check_permission
+    authenticate_user!
+    @item = klass.find(params[:id])
+    unless current_user.admin? or current_user.eql? @item.user
+      redirect_to @item, notice: "You don't have permission to modify this record."
+    end
+  end
 end

@@ -1,0 +1,29 @@
+<h2>Report Post</h2>
+<%= form_for :report, :action => report_post(@post), :class => 'form-horizontal' do |f| %>
+<fieldset>
+<div class="control-group">
+	<label class="control-label" for="post_title">Reason for reporting.</label>
+	<div class="controls">
+  	<label class="radio">
+			<input type="radio" id="news_founders_post_true" name="report[report_type]" value="inappropriate">
+			It's inappropriate.
+		</label>
+		<label class="radio">
+			<input type="radio" id="news_founders_post_false" name="report[report_type]" value="inaccurate">
+			It's inaccurate.
+		</label>
+		<label class="radio">
+			<input type="radio" id="news_founders_post_false" name="report[report_type]" value="other">
+			Other.
+		</label>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label">Additional Comments</label>
+	<div class="controls">
+		<input type="textarea" name="report[report_content]" class="input-xlarge span4" rows="4">
+	</div>
+</div>
+</fieldset>
+<input type="submit" value="Submit report." />
+<% end %>

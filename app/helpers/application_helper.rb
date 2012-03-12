@@ -122,7 +122,7 @@ module ApplicationHelper
   end
   
   def set_all_index_vars
-    @all_items = klass.near(@location[:ll])
+    @all_items = klass.near(@location[:ll], default_distance)
     @items = @all_items.page(params[:page]).per(10)
     @json = @all_items.to_gmaps4rails
     @state_items = klass.where(:state => @location[:state]).ordered_cities
@@ -134,5 +134,46 @@ module ApplicationHelper
     @item = klass.find(params[:id])
     @ratings = @item.ratings.map {|r| rating_helper r }
     @rating = @item.ratings.new
+  end
+
+  def set_popular_vars
+    @all_items = klass.popular.near(@location[:ll], 15)
+    @json = @all_items.to_gmaps4rails
+    @items = @all_items.page(params[:page]).per(10)
+    @heading = "Hall of Fame"
+  end
+  
+  def set_unsafe_vars
+    @all_items = klass.where("cached_rating < 1").order("cached_rating ASC").near(@location[:ll], 15)
+    @json = @all_items.to_gmaps4rails
+    @items = @all_items.page(params[:page]).per(10)
+    @heading = "Unsafe #{klass.name.pluralize}"
+  end
+  
+  def set_category_vars(class_type)
+    @categories = class_type.roots.collect do |r| 
+      {
+        name: r.name, 
+        id: r.id,
+        children: r.children.collect do |c| 
+          {name: c.name, id:c.id, children:c.children.collect { |c3| {name: c3.name, id:c3.id } } }
+        end
+      }
+    end.sort { |r1, r2| r1[:name] <=> r2[:name]}
+  end
+  
+  def associated_tag(klass)
+    case klass 
+    when Place
+     PlaceType
+    when Leader
+     LeaderType
+    when Event
+     EventType
+    end
+  end
+  
+  def report_post(post)
+    "/report/#{post.class.name.downcase}/#{post.id}"
   end
 end

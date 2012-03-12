@@ -1,0 +1,24 @@
+<h2>Users</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Display Name</th>
+      <th>Email</th>
+			<th></th>
+			<th></th>
+    </tr>
+  </thead>
+  <tbody>
+	<% @users.each do |user|  %>
+    <tr>
+      <td><%= user.display_name %></td>
+      <td><%= user.email %></td>
+			<td></td>
+			<td><%= link_to 'Destroy User', destroy_user_path(user),:method => :delete, :confirm => "Really delete #{user.display_name}?", :class => 'btn btn-danger' %></td>
+    </tr>
+	<% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>

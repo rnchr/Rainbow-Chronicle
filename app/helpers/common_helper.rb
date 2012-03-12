@@ -25,6 +25,14 @@ module CommonHelper
     created_at.strftime("%b %d")
   end
   
+  def rating_color
+    if cached_rating.round > 0
+      "rating-pos-#{cached_rating.round}"
+    else
+      "rating-neg-#{cached_rating.round.abs}"
+    end
+  end
+  
   def rating_icon(type)
     if cached_rating.round.eql? 0
       "/images/#{type}s-zero.png"
@@ -32,6 +40,17 @@ module CommonHelper
       "/images/#{type}s-pos#{cached_rating.round}.png"
     else
       "/images/#{type}s-neg#{cached_rating.abs.round}.png"
+    end
+  end
+  
+  def static_icon
+    type = self.class.name.downcase
+    if cached_rating.round.eql? 0
+      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-zero.png"
+    elsif cached_rating > 0
+      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-pos#{cached_rating.round}.png"
+    else
+      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-neg#{cached_rating.abs.round}.png"
     end
   end
 end

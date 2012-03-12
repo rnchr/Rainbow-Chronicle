@@ -11,14 +11,17 @@
 		<dl>
 			<%= raw display_if_present(obj, show) %>
 		</dl>
+		<strong>Actions: </strong>
+		<%= link_to 'Report', report_post(obj) %>
 		<% if can? [:edit, :destroy], obj %>
-			<strong>Actions: </strong>
-			<%= link_to 'Edit', polymorphic_url(obj, action: :edit) %> | 
+			| <%= link_to 'Edit', polymorphic_url(obj, action: :edit) %> | 
 			<%= link_to 'Delete this post', obj, method: :delete, :confirm => 'Are you sure?' %>
 		<% end %>
 </div>
 
 
 <div class="span4 static-map">
-	<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{obj.lat}%2C#{obj.lng}" %>
+	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?size=450x300&markers=
+	icon:#{obj.static_icon}%7C
+	#{obj.lat},#{obj.lng}&sensor=false" %>
 </div>

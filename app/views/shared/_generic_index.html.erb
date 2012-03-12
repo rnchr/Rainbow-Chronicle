@@ -1,17 +1,5 @@
 <% collection = klass.name.pluralize %>
-<form class="form-inline">
-	Search: <input type="text" class="span4 search-query" placeholder="<%= location[:string] %>" name="location" />
-	<input type="submit" value="submit" />
-	<a href="<%= polymorphic_url(klass, :action => 'popular') %>" class="btn btn-large pull-right">Hall of Fame</a>
-	<a href="<%= polymorphic_url(klass, :action => 'unsafe') %>"class="btn btn-large pull-right">
-		Unsafe <%= collection %></a>
-</form>
-
-<%= gmaps({:map_options => {
-						 :center_latitude => location[:ll][0], :center_longitude => location[:ll][1], :zoom => 10
-					 },
-					:markers => { "data" => json }
-}) %>
+<%= render 'shared/gmaps_helper', :location => location, :json => json, :klass => klass %>
 
 <div class="row">
 <%= render 'shared/top3', :object => top_national %>
@@ -47,7 +35,7 @@
 	</div>
 
 	<div class="span4">
-		<h3 class="list-title" style="display:inline-block;"><%= collection %> <a href="<%= new_polymorphic_url(klass) %>">(<strong>Add</strong> a new one?)</a></h3>
+		<h3 class="list-title" style="display:inline-block;"><%= collection %></h3>
 		<%= render items %>
 		<br style="clear: both;" />
 		<%= paginate items %>

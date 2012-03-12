@@ -24,6 +24,10 @@ class Event < ActiveRecord::Base
     event_types
   end
   
+  def self.tag_type
+    EventRating
+  end
+  
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
   
   def gmaps4rails_marker_picture

@@ -1,0 +1,18 @@
+<h2>Admin Control Panel</h2>
+
+<p>Hello, <strong><%= current_user.display_name %></strong>.</p>
+
+<h3><%= link_to 'Events', controller: 'admin', action: 'events' %></h3>
+<p>There are <%= @count[:event_ratings] %> ratings across <%= pluralize @count[:event], 'event' %>.</p>
+	
+<h3><%= link_to 'Places', controller: 'admin', action: 'places' %></h3>
+<p>There are <%= @count[:place_ratings] %> ratings across <%= pluralize @count[:place], 'place' %>.</p>
+
+<h3><%= link_to 'Leaders', controller: 'admin', action: 'leaders' %></h3>
+<p>There are <%= @count[:leader_ratings] %> ratings across <%= pluralize @count[:leader], 'leader' %>.</p>
+
+<h3><%= link_to 'News', controller: 'admin', action: 'news' %></h3>
+<p>There are <%= @count[:comment] %> comments across <%= pluralize @count[:news], 'news item' %>.</p>
+	
+<h3><%= link_to 'Users', controller: 'admin', action: 'users' %></h3>
+<p>There are <%= @count[:user] %> users.</p>

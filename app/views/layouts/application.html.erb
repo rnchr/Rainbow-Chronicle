@@ -33,7 +33,7 @@
 				<li id="Place"><a href="<%= places_path %>">Places</a></li>
 				<li id="Leader"><a href="<%= leaders_path %>">Leaders</a></li>
 				<li id="Event"><a href="<%= events_path %>">Events</a></li>
-				<li id="Map"><a>Rainbow Map</a></li>
+				<li id="Map"><a href="<%= map_path %>">Rainbow Map</a></li>
 				<li id="User" class="dropdown">
 					<% unless user_signed_in? %>
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -48,7 +48,10 @@
 						Your Account <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-					  <li>Logged in as <strong><%= current_user.email %></strong>.</li>
+					  <li>Logged in as<br /> <strong><%= current_user.email %></strong>.</li>
+						<% if current_user.admin? %>
+						<li><%= link_to "Admin Panel", admin_path %></li>
+						<% end %>
 						<li><%= link_to "Edit Profile", edit_user_registration_path %>
 						<li><%= link_to "Log out?", destroy_user_session_path, :method => :delete %></li>
 					</ul>
@@ -76,14 +79,12 @@
 				<%= yield %>
 			</div>
 			<div class="span3 sidebar-nav">
-				<!-- <div class="well sidebar-nav"> -->
 					<h2 class="sidebar-title">Recent News</h2>
 					<ul class="nav nav-list">
 						<% @recent.each do |news| %>
 						<li><%= link_to news.title, news %></li>
 						<% end %>
 					</ul>
-				<!-- </div> -->
 				<div id="fb-root"></div>
 				<script>(function(d, s, id) {
 					var js, fjs = d.getElementsByTagName(s)[0];

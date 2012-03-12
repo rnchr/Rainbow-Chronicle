@@ -70,7 +70,7 @@ body {
     font-family: 'Headline', sans-serif;
     color: @red;
     display: block;
-    border: 2px solid @grayDarker;
+    border: 1px solid @grayDarker;
     padding: 0;
     background-color: @grayLighter;
     margin-bottom: 10px;
@@ -192,6 +192,39 @@ footer {
                 }
             }
         }
+    }
+}
+
+.form-cat-list {
+    background: @grayLighter;
+    border: 1px solid darken(red, 10);
+    & > ul {
+        height: 400px;
+        overflow-y:scroll;
+    }
+    ul {
+        list-style: none;
+    }
+
+}
+
+table.ratings-table {
+    .rating-pos-5 { background-color: @green; }
+    .rating-pos-4 { background-color: lighten(@green, 10);}
+    .rating-pos-3 { background-color: lighten(@green, 20);}
+    .rating-pos-2 { background-color: lighten(@green, 30);}
+    .rating-pos-1 { background-color: lighten(@green, 40);}
+    .rating-pos-0, .rating-neg-0 { background-color: yellow}
+    .rating-neg-1 { background-color: lighten(yellow, 10)}
+    .rating-neg-2 { background-color: orange}
+    .rating-neg-3 { background-color: orange}
+    .rating-neg-4 { background-color: lighten(red, 15)}
+    .rating-neg-5 { background-color: red}
+    .rated > strong {
+        font-size: 36px;
+    }
+    .rated > small {
+        float: right;
     }
 }
 

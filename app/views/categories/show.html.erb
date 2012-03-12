@@ -1,4 +1,4 @@
-<%= gmaps4rails(@json) %>
+<%= render 'shared/gmaps_helper', :location => @location, :json => @json, :klass => @type %>
 
 <div class="row">
 

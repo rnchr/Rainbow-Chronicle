@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Poster</th>
+			<th>Address</th>
+			<th></th>
+			<th></th>
+    </tr>
+  </thead>
+  <tbody>
+	<% items.each do |item|  %>
+    <tr>
+      <td style="text-align: center;"><%= link_to item.title, item %></td>
+      <td><%= item.user.display_name %></td>
+			<td><%= item.address %></td>
+			<td><%= link_to 'Edit', edit_polymorphic_path(item) %></td>
+			<td><%= link_to 'Destroy', polymorphic_path(item),:method => :delete, :confirm => "Really delete #{item.title}?" %></td>
+    </tr>
+	<% end %>
+  </tbody>
+</table>
+
+<%= paginate items %>

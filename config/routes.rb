@@ -5,10 +5,19 @@ RcRails::Application.routes.draw do
   root :to => 'places#index'
   match '/map'  => 'pages#map'
   
-  
   match 'pages/:action', :controller => 'pages'
   match '/search/:query' => 'pages#search'
-  match '/search' => 'pages#search_helper'
+  match '/search' => 'pages#search_helper', :as => 'search'
+  
+  delete '/users/:id' => 'users#destroy', :as => 'destroy_user'
+  
+  get '/report/:type/:id' => 'reports#new'
+  post '/report/:type/:id' => 'reports#create'
+  delete '/report/:id' => 'reports#destroy'
+
+  match '/admin' => 'admin#index', :as => 'admin'
+  match '/admin/:action', :controller => 'admin'
+
   resources :news do
     collection do
       get 'popular'

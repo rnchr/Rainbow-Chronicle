@@ -1,9 +1,0 @@
-<form class="form-inline">
-	<input type="text" class="span6 search-query" placeholder="Search by location" />
-	<a href="<%= leaders_popular_path %>" class="btn btn-large btn-danger pull-right">Hall of Fame</a>
-	<a class="btn btn-large btn-danger pull-right">Unfriendly Leaders</a>
-</form>
-<div style="margin:auto;">
-<%= gmaps4rails(@json) %>
-</div>
-<%= render :partial => 'shared/popular', :locals => {:objs => @leaders} %>

@@ -2,7 +2,6 @@
   <% if @place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
-
       <ul>
       <% @place.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -10,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+	<%= render 'shared/categories', :categories => @categories %>
 	<fieldset>
   <div class="control-group">
 		<label class="control-label" for="place_title">Title</label>
@@ -17,12 +17,14 @@
 			<input type="text" id="place_title" name="place[title]" value="<%= @place.title %>" class="input-xlarge" />
 		</div>
   </div>
+<% if current_user.admin? %>
 	<div class="control-group">
 		<label class="control-label" for="place_description">Description</label>
 		<div class="controls">
 			<textarea id="place_description" name="place[description]" value="<%= @place.description %>" class="input-xlarge"></textarea>
 		</div>
   </div>
+<% end %>
 	<div class="control-group">
 		<label class="control-label" for="place_owner">Owner</label>
 		<div class="controls">
@@ -39,6 +41,12 @@
 		<label class="control-label" for="place_address">Address</label>
 		<div class="controls">
 			<textarea id="place_address" name="place[address]" class="input-xlarge"><%= @place.address %></textarea>
+		</div>
+  </div>
+	<div class="control-group">
+		<label class="control-label" for="place_address">Hours of Operation</label>
+		<div class="controls">
+			<textarea id="place_address" name="place[hours_of_operation]" class="input-xlarge" rows="7"><%= @place.hours_of_operation %></textarea>
 		</div>
   </div>
 	<div class="control-group">

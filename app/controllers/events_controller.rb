@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  respond_to :html
-  before_filter :authenticate_user!, :only => [:new, :create, :update, :edit, :destroy]
+  before_filter :authenticate_user!, :only => [:new, :create]
+  before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
   before_filter :set_active
   
   def index
@@ -10,6 +10,16 @@ class EventsController < ApplicationController
   def show
     set_show_vars
     @rating_questions = Rating.where(:for => 'events')
+  end
+
+  def popular
+    set_popular_vars
+    render 'shared/popular'
+  end
+  
+  def unsafe
+    set_unsafe_vars
+    render 'shared/popular'
   end
 
   def new
@@ -49,8 +59,7 @@ class EventsController < ApplicationController
   end
   
   private
-  def klass; Event; end
-  def set_active
-    @active = "Event"
-  end
+  def klass; @klass = Event; end
+  def set_active; @active = "Event"; end
+
 end

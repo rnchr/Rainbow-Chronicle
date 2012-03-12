@@ -9,16 +9,20 @@ class CategoriesController < ApplicationController
     @items = Kaminari.paginate_array(@all).page(params[:page]).per(10)
   end
   
+  def create
+
+  end
+  
   private
   
   def initialize_type
-    @klass = case params[:type]
+    @klass, @type = case params[:type]
     when 'places'
-      PlaceType
+      [PlaceType, Place]
     when 'events'
-      EventType
+      [EventType, Event]
     when 'leaders'
-      LeaderType
+      [LeaderType, Leader]
     else
       not_found
     end

@@ -36,7 +36,7 @@ class NewsController < ApplicationController
 
   def create
     @news = News.new(params[:news])
-    @news.founders_post = (params[:founders_post] and current_user.admin?)
+    @news.founders_post = (params[:founders_post].eql? "true" and current_user.admin?)
     @news.user = current_user
     if @news.save
       redirect_to @news, notice: 'News was successfully created.'

@@ -1,10 +1,10 @@
 <%= raw show_header @news %>
 
-<% if @news.link %>
-Go to story: <%= link_to @news.link, @news.link %><br />
+<% unless @news.link.blank? %>
+<%= link_to 'Go to story', @news.link , :class => 'btn btn-primary'%><br />
 <% end %>
 
-Posted by: <strong><%= @news.user.display_name %></strong><br />
+<p class="author">Posted by: <strong><%= @news.user.display_name %></strong> at <%= @news.timestamp %></p>
 <blockquote>
 	<%= raw @news.body %>
 </blockquote>

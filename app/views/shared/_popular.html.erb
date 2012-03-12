@@ -1,8 +1,7 @@
 <div class="row">
-
 	<div class="span8">
-		<h3 class="list-title" style="display:inline-block;">Hall of Fame</h3>
-		<table class="table">
+		<h3 class="list-title" style="display:inline-block;"><%= heading %></h3>
+		<table class="table ratings-table">
 			<thead>
 				<tr>
 					<th></th>
@@ -13,9 +12,11 @@
 			<tbody>
 				<% objs.each do |obj| %>
 				<tr>
-					<td><%= link_to obj.title, obj %></td>
+					<td><%= link_to obj.title, obj %><br />
+						<%= obj.address %><br />
+						<strong>Distance:</strong> <%= obj.distance.round(2) %> miles away.</td>
 					<td><%= obj.updated_at.strftime("%B %d, %Y") %></td>
-					<td><%= obj.cached_rating.round(2) %>, <%= pluralize obj.ratings.count, 'vote' %></td>
+					<td class="rated <%= obj.rating_color %>"><strong><%= obj.cached_rating.round(2) %></strong><small><%= pluralize obj.ratings.count, 'vote' %></small></td>
 				</tr>
 				<% end %>
 			</tbody>
@@ -23,5 +24,4 @@
 		<br style="clear: both;" />
 		<%= paginate objs %>
 	</div>
-
 </div>

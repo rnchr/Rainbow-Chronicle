@@ -4,11 +4,11 @@ class News < ActiveRecord::Base
   attr_accessible :title, :user_id, :views, :link, :body, :lock, :created_at, :photo, :id, :comment_count
   validates :title, :presence => true
   
-  scope :latest, order("created_at DESC")
+  scope :latest, where(:founders_post => false).order("created_at DESC")
   scope :recent, latest.limit(5)
   scope :popular, order("views DESC")
   scope :controversial, where("comment_count >= 2").latest
-  scope :last_founders_post, where(:founders_post => true).latest.limit(1)
+  scope :last_founders_post, where(:founders_post => true).order("created_at desc").limit(1)
   
   def short_time
     created_at.strftime("%b %d")

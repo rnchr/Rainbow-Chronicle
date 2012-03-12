@@ -4,9 +4,14 @@ class Leader < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy, :class_name => "LeaderRating"
   has_many :leader_categories
   has_many :leader_types, :through => :leader_categories
+  belongs_to :user
   
   def tags
     leader_types
+  end
+  
+  def self.tag_type
+    LeaderRating
   end
   
   scope :popular, where("cached_rating > 2.5").order("cached_rating DESC")
@@ -14,7 +19,6 @@ class Leader < ActiveRecord::Base
   scope :top_national, ordered_cities.limit(3)
   has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>" }
   
-  belongs_to :user
   # 
   # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :phone, 
   #                 :picture, :created_at, :type, :views, :website, :cached_rating, :state, :city, :zipcode

@@ -21,6 +21,7 @@ class PlacesController < ApplicationController
 
   def new
     @place = Place.new
+    set_category_vars PlaceType
   end
 
   def edit
@@ -33,6 +34,8 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.new(params[:place])
+    @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
+      
     @place.user = current_user
     if @place.save
       redirect_to @place, notice: 'Place was successfully created.'
@@ -51,16 +54,13 @@ class PlacesController < ApplicationController
   end
   
   def popular
-    @all_places = Place.popular.near(@location, 15)
-    @json = @all_places.to_gmaps4rails
-    @places = @all_places.page(params[:page]).per(10)
+    set_popular_vars
+    render 'shared/popular'
   end
   
   def unsafe
-    @all_places = Place.where("cached_rating < 1").order("cached_rating ASC").near(@location, 15)
-    @json = @all_places.to_gmaps4rails
-    @places = @all_places.page(params[:page]).per(10)
-    render 'popular'
+    set_unsafe_vars
+    render 'shared/popular'
   end
 
   def destroy
@@ -70,18 +70,11 @@ class PlacesController < ApplicationController
   end
   
   private
-  def klass; Place; end
+  def klass; @klass = Place; end
   def class_name; 'places'; end
   
   def set_active
     @active = "Place"
-  end
-  def authenticate_and_check_permission
-    authenticate_user!
-    @place = Place.find(params[:id])
-    unless current_user.admin? or current_user.eql? @place.user
-      redirect_to @place, notice: "You don't have permission to modify this record."
-    end
   end
 
 end

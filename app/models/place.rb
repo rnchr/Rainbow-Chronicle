@@ -6,6 +6,11 @@ class Place < ActiveRecord::Base
   has_many :place_categories
   has_many :place_types, :through => :place_categories
   has_many :users, :through => :ratings
+  
+  def self.tag_type
+    PlaceRating
+  end
+  
   def tags
     place_types
   end
