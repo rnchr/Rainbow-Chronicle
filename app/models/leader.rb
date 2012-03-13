@@ -5,6 +5,8 @@ class Leader < ActiveRecord::Base
   has_many :leader_categories
   has_many :leader_types, :through => :leader_categories
   belongs_to :user
+  has_many :users, :through => :ratings
+  
   
   def tags
     leader_types

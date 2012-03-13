@@ -5,6 +5,8 @@ class Event < ActiveRecord::Base
   has_many :event_categories
   has_many :event_types, :through => :event_categories
   belongs_to :user
+  has_many :users, :through => :ratings
+  
   
   has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/events/:id" }
   

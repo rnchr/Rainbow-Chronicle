@@ -8,7 +8,7 @@
 		<small>
 		<% if comment.user.eql? current_user %>
 			<%= link_to 'Delete comment.', [comment.news, comment], :method => :delete, :confirm => 'Are you sure?' %>
-		<% else %> 
+		<% elsif user_signed_in? %> 
 			<%= link_to 'Report this post.', report_post(comment) %>
 		<% end %>
 	</div>
