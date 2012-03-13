@@ -94,7 +94,7 @@ module ApplicationHelper
   def show_header(obj)
       "<div class=\"show-header\">
       	<h2 class=\"date-created span1\">#{obj.short_time}</h2>
-      	<h2 class=\"show-name span8\">#{obj.title}</h2>
+      	<h2 class=\"show-name span6\">#{obj.title}</h2>
       	<br style=\"clear: both;\" />
       </div>"
   end

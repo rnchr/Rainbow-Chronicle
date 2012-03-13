@@ -44,6 +44,36 @@
 		</div>
   </div>
 	<% end %>
+	<div class="control-group">
+		<label class="control-label">Post Type</label>
+		<div class="controls">
+    	<label class="radio inline">
+				<input type="radio" id="photo1" name="news[photo]" value="rc-news" checked>
+				News<br />
+				<img src="/images/rc-news.png" />
+			</label>
+			<label class="radio inline">
+				<input type="radio" id="photo2" name="news[photo]" value="rc-opinion">
+				Opinion<br />
+				<img src="/images/rc-opinion.png" />
+			</label>
+			<label class="radio inline">
+				<input type="radio" id="photo3" name="news[photo]" value="rc-image" >
+				Image<br />
+				<img src="/images/rc-image.png" />
+			</label>
+			<label class="radio inline">
+				<input type="radio" id="photo4" name="news[photo]" value="rc-video" >
+				Video<br />
+				<img src="/images/rc-video.png" />
+			</label>
+			<label class="radio inline">
+				<input type="radio" id="photo5" name="news[photo]" value="rc-nsfw" >
+				NSFW<br />
+				<img src="/images/rc-nsfw.png" />
+			</label>
+		</div>
+  </div>
 </fieldset>
   <div class="actions">
     <%= f.submit %>

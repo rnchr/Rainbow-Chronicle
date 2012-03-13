@@ -1,4 +1,4 @@
-<div class="span4 well">
+<div class="span3 well">
 		<span class="author"><strong>Posted by:</strong> <%= obj.user.display_name %>
 		</span><br />
 		<span class="tags"><strong>Category:</strong> 
@@ -20,8 +20,8 @@
 </div>
 
 
-<div class="span4 static-map">
-	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?size=450x300&markers=
+<div class="span3 static-map">
+	<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?size=300x250&markers=
 	icon:#{obj.static_icon}%7C
 	#{obj.lat},#{obj.lng}&sensor=false" %>
 </div>

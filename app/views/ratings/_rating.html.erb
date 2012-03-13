@@ -2,7 +2,7 @@
 	<p>
 		<strong class="user-review-name"><%= rating[:name] %></strong> rated it a <%= raw color_rating(rating[:overall])%> <span class="timestamp"><%= rating[:time] %></span>
 	</p>
-	<ul class="span9">
+	<ul class="span6">
 	<% rating[:metrics].each do |m| %>
 		<li class="span4"><%= raw "<strong>#{m[:key]}:</strong> #{m[:val]}<br />" %></li>
 	<% end %>

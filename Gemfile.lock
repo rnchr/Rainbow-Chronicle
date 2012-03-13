@@ -9,9 +9,9 @@ GIT
 
 GIT
   remote: https://github.com/mceachen/closure_tree.git
-  revision: 93a720fe1d81491d1dd6c5ecdc96e4ce00b0ef99
+  revision: 56193ea26e55bf0c6c533197eb43e4ee97331f4f
   specs:
-    closure_tree (3.0.2)
+    closure_tree (3.0.3)
       activerecord (>= 3.0.0)
 
 GEM
@@ -72,7 +72,7 @@ GEM
     formtastic (2.1.1)
       actionpack (~> 3.0)
     geocoder (1.1.1)
-    gmaps4rails (1.4.6)
+    gmaps4rails (1.4.7)
       json
     hike (1.2.1)
     i18n (0.6.0)
@@ -85,7 +85,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
-    less (2.0.9)
+    less (2.0.10)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
     less-rails (2.1.7)

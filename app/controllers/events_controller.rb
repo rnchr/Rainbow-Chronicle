@@ -24,17 +24,22 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    set_category_vars EventType
   end
 
   def edit
     @event = Event.find(params[:id])
+    set_category_vars EventType
+    
   end
 
   def create
     @event = Event.new(params[:event])
-
+    @event.tags << params[:categories].collect {|c| EventType.find(c) }
+      
+    @event.user = current_user
     if @event.save
-      redirect_to @event, notice: 'Event was successfully created.' 
+      redirect_to @event, notice: 'Event was successfully created.'
     else
       render action: "new"
     end
@@ -42,13 +47,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-
+    @event.tags << params[:categories].collect {|c| EventType.find(c) }
     if @event.update_attributes(params[:event])
       redirect_to @event, notice: 'Event was successfully updated.'
     else
       render action: "edit"
     end
-    
   end
 
   def destroy

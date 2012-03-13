@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= raw show_header @item %>
-<%= render :partial => 'shared/show_info', :locals => {:obj => @item, :show => [:owner, :phone, :website, :address, :hours]} %>
+<%= render :partial => 'shared/show_info', :locals => {:obj => @item, :show => [:phone, :website, :address, :start, :end, :timespan]} %>
 
 <%= render :partial => 'shared/rating_form', :locals => {:obj => @item, :rating => @rating, :rating_questions => @rating_questions}%>
 

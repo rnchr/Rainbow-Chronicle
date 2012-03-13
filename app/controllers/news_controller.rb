@@ -35,8 +35,10 @@ class NewsController < ApplicationController
   end
 
   def create
+    types = %w{rc-news rc-opinion rc-image rc-video rc-nsfw}
     @news = News.new(params[:news])
     @news.founders_post = (params[:founders_post].eql? "true" and current_user.admin?)
+    @news.photo = if types.include? params[:news][:photo] then params[:news][:photo] else nil end
     @news.user = current_user
     if @news.save
       redirect_to @news, notice: 'News was successfully created.'

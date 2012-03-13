@@ -1,12 +1,12 @@
-<div class="span9">
+<div class="span7">
 	<div class="rating-form">
 		<h3 class="new-rating-form">Add A Rating</h3>
 		<%= form_for [obj, rating] do |f| %>			
 			<%= render :partial => 'ratings/rating_question', :collection => rating_questions, :as => :r %>
-			<div class="span9">
-				<label class="span4">Comments:</label>
-				<div class="span4 submission">
-					<textarea class="input-xlarge span4" id="textarea" name="comment" rows="4"></textarea>
+			<div class="span7 rating-questions">
+				<label class="span3">Comments:</label>
+				<div class="span3 submission">
+					<textarea class="input-xlarge span3" id="textarea" name="comment" rows="4"></textarea>
 					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
 				</div>
 			</div>

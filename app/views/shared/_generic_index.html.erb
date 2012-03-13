@@ -5,12 +5,12 @@
 <%= render 'shared/top3', :object => top_national %>
 </div>
 
-<div class="row">
-	<div class="span2 category-list pull-left">
+<div class="row index-page">
+	<div class="category-list">
 		<h3 class="list-title">Categories</h3>
 		<%= render :partial => 'shared/category_helper', :locals =>  {:objs => all_items } %>
 	</div>
-	<div class="span2 city-list">
+	<div class="city-list">
 		<h3 class="list-title">Cities</h3>
 		<div id="nearby-cities">
 			<h4>Top Cities Nearby</h4>
@@ -34,7 +34,7 @@
 		
 	</div>
 
-	<div class="span4">
+	<div class="listed-items">
 		<h3 class="list-title" style="display:inline-block;"><%= collection %></h3>
 		<%= render items %>
 		<br style="clear: both;" />

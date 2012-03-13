@@ -1,4 +1,4 @@
-<div class="span3 pull-right form-cat-list">
+<div class="span3 well form-cat-list">
 <h3>Categories</h3>
 <ul>
 <% categories.each do |root| %>
@@ -13,19 +13,11 @@
 				<li><input type="checkbox" name="categories[]" value="<%= level3[:id] %>" />
 				<span class="child-cat"><%= raw "#{level3[:name]}" %></span>
 			<% end %>
-			<li><%= link_to 'Add a new subcategory.', '', :class => 'sub-sub-cat' %></li>
 			</ul>
 		</li>
-	<% end %>
-	<% if current_user.admin? %>
-	<li><%= link_to 'Add a new subcategory.', '', :class => 'sub-cat' %></li>
 	<% end %>
 		</ul>
 	</li>
 <% end %>
-<% if current_user.admin? %>
-<li><%= link_to 'Add a new category.', '', :class => 'cat' %></li>
-<% end %>
 </ul>
-<span id="cat_placeholder">New Category:</span> <input type="text" name="new_cat" />
 </div>

@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<%= raw show_header @leader %>
-<%= render :partial => 'shared/show_info', :locals => {:obj => @leader, :show => [:owner, :phone, :website, :address, :hours]} %>
+<%= raw show_header @item %>
+<%= render :partial => 'shared/show_info', :locals => {:obj => @item, :show => [:phone, :website, :address]} %>
 
-<%= render :partial => 'shared/rating_form', :locals => {:obj => @leader, :rating => @rating, :rating_questions => @rating_questions }%>
+<%= render :partial => 'shared/rating_form', :locals => {:obj => @item, :rating => @rating, :rating_questions => @rating_questions}%>
 
-<div class="show-ratings span9">
-	<h3>Ratings (<%= @leader.rating_string %> overall)</h2>
+<div class="show-ratings span7">
+	<h3>Ratings (<%= @item.rating_string %> overall)</h2>
 	<%= render :partial => 'ratings/rating', :collection => @ratings %>
 </div>
 

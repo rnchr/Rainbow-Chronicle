@@ -9,67 +9,74 @@
       </ul>
     </div>
   <% end %>
-	<%= render 'shared/categories', :categories => @categories %>
-	<fieldset>
-  <div class="control-group">
-		<label class="control-label" for="place_title">Title</label>
-		<div class="controls">
-			<input type="text" id="place_title" name="place[title]" value="<%= @place.title %>" class="input-xlarge" />
-		</div>
-  </div>
-<% if current_user.admin? %>
-	<div class="control-group">
-		<label class="control-label" for="place_description">Description</label>
-		<div class="controls">
-			<textarea id="place_description" name="place[description]" value="<%= @place.description %>" class="input-xlarge"></textarea>
-		</div>
-  </div>
-<% end %>
-	<div class="control-group">
-		<label class="control-label" for="place_owner">Owner</label>
-		<div class="controls">
-			<input type="text" id="place_owner" name="place[owner]" value="<%= @place.owner %>" class="input-xlarge" />
-		</div>
-  </div>
-	<div class="control-group">
-		<label class="control-label" for="place_phone">Phone Number</label>
-		<div class="controls">
-			<input type="text" id="place_title" name="place[phone]" value="<%= @place.phone %>" class="input-xlarge" />
-		</div>
-  </div>
-	<div class="control-group">
-		<label class="control-label" for="place_address">Address</label>
-		<div class="controls">
-			<textarea id="place_address" name="place[address]" class="input-xlarge"><%= @place.address %></textarea>
-		</div>
-  </div>
-	<div class="control-group">
-		<label class="control-label" for="place_address">Hours of Operation</label>
-		<div class="controls">
-			<textarea id="place_address" name="place[hours_of_operation]" class="input-xlarge" rows="7"><%= @place.hours_of_operation %></textarea>
-		</div>
-  </div>
-	<div class="control-group">
-		<label class="control-label" for="place_rating_set">Business Type</label>
-		<div class="controls">
-			<label class="radio">
-				<input type="radio" id="place_rating_set_local" name="place[rating_set]" value="local" 
-				<%= "checked" if @place.rating_set.eql? "local" %>>
-				Local
-			</label>
-			<label class="radio">
-				<input type="radio" id="place_rating_set_corporate" name="place[rating_set]" value="corporate" <%= "checked" if @place.rating_set.eql? "corporate" %>>
-				Corporate
-			</label>
-		</div>
-  </div>
-	<div class="control-group">
-		<label class="control-label" for="place_photo">Upload a photo: </label>
-		<div class="controls">
-			<%= f.file_field :photo %>
-		</div>
-  </div>
-
+	<div class="left-col span5 pull-left">
+		<fieldset>
+	  <div class="control-group">
+			<label class="control-label" for="place_title">Title</label>
+			<div class="controls">
+				<input type="text" id="place_title" name="place[title]" value="<%= @place.title %>" class="input-xlarge" />
+			</div>
+	  </div>
+	<% if current_user.admin? %>
+		<div class="control-group">
+			<label class="control-label" for="place_description">Description</label>
+			<div class="controls">
+				<textarea id="place_description" name="place[description]" value="<%= @place.description %>" class="input-xlarge"></textarea>
+			</div>
+	  </div>
+	<% end %>
+		<div class="control-group">
+			<label class="control-label" for="place_owner">Owner</label>
+			<div class="controls">
+				<input type="text" id="place_owner" name="place[owner]" value="<%= @place.owner %>" class="input-xlarge" />
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="place_phone">Phone Number</label>
+			<div class="controls">
+				<input type="text" id="place_title" name="place[phone]" value="<%= @place.phone %>" class="input-xlarge" />
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="place_address">Address</label>
+			<div class="controls">
+				<textarea id="place_address" name="place[address]" class="input-xlarge"><%= @place.address %></textarea>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="place_hours_of_operation">Hours of Operation</label>
+			<div class="controls">
+				<textarea id="place_address" name="place[hours_of_operation]" class="input-xlarge" rows="7"><%= @place.hours_of_operation %></textarea>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="place_rating_set">Business Type</label>
+			<div class="controls">
+				<label class="radio">
+					<input type="radio" id="place_rating_set_local" name="place[rating_set]" value="local" 
+					<%= "checked" if @place.rating_set.eql? "local" %>>
+					Local
+				</label>
+				<label class="radio">
+					<input type="radio" id="place_rating_set_corporate" name="place[rating_set]" value="corporate" <%= "checked" if @place.rating_set.eql? "corporate" %>>
+					Corporate
+				</label>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="place_photo">Upload a photo: </label>
+			<div class="controls">
+				<%= f.file_field :photo %>
+			</div>
+	  </div>
+		</fieldset>
+	</div>
+	<div class="right-col">
+		Already Categorized as:<br /> <%= raw @place.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
+		
+		<%= render 'shared/categories', :categories => @categories %>
+	</div>
+	<br class="clear" />
   <div class="actions">
     <%= f.submit %>
   </div>

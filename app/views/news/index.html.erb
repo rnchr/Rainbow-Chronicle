@@ -1,6 +1,6 @@
 <%= render 'filter' %>
 
-<div class="span8 news-item founders-post">
+<div class="news-item founders-post">
 	<div class="inner">
 		<h2>Founder's Post</h2><span class="author">By <strong><%= @fp.user.display_name %></strong> at <%= @fp.timestamp %></span>
 	
@@ -13,6 +13,23 @@
 	</div>
 </div>
 
-<%= render @news %>
+<%= render @news[0..4] %>
+
+<div class="span6">
+<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9217859865934808";
+		/* Banner1 */
+		google_ad_slot = "5335419252";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<br class="clear" />
+
+<%= render @news[5..10] %>
 
 <%= paginate @news %>

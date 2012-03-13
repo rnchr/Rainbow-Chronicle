@@ -11,38 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description, :class => "input-xlarge" %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :website %><br />
-    <%= f.text_field :website %>
-  </div>
-  <div class="field">
-    <%= f.label :start %><br />
-    <%= f.date_select :start %>
-  </div>
-  <div class="field">
-    <%= f.label :end %><br />
-    <%= f.date_select :end %>
-  </div>
-  <div class="field">
-    <%= f.label :timespan %><br />
-    <%= f.text_field :timespan %>
-  </div>
+	<div class="left-col span5 pull-left">
+		<fieldset>
+	  <div class="control-group">
+			<label class="control-label" for="event_title">Name</label>
+			<div class="controls">
+				<input type="text" id="event_title" name="event[title]" value="<%= @event.title %>" class="input-xlarge" />
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_phone">Phone Number</label>
+			<div class="controls">
+				<input type="text" id="event_title" name="event[phone]" value="<%= @event.phone %>" class="input-xlarge" />
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_address">Address</label>
+			<div class="controls">
+				<textarea id="event_address" name="event[address]" class="input-xlarge"><%= @event.address %></textarea>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_website">Website</label>
+			<div class="controls">
+				<input type="text" id="event_website" name="event[website]" value="<%= @event.website %>" class="input-xlarge" />
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_photo">Upload a photo: </label>
+			<div class="controls">
+				<%= f.file_field :photo %>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_start">Start Date: </label>
+			<div class="controls">
+				<%= f.date_select :start %>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_photo">End Date: </label>
+			<div class="controls">
+				<%= f.date_select :end %>
+			</div>
+	  </div>
+		<div class="control-group">
+			<label class="control-label" for="event_timespan">Timespan</label>
+			<div class="controls">
+				<input type="text" id="event_timespan" name="event[timespan]" value="<%= @event.timespan %>" class="input-xlarge" />
+			</div>
+	  </div>
+		</fieldset>
+	</div>
+	<div class="right-col">
+		Already Categorized as:<br /> <%= raw @event.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
+		
+		<%= render 'shared/categories', :categories => @categories %>
+	</div>
+	<br class="clear" />
   <div class="actions">
     <%= f.submit %>
   </div>

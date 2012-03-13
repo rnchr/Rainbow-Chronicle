@@ -1,4 +1,4 @@
-<div class="span8 news-item">
+<div class=" news-item">
 	<h3><%= link_to raw(news.title), news %></h3>
 	<p class="author">By <strong><%= news.user.display_name %></strong> at <%= news.timestamp %></p>
 		<%= image_tag news.image %>
@@ -6,4 +6,5 @@
 		<%= strip_tags news.body %>
 	</blockquote>
 	<span style="text-align:right; float: right; clear: both;"><%= link_to 'Read More', news %> | <%= pluralize news.comment_count, 'Comment' %></span>
+	<br class="clear" />
 </div>

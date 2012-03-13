@@ -26,6 +26,8 @@ class PlacesController < ApplicationController
 
   def edit
     @place = Place.find(params[:id])
+    set_category_vars PlaceType
+    
     unless can? :edit, @place
       redirect_to @place, notice: "You don't have permission to modify this record."
       return
@@ -46,6 +48,8 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
+    @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
+
     if @place.update_attributes(params[:place])
       redirect_to @place, notice: 'Place was successfully updated.'
     else

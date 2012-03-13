@@ -24,23 +24,30 @@ class LeadersController < ApplicationController
   
   def new
     @leader = Leader.new
+    set_category_vars LeaderType
   end
 
   def edit
     @leader = Leader.find(params[:id])
+    set_category_vars LeaderType
+    
   end
 
   def create
-    leader = Leader.new(params[:leader])
-    if leader.save
-      redirect_to leader
+    @leader = Leader.new(params[:leader])
+    @leader.tags << params[:categories].collect {|c| LeaderType.find(c) }
+      
+    @leader.user = current_user
+    if @leader.save
+      redirect_to @leader, notice: 'Leader was successfully created.'
     else
-      render action: 'new'
+      render action: "new"
     end
   end
 
   def update
     @leader = Leader.find(params[:id])
+    @leader.tags << params[:categories].collect {|c| LeaderType.find(c) }
     if @leader.update_attributes(params[:leader])
       redirect_to @leader, notice: 'Leader was successfully updated.'
     else

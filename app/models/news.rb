@@ -23,7 +23,10 @@ class News < ActiveRecord::Base
   end
   
   def image
-    photo ||= 'rc-news'
-    "/images/#{photo}.png"
+    unless photo.blank?
+      "/images/#{photo}.png"
+    else
+      "/images/rc-news.png"
+    end
   end
 end
