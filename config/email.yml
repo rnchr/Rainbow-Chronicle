@@ -6,9 +6,9 @@ development:
     :password: troegenator
     :enable_starttls_auto: true
 production:
-    :address: smtp.gmail.com
+    :address: smtp.sendgrid.net
     :port: 587
     :authentication: plain
-    :user_name: therainbowchronicle
-    :password: troegenator
+    :user_name: rainbowchronicle
+    :password: Lilteezy1
     :enable_starttls_auto: true

@@ -11,5 +11,5 @@
 <%= gmaps({:map_options => {
 						 :center_latitude => location[:ll][0], :center_longitude => location[:ll][1], :zoom => 11
 					 },
-					:markers => { "data" => json }
+					:markers => { "data" => json, "options" => {"do_clustering" => false}}
 }) %>
