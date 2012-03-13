@@ -7,6 +7,7 @@
       <th>Email</th>
 			<th></th>
 			<th></th>
+			<th></th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
     <tr>
       <td><%= user.display_name %></td>
       <td><%= user.email %></td>
+			<td><%= link_to 'Make admin', make_admin_path(user), :confirm => "Are you sure you want to make #{user.display_name} and administrator? This is not reversible.", :class => 'btn btn-warning' %></td>
 			<td></td>
 			<td><%= link_to 'Destroy User', destroy_user_path(user),:method => :delete, :confirm => "Really delete #{user.display_name}?", :class => 'btn btn-danger' %></td>
     </tr>

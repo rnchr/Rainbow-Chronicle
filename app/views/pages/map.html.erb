@@ -1,3 +1,9 @@
-<%= gmaps4rails(@json) %>
+<%= gmaps({:map_options => {
+						:zoom => 4, :center_latitude => '39.04', :center_longitude => '-99.01'
+					 },
+					"markers" => { "data" => @json, "options" => { "clusterer_maxZoom" => 1 } }
+
+}) %>
+
 <br />
 <p style="font-size:1.5em; text-align: center;">Letter indicates Event, Leader, or Place. Color indicates gay-friendliness.</p>

@@ -1,7 +1,8 @@
 <% collection = klass.name.pluralize %>
 <form class="form-inline">
-	Search: <input type="text" class="input-medium search-query" placeholder="<%= location[:string] %>" name="location" />
+	<input type="text" class="input-medium search-query" placeholder="<%= location[:string] %>" name="location" />
 	<input type="submit" value="Go" />
+	<input type="submit" value="Set As Default" />
 	<%= link_to "Add a New #{klass.name.humanize}", new_polymorphic_path(klass), :class => "btn btn-primary"%>
 	<a href="<%= polymorphic_url(klass, :action => 'popular') %>" class="btn btn-success">Hall of Fame</a>
 	<a href="<%= polymorphic_url(klass, :action => 'unsafe') %>"class="btn btn-warning">
@@ -11,5 +12,6 @@
 <%= gmaps({:map_options => {
 						 :center_latitude => location[:ll][0], :center_longitude => location[:ll][1], :zoom => 11
 					 },
-					:markers => { "data" => json, "options" => {"do_clustering" => false}}
+					"markers" => { "data" => json, "options" => { "clusterer_maxZoom" => 1 } }
+
 }) %>

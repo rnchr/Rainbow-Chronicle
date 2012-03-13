@@ -10,7 +10,7 @@ RcRails::Application.routes.draw do
   match '/search' => 'pages#search_helper', :as => 'search'
   
   delete '/users/:id' => 'users#destroy', :as => 'destroy_user'
-  
+  match '/admin/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin'
   post '/categories' => 'categories#create', :as => 'create_category'
   
   get '/report/:type/:id' => 'reports#new'

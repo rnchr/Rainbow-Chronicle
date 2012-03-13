@@ -1,4 +1,5 @@
 module CommonHelper
+  # include ActionView::Helpers::UrlHelper
   def aggregate!
     cached_rating = ratings.average(:overall).to_f
     update_attributes!({:cached_rating => cached_rating})
@@ -12,8 +13,13 @@ module CommonHelper
     (cached_rating > 0 ? "+" : "") + "#{cached_rating.round(2)}"
   end
   
+  def gmaps4rails_title
+    title
+  end
+  
   def gmaps4rails_infowindow
-      "<span style=\"font-weight:bold;\">#{title}</span><br>#{address}<br>Rating: #{rating_string}"
+      "<span style=\"font-weight:bold;\">#{title}</span>
+      <br>#{address}<br>Rating: #{rating_string}<br>" 
   end
   
   # splits the address at the first comma
