@@ -7,7 +7,6 @@ class Leader < ActiveRecord::Base
   belongs_to :user
   has_many :users, :through => :ratings
   
-  
   def tags
     leader_types
   end

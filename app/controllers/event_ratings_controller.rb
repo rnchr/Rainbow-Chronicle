@@ -1,4 +1,5 @@
 class EventRatingsController < ApplicationController
+  include RatingsHelper
   before_filter :authenticate_user!, :except => [:index]
   
   def index
