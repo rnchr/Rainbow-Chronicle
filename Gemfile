@@ -21,7 +21,7 @@ gem "paperclip", "~> 2.7"
 gem 'sequel'
 gem 'awesome_print'
 gem 'mysql'
-
+gem 'newrelic_rpm'
 gem 'thin'
 
 # Gems used only for assets and not required
