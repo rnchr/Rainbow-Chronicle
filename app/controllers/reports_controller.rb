@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
 
     @report = Report.new
     @report.item_id = params[:id]
-    @report.user_id = current_user
+    @report.user = current_user
     @report.post_type = params[:type]
     @report.report_type = params[:report][:report_type]
     @report.report_content = params[:report][:report_content]

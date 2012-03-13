@@ -11,6 +11,8 @@ RcRails::Application.routes.draw do
   
   delete '/users/:id' => 'users#destroy', :as => 'destroy_user'
   
+  post '/categories' => 'categories#create', :as => 'create_category'
+  
   get '/report/:type/:id' => 'reports#new'
   post '/report/:type/:id' => 'reports#create'
   delete '/report/:id' => 'reports#destroy'

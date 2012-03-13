@@ -3,25 +3,38 @@
 <table>
   <thead>
     <tr>
-      <th>Title</th>
+      <th>Offensive Post</th>
+			<th>News post (if applicable)</th>
       <th>Poster</th>
+			<th>Reported by</th>
+			<th>Category of report</th>
+      <th>Reason</th>
 			<th></th>
 			<th></th>
 			<th></th>
     </tr>
   </thead>
   <tbody>
-	<% @orig_posts.each do |post|  %>
+	<% @orig_posts.each do |pair|  %>
+		<% post, report = pair.first, pair.last%>
     <tr>
 		<% if post.class.eql? Comment %>
       <td><%= post.body %></td>
+			<td><%= link_to post.news.title, post.news %></td>
       <td><%= post.user.display_name %></td>
+			<td><%= report.user.display_name %></td>
+			<td><%= report.report_type %></td>
+			<td><%= report.report_content %></td>
 			<td><%= link_to 'Show', news_comment_path(post.news, post) %></td>
-			<td><%= link_to 'Edit', edit_news_comment_path(post.news, post) %></td>
+			<td></td>
 			<td><%= link_to 'Delete', news_comment_path(post.news, post),:method => :delete, :confirm => "Really delete this?" %></td>
 		<% else %>
 		  <td><%= post.title %></td>
+			<td></td>
       <td><%= post.user.display_name %></td>
+			<td><%= report.user.display_name %></td>
+			<td><%= report.report_type %></td>
+			<td><%= report.report_content %></td>
 			<td><%= link_to 'Show', polymorphic_path(post) %></td>
 			<td><%= link_to 'Edit', edit_polymorphic_path(post) %></td>
 			<td><%= link_to 'Delete', polymorphic_path(post),:method => :delete, :confirm => "Really delete this?" %></td>

@@ -11,7 +11,8 @@ class AdminController < ApplicationController
       event_ratings: EventRating.count,
       user: User.count,
       news: News.count,
-      comment: Comment.count
+      comment: Comment.count,
+      reports: Report.count
     }
   end
   
@@ -23,7 +24,7 @@ class AdminController < ApplicationController
     @reports = Report.order("created_at ASC").page(params[:page]).per(40)
     @orig_posts = @reports.collect do |post|
       begin
-        class_for(post.post_type).find(post.item_id)
+        [class_for(post.post_type).find(post.item_id), post]
       rescue ActiveRecord::RecordNotFound
         post.destroy
         nil
@@ -41,6 +42,27 @@ class AdminController < ApplicationController
   
   def leaders
     @leaders = Leader.order("created_at DESC").page(params[:page]).per(40)
+  end
+  
+  def event_categories
+    @type = "events"
+    @categories = EventType.leaves
+    @cat = EventType.new
+    render 'new_category'
+  end
+  
+  def place_categories
+    @type = "places"
+    @categories = PlaceType.leaves
+    @cat = PlaceType.new
+    render 'new_category'
+  end
+  
+  def leader_categories
+    @type = "leaders"
+    @categories = LeaderType.leaves
+    @cat = LeaderType.new
+    render 'new_category'
   end
   
   def news

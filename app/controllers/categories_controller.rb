@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_filter :initialize_type
+  before_filter :verify_admin, :only => [:create]
   
   def show
     @category = params[:category]
@@ -10,7 +11,9 @@ class CategoriesController < ApplicationController
   end
   
   def create
-
+    path = params[:existing_path].split(',')
+    @klass.find_or_create_by_path([path, params[:new_category]].flatten)
+    redirect_to admin_path
   end
   
   private

@@ -1,0 +1,12 @@
+<h2>New category for <%= @type %></h2>
+<%= form_for @cat, :url => create_category_path do |f| %>
+	<input type="hidden" name ="type" value="<%= @type %>" />
+	<select name="existing_path">
+		<option value="">Create New Top Level Category</option>
+		<% @categories.each do |c| %>
+		<option value="<%= c.ancestry_path.join(',') %>"><%= c.ancestry_path.join(' > ') %></option>
+		<% end %>
+	</select>
+	<input type="text" class="input-xlarge" name="new_category" placeholder="New (Sub)Category Name" />
+	<%= f.submit "Save" %>
+<% end %>

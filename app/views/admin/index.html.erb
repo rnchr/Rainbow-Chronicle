@@ -16,3 +16,10 @@
 	
 <h3><%= link_to 'Users', controller: 'admin', action: 'users' %></h3>
 <p>There are <%= @count[:user] %> users.</p>
+
+<h3><%= link_to 'Reported Posts', controller: 'admin', action: 'reports' %></h3>
+<p>There are <%= pluralize @count[:reports], 'reported posts' %> pending action.</p>
+
+<h3><%= link_to 'Add New Event Categories', controller: 'admin', action: 'event_categories' %></h3>
+<h3><%= link_to 'Add New Place Categories', controller: 'admin', action: 'place_categories' %></h3>
+<h3><%= link_to 'Add New Leader Categories', controller: 'admin', action: 'leader_categories' %></h3>
