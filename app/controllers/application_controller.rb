@@ -16,17 +16,27 @@ class ApplicationController < ActionController::Base
   
   def load_location
     if not params[:location].blank?
-      result = Geocoder.search(params[:location])
+      result = Geocoder::Lookup::GeocoderCa.search(params[:location])
       unless result.empty?
         @location = {
           :ll => [result.first.latitude, result.first.longitude],
           :state => result.first.province_code,
           :string => "#{result.first.city}, #{result.first.province_code}"
           }
+         session[:location_lat] = result.first.latitude
+         session[:location_lng] = result.first.longitude
+         session[:location_state] = result.first.province_code
+         session[:location_string] = "#{result.first.city}, #{result.first.province_code}"
         return
       end
+    elsif not session[:location_lat].blank?
+      @location = {
+        :ll => [session[:location_lat], session[:location_lng]],
+        :state => session[:location_state],
+        :string => session[:location_string]
+      }
+      return
     end
-    
     if user_signed_in? && !current_user.location.blank?
       @location = {
         :ll => [current_user.lat, current_user.lng],

@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
                   :login, :first_name, :last_name, :url, :location
   
   geocoded_by :location, :latitude => :lat, :longitude => :lng
-  
+  reverse_geocoded_by :lat, :lng,
+    :address => :location
+  after_validation :reverse_geocode
   before_update :geocode
   
   has_many :events

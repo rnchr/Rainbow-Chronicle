@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-	<div class="left-col span5 pull-left">
+
 		<fieldset>
 	  <div class="control-group">
 			<label class="control-label" for="leader_title">Name</label>
@@ -44,12 +44,15 @@
 			</div>
 	  </div>
 		</fieldset>
-	</div>
-	<div class="right-col">
-		Already Categorized as:<br /> <%= raw @leader.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
-		
-		<%= render 'shared/categories', :categories => @categories %>
-	</div>
+
+		<p>Already Categorized as:<br /> 
+			<% if @leader.tags.count.eql? 0 %>
+				None
+			<% else %>
+				<%= @leader.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
+			<% end %>
+			</p>
+
 	<br class="clear" />
   <div class="actions">
     <%= f.submit %>

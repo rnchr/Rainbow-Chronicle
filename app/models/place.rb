@@ -26,7 +26,8 @@ class Place < ActiveRecord::Base
                   # :picture, :created_at, :type, :views, :description, :website, :cached_rating, :state, :city, :zipcode
                   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
-  
+  after_validation :geocode,
+    :if => lambda{ |obj| obj.address_changed? }
   # before_create :geocode
   
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'

@@ -9,7 +9,6 @@
       </ul>
     </div>
   <% end %>
-	<div class="left-col span5 pull-left">
 		<fieldset>
 	  <div class="control-group">
 			<label class="control-label" for="place_title">Title</label>
@@ -70,12 +69,15 @@
 			</div>
 	  </div>
 		</fieldset>
-	</div>
-	<div class="right-col">
-		Already Categorized as:<br /> <%= raw @place.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
-		
+
+		<p>Already Categorized as:<br /> 
+			<% if @place.tags.count.eql? 0 %>
+				None
+			<% else %>
+				<%= @place.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
+			<% end %>
+			</p>		
 		<%= render 'shared/categories', :categories => @categories %>
-	</div>
 	<br class="clear" />
   <div class="actions">
     <%= f.submit %>

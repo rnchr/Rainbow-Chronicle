@@ -3,7 +3,7 @@ module ApplicationHelper
   def display_categories(objects)
     return unless objects.count > 0
     obj = objects.first
-
+    threshold = 4
     list = {}
     objects.each do |o|
       o.tags.each do |t|
@@ -19,19 +19,22 @@ module ApplicationHelper
     ret = "<ul class=\"category-side-bar\">"
 
     list = list.sort {|a,b| b[1][:count] <=> a[1][:count] }
-    list[0..5].each do |cat|
+    count = 0
+    list.each do |cat|
       b = Hash.new(0)
       cat[1][:sub].each do |v|
         b[v] += 1
       end
-      ret << "<li class=\"title\"><a href=\"#{category_path(cat[0], obj)}\">#{cat[0]} (#{cat[1][:sub].count})</a></li><ul>"
+      style = count > threshold ? "hidden-cat" : ""
+      ret << "<li class=\"title #{style}\"><a href=\"#{category_path(cat[0], obj)}\">#{cat[0]} (#{cat[1][:sub].count})</a><ul>"
       b = b.reject {|o| o.nil?}
       b.each do |k, v|
         ret << "<li><a href=\"#{category_path(k, obj)}\">#{k} (#{v})</a></li>\n"
       end
-      ret << "</ul>"
+      ret << "</li></ul>"
+      count += 1
     end
-    ret += "</ul>"
+    ret += "</ul><a id=\"show-all-cats\">Show all categories in the area.</a>"
   end
 
   def rating_helper(rating)
