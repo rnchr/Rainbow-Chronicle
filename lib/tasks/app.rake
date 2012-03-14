@@ -2,9 +2,7 @@ require_relative './parse_data'
 
 namespace :app do
   task :ensure_development_environment => :environment do
-    if Rails.env.production?
-      raise "Sorry, this task isn't safe for production!"
-    end
+
   end
   
   desc "Open up Migration Database"

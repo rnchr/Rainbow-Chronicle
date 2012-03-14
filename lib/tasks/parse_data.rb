@@ -99,7 +99,9 @@ module MigrationTasks
         post = klass.find r[:rating_postid]
         ratings_for_post = build_ratings r[:rating_postid]
         ratings_for_post.map do |rating|
-           new_rating = post.ratings.create! rating
+           new_rating = post.ratings.new rating
+           new_rating.created_at = r[:created_at]
+           new_rating.save
         end
       rescue ActiveRecord::RecordNotFound
         puts $!
@@ -107,7 +109,6 @@ module MigrationTasks
         unless ex.message.eql? 'PNF'
           puts "ERROR"
           puts ex.message
-          raise
         end
       end
     end

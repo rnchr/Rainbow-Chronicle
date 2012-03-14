@@ -99,6 +99,7 @@ GEM
     mime-types (1.17.2)
     multi_json (1.1.0)
     mysql (2.8.1)
+    mysql2 (0.3.11)
     newrelic_rpm (3.3.2)
     orm_adapter (0.0.6)
     paperclip (2.7.0)
@@ -177,6 +178,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql
+  mysql2
   newrelic_rpm
   paperclip (~> 2.7)
   rails (= 3.2.1)

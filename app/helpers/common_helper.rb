@@ -19,7 +19,8 @@ module CommonHelper
   
   def gmaps4rails_infowindow
       "<span style=\"font-weight:bold;\">#{title}</span>
-      <br>#{address}<br>Rating: #{rating_string}<br>" 
+      <br>#{address}<br>Rating: #{rating_string}<br>
+      <a href=\"/#{self.class.name.pluralize.downcase}/#{id}\">View Listing</a>" 
   end
   
   # splits the address at the first comma
