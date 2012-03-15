@@ -1,11 +1,12 @@
 RcRails::Application.routes.draw do
+  
+  match 'pages/:action', :controller => 'pages'
 
   devise_for :users
 
   root :to => 'places#index'
   match '/map'  => 'pages#map'
   
-  match 'pages/:action', :controller => 'pages'
   match '/search/:query' => 'pages#search'
   match '/search' => 'pages#search_helper', :as => 'search'
   

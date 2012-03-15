@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  
+  def mailer_set_url_options
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end  
   protect_from_forgery
   
   before_filter :load_recent_news
@@ -16,7 +18,7 @@ class ApplicationController < ActionController::Base
   
   def load_location
     if not params[:location].blank?
-      result = Geocoder::Lookup::GeocoderCa.search(params[:location])
+      result = Geocoder.search(params[:location])
       unless result.empty?
         @location = {
           :ll => [result.first.latitude, result.first.longitude],

@@ -23,5 +23,8 @@ production:
   database: rbc_2012
   pool: 5
   timeout: 5000
-  user: web_app
-  password: cyber99douchery
+  user: root@'%'
+  password: rainbowsoflove
+  host: localhost
+  reconnect: true
+
