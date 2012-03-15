@@ -52,7 +52,7 @@
 				<%= @leader.tags.map {|tag| tag.ancestry_path.join(' > ')}.join('<br />'.html_safe) %>
 			<% end %>
 			</p>
-
+			<%= render 'shared/categories', :categories => @categories %>
 	<br class="clear" />
   <div class="actions">
     <%= f.submit %>
