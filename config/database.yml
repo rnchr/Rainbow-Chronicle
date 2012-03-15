@@ -19,7 +19,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: rbc_2012
   pool: 5
   timeout: 5000
+  user: root@'%'
+  password: rainbowsoflove
+  host: localhost
+  reconnect: true

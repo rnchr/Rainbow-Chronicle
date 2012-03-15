@@ -9,7 +9,7 @@ RcRails::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -49,7 +49,17 @@ RcRails::Application.configure do
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default_url_options = {:host => 'rainbowchronicle.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.sendgrid.net",
+    :port    => 587,
+    :user_name => 'rainbowchronicle',
+    :password => 'Lilteezy1',
+    :domain  => 'rainbowchronicle.com'
+  }
+
 
   # Enable threaded mode
   # config.threadsafe!
