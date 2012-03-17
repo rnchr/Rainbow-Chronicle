@@ -35,8 +35,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params[:event])
-    @event.tags << params[:categories].collect {|c| EventType.find(c) }
-      
+    unless params[:categories].nil?
+      @event.tags << params[:categories].collect {|c| EventType.find(c) }
+    end
     @event.user = current_user
     if @event.save
       redirect_to @event, notice: 'Event was successfully created.'
@@ -47,7 +48,9 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.tags << params[:categories].collect {|c| EventType.find(c) }
+    unless params[:categories].nil?
+      @event.tags << params[:categories].collect {|c| EventType.find(c) }
+    end
     if @event.update_attributes(params[:event])
       redirect_to @event, notice: 'Event was successfully updated.'
     else

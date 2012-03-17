@@ -18,12 +18,14 @@ class Leader < ActiveRecord::Base
   scope :popular, where("cached_rating > 2.5").order("cached_rating DESC")
   scope :ordered_cities, select("city, state, count(city) as c").group(:city).order("c desc")
   scope :top_national, ordered_cities.limit(3)
-  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/leaders/:id" }
+  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/:hash.:extension",
+      :hash_secret => "leaders_secret" }
   
-  # 
-  # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :phone, 
-  #                 :picture, :created_at, :type, :views, :website, :cached_rating, :state, :city, :zipcode
-  # 
+  
+  attr_accessible :title, :lat, :lng, :address, :phone, 
+                  :picture, :type, :views, :website, :cached_rating, :state, :city, :zipcode,
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at, :photo
+  
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,
     :if => lambda{ |obj| obj.address_changed? }

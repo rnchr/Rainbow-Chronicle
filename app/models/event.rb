@@ -8,7 +8,8 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :ratings
   
   
-  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/events/:id" }
+  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/:hash.:extension",
+      :hash_secret => "event_secret" }
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,
@@ -18,11 +19,12 @@ class Event < ActiveRecord::Base
   scope :top_national, ordered_cities.limit(3)
 
   before_create :geocode
-  # 
-  # # for migration script
-  # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :start, :end, :owner, :phone,
-  #                 :picture, :created_at, :timespan, :type, :views, :website, :cached_rating, :state, :city, :zipcode
-  # 
+  
+  # for migration script
+  attr_accessible :title, :lat, :lng, :address, :start, :end, :owner, :phone,
+                  :picture, :created_at, :timespan, :views, :website, :state, :city, :zipcode, :photo,
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
+  
   def tags
     event_types
   end

@@ -19,11 +19,13 @@ class Place < ActiveRecord::Base
   scope :ordered_cities, select("city, state, count(city) as c").group(:city).order("c desc")
   scope :top_national, ordered_cities.limit(3)
   
-  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/places/:id" }
+  has_attached_file :photo, :styles => { :medium => "370x370>", :thumb => "75x75>", :url => "/system/:hash.:extension",
+      :hash_secret => "places_secret" }
   
   belongs_to :user
-  # attr_accessible :id, :user_id, :title, :lat, :lng, :address, :hours_of_operation, :owner, :rating_set, :phone,
-                  # :picture, :created_at, :type, :views, :description, :website, :cached_rating, :state, :city, :zipcode
+  attr_accessible  :title, :lat, :lng, :address, :hours_of_operation, :owner, :rating_set, :phone,
+                  :picture, :type, :views, :description, :website, :state, :city, :zipcode, :photo,
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
                   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,

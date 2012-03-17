@@ -36,8 +36,9 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.new(params[:place])
-    @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
-      
+    unless params[:categories].nil?
+      @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
+    end      
     @place.user = current_user
     if @place.save
       redirect_to @place, notice: 'Place was successfully created.'
@@ -48,8 +49,9 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
-    @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
-
+    unless params[:categories].nil?
+      @place.tags << params[:categories].collect {|c| PlaceType.find(c) }
+    end
     if @place.update_attributes(params[:place])
       redirect_to @place, notice: 'Place was successfully updated.'
     else
