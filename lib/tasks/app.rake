@@ -5,6 +5,13 @@ namespace :app do
 
   end
   
+  desc "Fix long places rating"
+  task :shorten_rating => :environment do
+    rating = Rating.find(4)
+    rating.text = "Comfort as a member of LGBT community"
+    rating.save
+  end
+  
   desc "Open up Migration Database"
   task :open_db do
     DB_NAME = '634196_rc_wp'
