@@ -70,10 +70,10 @@
 					<% end %>
 				</li>
 				<li style="float:right;">
-					<form class="form-search" method="GET" action="/search">
-						<input type="text" class="input-small search-query" name="query" />
-						<input type="submit" value="Search!" />
-					</form>
+					<%= form_tag("/search", :method => "get", :class => "form-search") do %>
+					  <%= text_field_tag(:query) %>
+					  <%= submit_tag("Search!") %>
+					<% end %>
 				</li>
 
 			</ul>
