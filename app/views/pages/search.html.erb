@@ -1,12 +1,23 @@
-<h2>Your search for <%= @query %> returned <%= pluralize  @results,'result' %>. </h2>
-<h3>News</h3>
-<ul>
-<%= render :partial => 'news_list', :locals => {:list => @news} %>
-</ul>
-<h3>Places</h3>
-<%= render :partial => 'search_list', :locals => {:list => @places} %>
-<h3>Leaders</h3>
-<%= render :partial => 'search_list', :locals => {:list => @leaders} %>
-<h3>Events</h3>
-<%= render :partial => 'search_list', :locals => {:list => @events} %>
-
+<% if @query.nil? %>
+	<h2>Please enter a search term.</h2>
+<% else %>
+	<h2>Your search for <%= @query %> returned <%= pluralize  @results,'result' %>. </h2>
+	<% unless @news.count.zero? %>
+		<h3>News</h3>
+		<ul>
+		<%= render :partial => 'news_list', :locals => {:list => @news} %>
+		</ul>
+	<% end %>
+	<% unless @places.count.zero? %>
+		<h3>Places</h3>
+		<%= render :partial => 'search_list', :locals => {:list => @places} %>
+	<% end %>
+	<% unless @leaders.count.zero? %>
+		<h3>Leaders</h3>
+		<%= render :partial => 'search_list', :locals => {:list => @leaders} %>
+	<% end %>
+	<% unless @events.count.zero? %>
+		<h3>Events</h3>
+		<%= render :partial => 'search_list', :locals => {:list => @events} %>
+	<% end %>
+<% end %>

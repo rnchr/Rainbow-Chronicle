@@ -8,14 +8,16 @@ class PagesController < ApplicationController
   
   def search
     @query = params[:query]
-    query = "%#{@query.gsub(/\s/,'%')}%"
+    unless @query.nil?
+      query = "%#{@query.gsub(/\s/,'%')}%"
     
-    @places = Place.where("title like ? or description like ?", query, query)
-    @events = Event.where("title like ? or description like ?", query, query)
-    @leaders = Leader.where("title like ?", query)
-    @news = News.where("title like ? or body like ?", query, query)
+      @places = Place.where("title like ? or description like ?", query, query)
+      @events = Event.where("title like ? or description like ?", query, query)
+      @leaders = Leader.where("title like ?", query)
+      @news = News.where("title like ? or body like ?", query, query)
     
-    @results = @news.count + @leaders.count + @places.count + @events.count
+      @results = @news.count + @leaders.count + @places.count + @events.count
+    end
   end
   
   def search_helper

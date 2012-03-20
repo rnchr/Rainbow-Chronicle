@@ -8,7 +8,8 @@ RcRails::Application.routes.draw do
   match '/map'  => 'pages#map'
   
   match '/search/:query' => 'pages#search'
-  match '/search' => 'pages#search_helper', :as => 'search'
+#  match '/search' => 'pages#search_helper', :as => 'search' #this leads to a redirect loop. jack carter 3/19/12
+  match '/search' => 'pages#search', :as => 'search'
   
   delete '/users/:id' => 'users#destroy', :as => 'destroy_user'
   match '/admin/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin'
