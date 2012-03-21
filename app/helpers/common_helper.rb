@@ -53,11 +53,11 @@ module CommonHelper
   def static_icon
     type = self.class.name.downcase
     if cached_rating.round.eql? 0
-      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-zero.png"
+      "http://www.rainbowchronicle.com/images/#{type}s-zero.png"
     elsif cached_rating > 0
-      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-pos#{cached_rating.round}.png"
+      "http://www.rainbowchronicle.com/images/#{type}s-pos#{cached_rating.round}.png"
     else
-      "http://www.rainbowchronicle.com/wp-content/themes/rainbow/img/icons/#{type}s-neg#{cached_rating.abs.round}.png"
+      "http://www.rainbowchronicle.com/images/#{type}s-neg#{cached_rating.abs.round}.png"
     end
   end
 end
