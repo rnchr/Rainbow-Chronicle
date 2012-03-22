@@ -5,7 +5,7 @@
 	</div>
 	<div class="body">
 		<h4 class="list-title-small">
-			<%= link_to obj.title, obj %>
+			<%= link_to obj.title.html_safe, obj %>
 		</h4>
 		<address class="addr pull-left"><%= raw obj.address %></address>
 		<div class="distance pull-right">

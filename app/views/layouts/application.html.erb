@@ -86,7 +86,6 @@
 		
 		<div class="row">
 			<div class="span7 main-content">
-
 				<%= yield %>
 			</div>
 			<div class="span3 sidebar-nav">
@@ -148,6 +147,13 @@
 						<p>&copy; 2010-2012 The Rainbow Chronicle LLC</p>
 						<p>All rights reserved</p>
 				</div>
+					<div class="foot-links-2">
+					<ul class="foot-links-2">
+						<li><%= link_to 'About us', '/pages/about' %> |</li>
+						<li><%= link_to 'Contact us', '/pages/contact' %> |</li>
+						<li><%= link_to 'Advertise', '/pages/advertise' %></li>								
+					</ul>
+					</div>
 					<ul class="foot-links">
 						<li><%= link_to 'Terms of Service', '/pages/tos' %> |</li>
 						<li><%= link_to 'Privacy Policy', '/pages/privacy' %></li>
