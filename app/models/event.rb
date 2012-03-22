@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
   # for migration script
   attr_accessible :title, :lat, :lng, :address, :start, :end, :owner, :phone,
                   :picture, :created_at, :timespan, :views, :website, :state, :city, :zipcode, :photo,
-                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at, :cached_rating
   
   def tags
     event_types

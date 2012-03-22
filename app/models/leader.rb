@@ -24,7 +24,7 @@ class Leader < ActiveRecord::Base
   
   attr_accessible :title, :lat, :lng, :address, :phone, 
                   :picture, :type, :views, :website, :cached_rating, :state, :city, :zipcode,
-                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at, :photo
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at, :photo, :cached_rating
   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,

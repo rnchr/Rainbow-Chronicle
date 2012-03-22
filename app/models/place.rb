@@ -25,7 +25,7 @@ class Place < ActiveRecord::Base
   belongs_to :user
   attr_accessible  :title, :lat, :lng, :address, :hours_of_operation, :owner, :rating_set, :phone,
                   :picture, :type, :views, :description, :website, :state, :city, :zipcode, :photo,
-                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
+                  :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at, :cached_rating
                   
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,
