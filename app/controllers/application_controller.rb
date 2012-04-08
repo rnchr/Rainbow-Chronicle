@@ -53,11 +53,15 @@ class ApplicationController < ActionController::Base
           :string => "Medford, MA"
           }
     else
+      if request.location.latitude.eql?("0") || request.location.latitude.eql?(0)
+        redirect_to 'pages#locator'
+      else
        @location = {
           :ll => [request.location.latitude, request.location.longitude],
           :state => request.location.state_code,
           :string => "#{request.location.city}, #{request.location.state_code}"
           }
+      end
     end
 
   end

@@ -1,0 +1,15 @@
+<h2>Hey there!</h2>
+<p>You were too sneaky for us and we couldn't find you. Tell us where to look so we can show you listings nearby.</p>
+<form id="locate_me" action="#">
+	<p><strong>Show me things near:</strong> <input type="text" name="addr_string" id="location" class="input-xlarge" value="<%= @location[:string] %>" /></p>
+	<input type="hidden" name="set_lat" id="set_lat" />
+	<input type="hidden" name="set_lng" id="set_lng" />
+	<input type="hidden" name="state" id="set_state" />
+	<input type="hidden" id="geocoded" />
+	<input type="button" class="btn btn-primary" id="find" value="Here I am!" />
+</form>
+<%= gmaps({:map_options => {
+						 :center_latitude => @location[:ll][0], :center_longitude => @location[:ll][1], :zoom => 12
+					 },
+					"markers" => { "data" => '[]' }
+}) %>

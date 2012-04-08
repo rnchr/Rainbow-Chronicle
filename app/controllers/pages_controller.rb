@@ -22,6 +22,19 @@ class PagesController < ApplicationController
     redirect_to "/search/#{params[:query]}"
   end
   
+  def test
+  end
+  
+  def locator
+    unless params[:addr_string].blank? && params[:set_lat].blank? &&
+              params[:set_lng].blank? && params[:state].blank?
+      session[:location_lat] = params[:set_lat].to_f
+      session[:location_lng] = params[:set_lng].to_f
+      session[:location_state] = params[:state]
+      session[:location_string] = params[:addr_string]
+    end
+  end
+  
   def categories
    
   end
