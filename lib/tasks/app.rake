@@ -5,6 +5,16 @@ namespace :app do
 
   end
   
+  desc "Update all uncoded zip/state/city fields in models"
+  task :reverse_code => :environment do
+    [Place, Event, Leader].each do |klass|
+      klass.where(city: nil).each do |o|
+        o.reverse_geocode
+        o.save
+      end
+    end
+  end
+  
   desc "Fix long places rating"
   task :shorten_rating => :environment do
     rating = Rating.find(4)

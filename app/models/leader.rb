@@ -31,6 +31,15 @@ class Leader < ActiveRecord::Base
     :if => lambda{ |obj| obj.address_changed? }
   # before_create :geocode
   
+  reverse_geocoded_by :lat, :lng do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.zipcode = geo.postal_code
+      obj.state = geo.province_code
+    end
+  end
+  after_validation :reverse_geocode
+  
   acts_as_gmappable :lat => 'lat', :lng => 'lng', :address => 'address'
   
   def gmaps4rails_marker_picture

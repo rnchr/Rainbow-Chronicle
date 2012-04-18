@@ -14,6 +14,16 @@ class Event < ActiveRecord::Base
   geocoded_by :address, :latitude => :lat, :longitude => :lng
   after_validation :geocode,
     :if => lambda{ |obj| obj.address_changed? }
+    
+  reverse_geocoded_by :lat, :lng do |obj,results|
+    if geo = results.first
+      obj.city    = geo.city
+      obj.zipcode = geo.postal_code
+      obj.state = geo.province_code
+    end
+  end
+  after_validation :reverse_geocode
+  
   scope :popular, where("cached_rating > 2.5").order("cached_rating DESC")
   scope :ordered_cities, select("city, state, count(city) as c").group(:city).order("c desc")
   scope :top_national, ordered_cities.limit(3)

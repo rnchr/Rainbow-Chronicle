@@ -5,10 +5,6 @@ module CommonHelper
     update_attributes!({:cached_rating => cached_rating})
   end
   
-  def zipcode
-    address.slice(address.rindex(/\d{5}/),5)
-  end
-  
   def rating_string
     (cached_rating > 0 ? "+" : "") + "#{cached_rating.round(2)}"
   end
