@@ -69,6 +69,9 @@ class AdminController < ApplicationController
     @news = News.order("created_at DESC").page(params[:page]).per(40)
   end
   
+  def all_ratings
+  end
+  
   private
   def class_for(type)
     {leader:Leader,place:Place,event:Event,comment:Comment}[type.to_sym]

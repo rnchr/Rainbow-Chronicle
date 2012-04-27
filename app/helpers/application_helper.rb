@@ -147,7 +147,7 @@ module ApplicationHelper
   end
   
   def set_unsafe_vars
-    @all_items = klass.where("cached_rating < 1").order("cached_rating ASC").near(@location[:ll], 15)
+    @all_items = klass.where("cached_rating <= -3.5").order("cached_rating ASC").near(@location[:ll], 15)
     @json = @all_items.to_gmaps4rails
     @items = @all_items.page(params[:page]).per(10)
     @heading = "Unsafe #{klass.name.pluralize}"
