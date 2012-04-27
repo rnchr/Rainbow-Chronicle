@@ -1,0 +1,8 @@
+Type, Zip, Rating
+<% [Place, Event, Leader].each do |klass| %>
+	<% klass.all.each do |i| %>
+		<% unless i.zipcode.blank? %>
+			<%= "#{klass.name},#{i.zipcode},#{i.cached_rating}" %>
+		<% end %>
+	<% end %>
+<% end %>
