@@ -1,9 +1,9 @@
 class PagesController < ApplicationController
   def map
-    @all = JSON.parse Place.all.to_gmaps4rails
-    @all += JSON.parse Event.all.to_gmaps4rails
-    @all += JSON.parse Leader.all.to_gmaps4rails
-    @json = @all.to_json
+    # @all = JSON.parse Place.all.to_gmaps4rails
+    # @all += JSON.parse Event.all.to_gmaps4rails
+    # @all += JSON.parse Leader.all.to_gmaps4rails
+    # @json = @all.to_json
   end
   
   def search

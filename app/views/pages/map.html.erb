@@ -1,9 +1,7 @@
-<%= gmaps({:map_options => {
-						:zoom => 4, :center_latitude => '39.04', :center_longitude => '-99.01'
-					 },
-					"markers" => { "data" => @json, "options" => { "clusterer_maxZoom" => 1 } }
+<h2>The Rainbow Map</h2>
+<p style="font-size:1.0em; text-align: center;">Color indicates gay friendliness. Green is better, red is worse. Zoom in to see more detailed spreads.</p>
+<div id="map">
+<iframe width='700' height='450' frameBorder='0' src='http://a.tiles.mapbox.com/v3/rainbowchron.map-b9l50y6p.html#4/39.000/-95.000'></iframe>
+<br style="clear:both;" />
+</div>
 
-}) %>
-
-<br />
-<p style="font-size:1.5em; text-align: center;">Letter indicates Event, Leader, or Place. Color indicates gay-friendliness.</p>
