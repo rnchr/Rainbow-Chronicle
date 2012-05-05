@@ -1,5 +1,5 @@
 <% collection = klass.name.pluralize %>
-<form class="form-inline">
+<form class="form-inline" action="<%= polymorphic_path(klass) %>">
 	<input type="text" class="input-medium search-query" placeholder="<%= location[:string] %>" name="location" />
 	<input type="submit" value="Search" />
 	<%= link_to "Add a New #{klass.name.humanize}", new_polymorphic_path(klass), :class => "btn btn-primary"%>
