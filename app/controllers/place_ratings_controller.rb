@@ -33,7 +33,7 @@ class PlaceRatingsController < ApplicationController
   end
   
   def destroy
-    rating = PlaceRating.find(params[:rating_id])
+    rating = PlaceRating.find(params[:id])
     place = Place.find(params[:place_id])
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy

@@ -34,7 +34,7 @@ class LeaderRatingsController < ApplicationController
   end
   
   def destroy
-    rating = LeaderRating.find(params[:rating_id])
+    rating = LeaderRating.find(params[:id])
     leader = Leader.find(params[:leader_id])
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
