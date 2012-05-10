@@ -37,13 +37,15 @@ module ApplicationHelper
     ret += "</ul><a id=\"show-all-cats\">Show all categories in the area.</a>"
   end
 
+  # This was originally to parse the rating JSON and send back a hash.
+  # It should be refactored to return a full rating object.
   def rating_helper(rating)
     metrics = JSON.parse rating.review
     metrics.map! do |r|
       {:key => Rating.find(r["rating_id"]).text, :val => r["value"] }
     end
     { :name => rating.user.display_name, :time => rating.created_at.strftime("%I:%m%p on %B %d, '%C"), 
-     :overall => rating.overall, :metrics => metrics, :comment => rating.comment }
+     :overall => rating.overall, :metrics => metrics, :comment => rating.comment, :photo => rating.photo, :rating => rating }
   end
   
   def color_rating(number)

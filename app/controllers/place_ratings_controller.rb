@@ -19,7 +19,7 @@ class PlaceRatingsController < ApplicationController
     @rating.comment = params[:comment]
     @rating.user = current_user
     @rating.overall = if count > 0 then (overall.to_f/count) else 0 end
-      
+    @rating.photo.assign(params[:place_rating][:photo])
     if @rating.save
       @place.aggregate!
       redirect_to @place

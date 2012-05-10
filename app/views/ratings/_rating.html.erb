@@ -11,5 +11,15 @@
 	<% unless rating[:comment].blank? %>
 		<p><strong>Comments:</strong> <%= raw rating[:comment] %></p>
 	<% end %>
+	
+	<% if rating[:photo].file? %>
+	<div>
+		<p><strong>Photo Attached:</strong></p><%= link_to image_tag(rating[:photo].url(:thumb)), rating[:photo].url  %>
+	</div>
+	<% end %>
+	
+	<% if rating[:rating].user.eql? current_user %>
+		<%= link_to "Delete your rating?", polymorphic_path([rating[:rating].listing, rating[:rating]]), :method => :delete, :confirm => 'Are you sure?' %>
+	<% end %>
 	<br style="clear: both;" />
 </div>

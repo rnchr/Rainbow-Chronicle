@@ -19,7 +19,7 @@ class EventRatingsController < ApplicationController
     @rating.comment = params[:comment]
     @rating.user = current_user
     @rating.overall = if count > 0 then (overall.to_f/count) else 0 end
-      
+    @rating.photo.assign(params[:event_rating][:photo])
     if @rating.save
       @event.aggregate!
       redirect_to @event
@@ -33,7 +33,7 @@ class EventRatingsController < ApplicationController
   end
   
   def destroy
-    rating = EventRating.find(params[:rating_id])
+    rating = EventRating.find(params[:id])
     event = Event.find(params[:event_id])
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy

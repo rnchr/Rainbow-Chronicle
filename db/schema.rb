@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510012226) do
+ActiveRecord::Schema.define(:version => 20120510045633) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -49,12 +49,16 @@ ActiveRecord::Schema.define(:version => 20120510012226) do
   create_table "event_ratings", :force => true do |t|
     t.text     "comment"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "event_id"
     t.string   "ip_address"
     t.float    "overall"
     t.text     "review"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -96,12 +100,16 @@ ActiveRecord::Schema.define(:version => 20120510012226) do
   create_table "leader_ratings", :force => true do |t|
     t.integer  "user_id"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "leader_id"
     t.string   "ip_address"
     t.float    "overall"
     t.text     "review"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "leaders", :force => true do |t|
@@ -152,12 +160,16 @@ ActiveRecord::Schema.define(:version => 20120510012226) do
   create_table "place_ratings", :force => true do |t|
     t.integer  "user_id"
     t.text     "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "place_id"
     t.string   "ip_address"
     t.float    "overall"
     t.text     "review"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "places", :force => true do |t|

@@ -4,6 +4,7 @@
 		<%= form_for [obj, rating] do |f| %>			
 			<%= render :partial => 'ratings/rating_question', :collection => rating_questions, :as => :r %>
 			<div class="span7 rating-questions">
+						<div class="span3">Attach a photo:</div><div class="span3">	<%= f.file_field :photo %></div>
 				<label class="span3">Comments:</label>
 				<div class="span3 submission">
 					<textarea class="input-xlarge span3" id="textarea" name="comment" rows="4"></textarea>
