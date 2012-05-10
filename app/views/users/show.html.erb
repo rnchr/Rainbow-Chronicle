@@ -1,5 +1,5 @@
 <div class="row">
-	<% if @user.avatar %>
+	<% if @user.avatar.file? %>
 		<%= image_tag @user.avatar.url(:medium), :class => 'profile-pic span2' %>
 	<% else %>
 	  <div class="no-profile-pic span2"><h3>This user doesn't have a picture yet!</h3></div>
