@@ -19,7 +19,7 @@ class LeaderRatingsController < ApplicationController
     @rating.comment = params[:comment]
     @rating.user = current_user
     @rating.overall = if count > 0 then (overall.to_f/count) else 0 end
-    @rating.photo.assign(params[:leader_rating][:photo])
+    @rating.photo.assign(params[:leader_rating][:photo]) if params[:leader_rating]
 
     if @rating.save
       @leader.aggregate!
@@ -38,6 +38,7 @@ class LeaderRatingsController < ApplicationController
     leader = Leader.find(params[:leader_id])
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
+      leader.aggregate!
       redirect_to leaders_path(leader), notice: "Your rating has been deleted."
     else
       redirect_to leaders_path(leader), notice: "You don't have permission to do that."

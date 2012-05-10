@@ -19,7 +19,7 @@ class PlaceRatingsController < ApplicationController
     @rating.comment = params[:comment]
     @rating.user = current_user
     @rating.overall = if count > 0 then (overall.to_f/count) else 0 end
-    @rating.photo.assign(params[:place_rating][:photo])
+    @rating.photo.assign(params[:place_rating][:photo]) if params[:place_rating]
     if @rating.save
       @place.aggregate!
       redirect_to @place
@@ -37,6 +37,7 @@ class PlaceRatingsController < ApplicationController
     place = Place.find(params[:place_id])
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
+      place.aggregate!
       redirect_to places_path(place), notice: "Your rating has been deleted."
     else
       redirect_to places_path(place), notice: "You don't have permission to do that."
