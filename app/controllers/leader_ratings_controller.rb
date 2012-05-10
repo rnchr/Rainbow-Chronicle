@@ -39,9 +39,9 @@ class LeaderRatingsController < ApplicationController
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
       leader.aggregate!
-      redirect_to leaders_path(leader), notice: "Your rating has been deleted."
+      redirect_to leader_path(leader), notice: "Your rating has been deleted."
     else
-      redirect_to leaders_path(leader), notice: "You don't have permission to do that."
+      redirect_to leader_path(leader), notice: "You don't have permission to do that."
     end
   end
 end

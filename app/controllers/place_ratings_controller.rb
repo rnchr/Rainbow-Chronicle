@@ -38,9 +38,9 @@ class PlaceRatingsController < ApplicationController
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
       place.aggregate!
-      redirect_to places_path(place), notice: "Your rating has been deleted."
+      redirect_to place_path(place), notice: "Your rating has been deleted."
     else
-      redirect_to places_path(place), notice: "You don't have permission to do that."
+      redirect_to place_path(place), notice: "You don't have permission to do that."
     end
   end
 end

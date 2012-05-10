@@ -38,9 +38,9 @@ class EventRatingsController < ApplicationController
     if current_user.admin? or rating.user.eql? current_user
       rating.destroy
       event.aggregate!
-      redirect_to events_path(event), notice: "Your rating has been deleted."
+      redirect_to event_path(event), notice: "Your rating has been deleted."
     else
-      redirect_to events_path(event), notice: "You don't have permission to do that."
+      redirect_to event_path(event), notice: "You don't have permission to do that."
     end
   end
 end
