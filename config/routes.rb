@@ -21,6 +21,8 @@ RcRails::Application.routes.draw do
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/:action', :controller => 'admin'
 
+  resources :users, :only => [:show]
+
   resources :news do
     collection do
       get 'popular'

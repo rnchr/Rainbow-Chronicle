@@ -1,0 +1,41 @@
+<div class="row">
+	<% if @user.avatar %>
+		<%= image_tag @user.avatar.url(:medium), :class => 'profile-pic span2' %>
+	<% else %>
+	  <div class="no-profile-pic span2"><h3>This user doesn't have a picture yet!</h3></div>
+	<% end %>
+	<div class="span5 profile_body">
+		<h2><%= @user.display_name %>'s profile</h2>
+		<h3>Recent Posts</h3>
+		<% if @user.recent_listings.any? %>
+		<ul>
+			<% @user.recent_listings.each do |item| %>
+				<li class="profile-news-item">I posted a new <%= item.class.name.downcase %>, <%= link_to item.title, item %>.
+					<span class="timestamp"><%= item.created_at.strftime("%B %d, %Y") %></span></li> 
+			<% end %>
+		</ul>
+		<% else %>
+		  <h4>I haven't posted any listings yet!</h4>
+		<% end %>
+		<h3>Recent Reviews</h3>
+		<% if @user.recent_reviews.any? %>
+		<ul>
+			<% @user.recent_reviews.each do |r| %>
+				<li class="profile-news-item">I rated a <%= r.listing.class.name.downcase %>, <%= link_to r.listing.title, r.listing %>, a <%= r.overall.round(2) %> overall. <span class="timestamp"><%= r.created_at.strftime("%B %d, %Y") %></span></li> </li> 
+			<% end %>
+		</ul>
+		<% else %>
+		  <h4>I haven't rated anything yet!</h4>
+		<% end %>
+		<h3>Recent Comments</h3>
+		<% if @user.recent_comments.any? %>
+		<ul>
+			<% @user.recent_comments.each do |c| %>
+				<li class="profile-news-item">"<%= c.body.truncate(120) %>" on <%= link_to c.news.title, c.news %> <%=  %><span class="timestamp"><%= c.created_at.strftime("%B %d, %Y") %></span></li> </li> 
+			<% end %>
+		</ul>
+		<% else %>
+		  <h4>I haven't made any comments!</h4>
+		<% end %>
+	</div>
+</div>

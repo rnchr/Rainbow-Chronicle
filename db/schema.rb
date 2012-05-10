@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311174707) do
+ActiveRecord::Schema.define(:version => 20120510012226) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id"
@@ -232,6 +232,10 @@ ActiveRecord::Schema.define(:version => 20120311174707) do
     t.string   "location"
     t.float    "lat"
     t.float    "lng"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

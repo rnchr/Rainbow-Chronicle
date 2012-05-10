@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :verify_admin
+  before_filter :verify_admin, :only => [:destroy, :make_admin]
+  
+  def show
+    @user = User.find params[:id]
+  end
   
   def destroy
     user = User.find params[:id]

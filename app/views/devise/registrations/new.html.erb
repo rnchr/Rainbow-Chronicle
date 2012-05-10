@@ -47,7 +47,12 @@
 			<span class="help-inline">This is the name we will show when you post.</span>
 		</div>
   </div>
-
+	<div class="control-group">
+		<label class="control-label" for="place_photo">Upload a personal avatar: </label>
+		<div class="controls">
+			<%= f.file_field :avatar %>
+		</div>
+  </div>
 	<div class="control-group">
     <%= f.label "Default Location", :class => 'control-label' %>
 		<div class="controls">
