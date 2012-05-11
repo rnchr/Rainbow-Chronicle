@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
   # returns list of n most recent site actions
   def recent_reviews(n=5)
      all = event_ratings.order("created_at desc").limit(n) + leader_ratings.order("created_at desc").limit(n) + place_ratings.order("created_at desc").limit(n)
-     all.sort {|a,b| a.created_at <=> b.created_at }[0...n]
+     all.sort {|a,b| b.created_at <=> a.created_at }[0...n]
   end
   
   def recent_listings(n=5)
     all = events.order("created_at desc").limit(n) + places.order("created_at desc").limit(n) + leaders.order("created_at desc").limit(n)
-    all.sort {|a,b| a.created_at <=> b.created_at }[0...n] 
+    all.sort {|a,b| b.created_at <=> a.created_at }[0...n] 
   end
 
   def recent_comments(n=5)
