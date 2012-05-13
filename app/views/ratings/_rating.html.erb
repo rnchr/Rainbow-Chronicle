@@ -6,7 +6,7 @@
 		<% JSON.parse(rating.review).map do |metric| %>
 			<% r = Rating.find_by_id(metric["rating_id"]) %>
 			<% unless r.nil? # messy way of catching errors %>
-				<li class="span4"><%= raw "<strong>#{r.text}:</strong> #{metric[:val]}<br />" %></li>
+				<li class="span4"><%= raw "<strong>#{r.text}:</strong> #{metric["value"]}<br />" %></li>
 			<% end %>
 		<% end %>
 	</ul>
