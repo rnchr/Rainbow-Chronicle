@@ -5,10 +5,7 @@
 
 <%= render :partial => 'shared/rating_form', :locals => {:obj => @item, :rating => @rating, :rating_questions => @rating_questions}%>
 
-
 <div class="show-ratings span7">
 	<h3>Ratings (<%= @item.rating_string %> overall)</h2>
 	<%= render :partial => 'ratings/rating', :collection => @ratings %>
 </div>
-
-

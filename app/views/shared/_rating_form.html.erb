@@ -1,7 +1,7 @@
 <div class="span7">
 	<div class="rating-form">
 		<h3 class="new-rating-form">Add A Rating</h3>
-		<%= form_for [obj, rating] do |f| %>			
+		<%= form_for [obj, obj.class.tag_type.new] do |f| %>			
 			<%= render :partial => 'ratings/rating_question', :collection => rating_questions, :as => :r %>
 			<div class="span7 rating-questions">
 						<div class="span3">Attach a photo:</div><div class="span3">	<%= f.file_field :photo %></div>
@@ -11,7 +11,6 @@
 					<input type="submit" class="btn btn-primary pull-right" value="Add your rating" />
 				</div>
 			</div>
-		<!-- </form> -->
 		<% end  %>
 	</div>
 </div>

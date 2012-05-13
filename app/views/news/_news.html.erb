@@ -1,6 +1,6 @@
 <div class=" news-item">
 	<h3><%= link_to raw(news.title), news %></h3>
-	<p class="author">By <strong><%= news.user.display_name %></strong> at <%= news.timestamp %></p>
+	<p class="author">By <strong><%= link_to news.user.display_name, user_path(news.user) %></strong> at <%= news.timestamp %></p>
 		<%= image_tag news.image %>
 	<blockquote>
 		<%= strip_tags news.body %>

@@ -44,7 +44,7 @@ module ApplicationHelper
     metrics.map! do |r|
       {:key => Rating.find(r["rating_id"]).text, :val => r["value"] }
     end
-    { :name => rating.user.display_name, :time => rating.created_at.strftime("%I:%m%p on %B %d, '%C"), 
+    { :user => rating.user, :time => rating.created_at.strftime("%I:%m%p on %B %d, '%C"), 
      :overall => rating.overall, :metrics => metrics, :comment => rating.comment, :photo => rating.photo, :rating => rating }
   end
   
@@ -137,8 +137,8 @@ module ApplicationHelper
   
   def set_show_vars
     @item = klass.find(params[:id])
-    @ratings = @item.ratings.map {|r| rating_helper r }
-    @rating = @item.ratings.new
+    @ratings = @item.ratings #.map {|r| rating_helper r }
+    # @rating = @item.ratings.new
   end
 
   def set_popular_vars

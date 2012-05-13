@@ -48,6 +48,24 @@
 		</div>
   </div>
 	<div class="control-group">
+    <%= f.label "A short bio about yourself. (140 characters max!)", :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :bio, :class => 'input-xlarge', :value => current_user.bio %>
+		</div>
+  </div>
+	<div class="control-group">
+    <%= f.label "Twitter Handle.", :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :twitter_link, :class => 'input-xlarge', :value => current_user.twitter_link %>
+		</div>
+  </div>
+	<div class="control-group">
+    <%= f.label "Link to your Facebook.", :class => 'control-label' %>
+		<div class="controls">
+    	<%= f.text_field :facebook_link, :class => 'input-xlarge', :value => current_user.facebook_link %>
+		</div>
+  </div>
+	<div class="control-group">
 		<label class="control-label" for="place_photo">Upload a profile picture: </label>
 		<div class="controls">
 			<%= f.file_field :avatar %>

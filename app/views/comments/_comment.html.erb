@@ -1,6 +1,6 @@
 <div class="comment">
 	<div class="comment-meta span2">
-<span class="comment-author"><strong><%= comment.user.display_name %></strong> 
+<span class="comment-author"><strong><%= link_to comment.user.display_name, user_path(comment.user) %></strong> 
 	on <%= comment.updated_at.strftime("%b %d at %R%p") %></span>
 	</div>
 	<div class="comment-body span4">

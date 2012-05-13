@@ -6,6 +6,15 @@
 	<% end %>
 	<div class="span5 profile_body">
 		<h2><%= @user.display_name %>'s profile</h2>
+		<% unless @user.bio.blank? %>
+			<p><strong>About Me:</strong> <%= @user.bio %></p>
+		<% end %>
+		<% unless @user.twitter_link.blank? %>
+			<p><strong>Twitter:</strong> <%= link_to "#{@user.twitter_link}", "http://twitter.com/#{@user.twitter_link}" %></p>
+		<% end %>
+		<% unless @user.facebook_link.blank? %>
+			<p><strong>Facebook:</strong> <%= link_to "#{@user.facebook_link}", "http://facebook.com/#{@user.facebook_link}" %></p>
+		<% end %>
 		<h3>Recent Posts</h3>
 		<% if @user.recent_listings.any? %>
 		<ul>

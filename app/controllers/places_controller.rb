@@ -8,8 +8,8 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find(params[:id])
-    @ratings = @place.ratings.map {|r| rating_helper r }
-    @rating = @place.ratings.new 
+    @ratings = @place.ratings #.map {|r| rating_helper r }
+    # @rating = @place.ratings.new 
     
     # this is ugly. fix it later.
     if @place.rating_set.eql? "corporate"

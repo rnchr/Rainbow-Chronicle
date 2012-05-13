@@ -21,7 +21,7 @@ RcRails::Application.routes.draw do
   match '/admin' => 'admin#index', :as => 'admin'
   match '/admin/:action', :controller => 'admin'
 
-  resources :users, :only => [:show]
+  get '/users/:id' => 'users#show', :as => 'user'
 
   resources :news do
     collection do

@@ -1,5 +1,5 @@
 <div class="span3 well">
-		<span class="author"><strong>Posted by:</strong> <%= obj.user.display_name %>
+		<span class="author"><strong>Posted by:</strong> <%= link_to obj.user.display_name, user_path(obj.user) %>
 		</span><br />
 		<span class="tags"><strong>Category:</strong> 
 		<%= raw obj.tags.map {|tag| tag.ancestry_path.map {|t| link_to t, category_path(t, obj) }}.flatten.uniq.join(', ') %>

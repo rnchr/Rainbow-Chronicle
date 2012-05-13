@@ -1,25 +1,28 @@
 <div class="single-rating well">
 	<p>
-		<strong class="user-review-name"><%= rating[:name] %></strong> rated it a <%= raw color_rating(rating[:overall])%> <span class="timestamp"><%= rating[:time] %></span>
+		<strong class="user-review-name"><%= link_to rating.user.display_name, user_path(rating.user) %></strong> rated it a <%= raw color_rating(rating.overall)%> <span class="timestamp"><%= rating.created_at.strftime("%I:%m%p on %B %d, '%C") %></span>
 	</p>
 	<ul class="span6">
-	<% rating[:metrics].each do |m| %>
-		<li class="span4"><%= raw "<strong>#{m[:key]}:</strong> #{m[:val]}<br />" %></li>
-	<% end %>
+		<% JSON.parse(rating.review).map do |metric| %>
+			<% r = Rating.find_by_id(metric["rating_id"]) %>
+			<% unless r.nil? # messy way of catching errors %>
+				<li class="span4"><%= raw "<strong>#{r.text}:</strong> #{metric[:val]}<br />" %></li>
+			<% end %>
+		<% end %>
 	</ul>
-	
+
 	<% unless rating[:comment].blank? %>
 		<p><strong>Comments:</strong> <%= raw rating[:comment] %></p>
 	<% end %>
 	
-	<% if rating[:photo].file? %>
+	<% if rating.photo.file? %>
 	<div>
-		<p><strong>Photo Attached:</strong></p><%= link_to image_tag(rating[:photo].url(:thumb)), rating[:photo].url  %>
+		<p><strong>Photo Attached:</strong></p><%= link_to image_tag(rating.photo.url(:thumb)), rating.photo.url  %>
 	</div>
 	<% end %>
 	
-	<% if rating[:rating].user.eql? current_user %>
-		<%= link_to "Delete your rating?", polymorphic_path([rating[:rating].listing, rating[:rating]]), :method => :delete, :confirm => 'Are you sure?' %>
+	<% if rating.user.eql? current_user %>
+		<%= link_to "Delete your rating?", polymorphic_path([rating.listing, rating]), :method => :delete, :confirm => 'Are you sure?' %>
 	<% end %>
 	<br style="clear: both;" />
 </div>

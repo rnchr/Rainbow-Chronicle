@@ -6,7 +6,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name,
-                  :login, :first_name, :last_name, :url, :location, :avatar
+                  :login, :first_name, :last_name, :url, :location, :avatar, :facebook_link,
+                  :twitter_link, :bio
+                  
+  validates_length_of :bio, :maximum => 140, :message => 'Maximum length is 140 characters. Make it count!'
   
   geocoded_by :location, :latitude => :lat, :longitude => :lng
   reverse_geocoded_by :lat, :lng, :address => :location
