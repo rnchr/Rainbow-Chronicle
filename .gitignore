@@ -13,6 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-
+# Ignore user uploaded assets
+/public/system
 # Ignore vim swap files
 *~
