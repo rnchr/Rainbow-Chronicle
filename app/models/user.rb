@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :places
   has_many :leaders
-  
+  has_many :authentications
   has_many :event_ratings
   has_many :leader_ratings
   has_many :place_ratings
@@ -45,4 +45,17 @@ class User < ActiveRecord::Base
   def recent_comments(n=5)
     comments.order("created_at desc").limit(n)
   end
+  
+  def apply_omniauth(omniauth)
+    self.email = omniauth['info']['email'] if email.blank?
+    self.first_name = omniauth['info']['first_name'] if first_name.blank?
+    self.display_name = omniauth['info']['first_name'] if display_name.blank?
+    self.last_name = omniauth['info']['last_name'] if last_name.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+  
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
+  end
+  
 end

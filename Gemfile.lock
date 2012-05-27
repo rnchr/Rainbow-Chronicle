@@ -44,6 +44,7 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.2.7)
     arel (3.0.2)
     awesome_print (1.0.2)
     bcrypt-ruby (3.0.1)
@@ -69,11 +70,16 @@ GEM
     eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    faraday (0.7.6)
+      addressable (~> 2.2)
+      multipart-post (~> 1.1)
+      rack (~> 1.1)
     formtastic (2.1.1)
       actionpack (~> 3.0)
     geocoder (1.1.1)
     gmaps4rails (1.4.7)
       json
+    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -98,9 +104,21 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    multipart-post (1.1.5)
     mysql (2.8.1)
     mysql2 (0.3.11)
     newrelic_rpm (3.3.2)
+    oauth2 (0.5.2)
+      faraday (~> 0.7)
+      multi_json (~> 1.0)
+    omniauth (1.0.3)
+      hashie (~> 1.2)
+      rack
+    omniauth-facebook (1.2.0)
+      omniauth-oauth2 (~> 1.0.0)
+    omniauth-oauth2 (1.0.0)
+      oauth2 (~> 0.5.0)
+      omniauth (~> 1.0)
     orm_adapter (0.0.6)
     paperclip (2.7.0)
       activerecord (>= 2.3.0)
@@ -180,6 +198,8 @@ DEPENDENCIES
   mysql
   mysql2
   newrelic_rpm
+  omniauth
+  omniauth-facebook
   paperclip (~> 2.7)
   rails (= 3.2.1)
   redis

@@ -24,6 +24,8 @@ gem 'awesome_print'
 gem 'mysql'
 gem 'newrelic_rpm'
 gem 'thin'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # Gems used only for assets and not required
 # in production environments by default.

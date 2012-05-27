@@ -1,5 +1,11 @@
 <h2>Sign up</h2>
-
+<br>
+<%= link_to "Sign Up With Facebook", '/auth/facebook', :class => 'btn btn-info' %>
+<br><br>
+OR Create an Account below
+<br><br>
+---------
+<br><br>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
 
@@ -10,6 +16,7 @@
 			<span class="help-inline">(Required.)</span>
 		</div>
   </div>
+<% if @user.password_required? %>
 
   <div class="control-group">
     <%= f.label :password, :class => 'control-label' %>
@@ -27,6 +34,7 @@
 			<span class="help-inline">(Required.)</span>
 		</div>
   </div>
+<% end %>
 
 	<div class="control-group">
     <%= f.label :first_name, :class => 'control-label' %>
@@ -59,6 +67,10 @@
     	<%= f.text_field :twitter_link, :class => 'input-xlarge' %>
 		</div>
   </div>
+
+<% if session[:omniauth] && session[:omniauth]['provider'] == 'facebook' %>
+	<%= f.hidden_field :facebook_link, :value => session[:omniauth]['uid'] %>
+<% else %>	
 	<div class="control-group">
     <%= f.label :facebook_link, "Link to your Facebook.", :class => 'control-label' %>
 		<div class="controls">
@@ -66,6 +78,9 @@
 			<p class="help-block">Just enter your facebook ID (a number like 1232443455 or your unique name) and we will link it!</p>
 		</div>
   </div>
+<% end %>
+
+
 	<div class="control-group">
 		<label class="control-label" for="place_photo">Upload a profile picture: </label>
 		<div class="controls">

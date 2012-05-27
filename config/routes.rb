@@ -1,14 +1,22 @@
 RcRails::Application.routes.draw do
   
+  get "authentications/index"
+
+  get "authentications/create"
+
+  get "authentications/destroy"
+
   match 'pages/:action', :controller => 'pages'
   match '/map'  => 'pages#map'
   
-  devise_for :users
-
+  devise_for :users, :controllers => {:registrations => 'registrations'}
+  match '/auth/:provider/callback' => 'authentications#create'
+  
   root :to => 'places#index'
   
   match '/search/:query' => 'pages#search'
   match '/search' => 'pages#search', :as => 'search'
+  
   
   delete '/users/:id' => 'users#destroy', :as => 'destroy_user'
   match '/admin/users/:id/make_admin' => 'users#make_admin', :as => 'make_admin'
