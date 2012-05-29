@@ -1,5 +1,5 @@
 <div class="span7 rating-questions">
 	<label class="span3"><%= r.text %> (<span class="rating-value" id="label-slider-<%= r.id %>">0</span>)</label>
-	<div class="slider span3" id="slider-<%= r.id %>"></div><br />
+	<span class="rating-label" id="left">Unfriendly</span><div class="slider span3" id="slider-<%= r.id %>" ></div><span class="rating-label" id="right">Friendly</span><br />
 	<input type="hidden" name="rating[<%= r.id %>]" id="rating-slider-<%= r.id %>" value="0">
 </div>

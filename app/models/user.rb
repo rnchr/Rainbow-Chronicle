@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :comments
   
   # recent_activities
-  # takes optional argument n, for how many results to return
+  # takes optional argument n, for how many results to return 
   # returns list of n most recent site actions
   def recent_reviews(n=5)
      all = event_ratings.order("created_at desc").limit(n) + leader_ratings.order("created_at desc").limit(n) + place_ratings.order("created_at desc").limit(n)
@@ -57,5 +57,5 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
-  
+
 end
