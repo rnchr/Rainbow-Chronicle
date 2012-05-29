@@ -1,6 +1,5 @@
 <h2>Sign up</h2>
 <br>
-<!--
 	<div style="border-bottom:1px dashed black;">
 		<h4>Really Quickly:</h4><br>
 		<%= link_to "Sign Up With Facebook", '/auth/facebook', :class => 'btn btn-info' %>
@@ -9,7 +8,7 @@
 	<br><br>
 	<h4>OR Create an Account here:</h4>
 	<br><br>
--->
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
   <%= devise_error_messages! %>
 
