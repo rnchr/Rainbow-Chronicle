@@ -6,6 +6,8 @@
 <div class="row">
 	<% if @user.avatar.file? %>
 		<%= image_tag @user.avatar.url(:medium), :class => 'profile-pic span2' %>
+	<% elsif @user.fb_image? %>
+		<%= image_tag @user.fb_image, :style => "width:100px;height:100px;", :class => 'profile-pic span2' %>
 	<% else %>
 	  <div class="no-profile-pic span2"><h3>This user doesn't have a picture yet!</h3></div>
 	<% end %>

@@ -6,6 +6,7 @@ class AuthenticationsController < ApplicationController
     omniauth = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
+      #render :text => omniauth.to_yaml
       flash[:notice] = "Signed In Successfully"      
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user
@@ -18,7 +19,8 @@ class AuthenticationsController < ApplicationController
       if user.save
         flash[:notice] = "Account created successfully"
         session[:fblogin]="yes"
-        sign_in_and_redirect(:user, user)
+        sign_in(:user, user)
+        redirect_to edit_user_registration_url
       else
         session[:omniauth] = omniauth.except('extra')
         redirect_to new_user_registration_url  

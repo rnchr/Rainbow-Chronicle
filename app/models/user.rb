@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name,
                   :login, :first_name, :last_name, :url, :location, :avatar, :facebook_link,
-                  :twitter_link, :bio
+                  :twitter_link, :bio, :fb_image
                   
   validates_length_of :bio, :maximum => 140, :message => 'Maximum length is 140 characters. Make it count!'
   
@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
     self.first_name = omniauth['info']['first_name'] if first_name.blank?
     self.display_name = omniauth['info']['first_name'] if display_name.blank?
     self.last_name = omniauth['info']['last_name'] if last_name.blank?
+    self.location = omniauth['info']['location'] if location.blank? && !omniauth['info']['location'].nil?
+    self.fb_image = omniauth['info']['image'] if fb_image.blank? && !omniauth['info']['image'].nil?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
   
