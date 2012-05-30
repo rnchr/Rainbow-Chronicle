@@ -55,6 +55,16 @@ class User < ActiveRecord::Base
     self.fb_image = omniauth['info']['image'] if fb_image.blank? && !omniauth['info']['image'].nil?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
+
+  def self.confirm_or_add_image(omniauth, user_id)
+    user=User.find(user_id)
+    unless user.avatar?
+      unless omniauth["info"]["image"].nil?
+        user.fb_image = omniauth["info"]["image"]
+        user.save
+      end
+    end
+  end
   
   def password_required?
     (authentications.empty? || !password.blank?) && super

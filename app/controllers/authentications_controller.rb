@@ -7,6 +7,7 @@ class AuthenticationsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       #render :text => omniauth.to_yaml
+      User.confirm_or_add_image(omniauth, authentication.user.id)
       flash[:notice] = "Signed In Successfully"      
       sign_in_and_redirect(:user, authentication.user)
     elsif current_user
