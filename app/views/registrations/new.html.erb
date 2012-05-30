@@ -2,7 +2,10 @@
 <br>
 	<div style="border-bottom:1px dashed black;">
 		<h4>Really Quickly:</h4><br>
-		<%= link_to "Sign Up With Facebook", '/auth/facebook', :class => 'btn btn-info' %>
+		<%= link_to '/auth/facebook', :style => "text-decoration:none;" do %>
+			<%= image_tag 'fb-login.png' %>
+		<% end %>
+		
 		<br><br>
 	</div>	
 	<br><br>
