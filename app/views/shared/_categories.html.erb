@@ -1,7 +1,7 @@
 <div class="form-cat-list">
 <h3>Categories</h3>
 <ul>
-<% categories.each do |root| %>
+<% @categories.each do |root| %>
 	<li><input type="checkbox" name="categories[]" value="<%= root[:id] %>" />
 		<span class="root-cat"><%= raw "#{root[:name]}" %></span>
 		<ul>

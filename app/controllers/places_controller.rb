@@ -41,6 +41,7 @@ class PlacesController < ApplicationController
     end      
     @place.user = current_user
     if @place.save
+      current_user.add_stars(@place.city, 2)
       redirect_to @place, notice: 'Place was successfully created.'
     else
       render action: "new"

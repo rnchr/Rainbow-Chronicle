@@ -13,7 +13,7 @@ class PlaceRatingsController < ApplicationController
       redirect_to @place, notice: "You've already rated this place! Please edit your existing rating instead."
       return
     end
-
+    
     @rating = @place.ratings.new
     @rating.review, overall, count = parse_review params
     @rating.comment = params[:comment]

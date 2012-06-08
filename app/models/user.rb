@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
   has_many :event_ratings
   has_many :leader_ratings
   has_many :place_ratings
-  
+  has_many :titles
+  has_many :stars
   has_many :comments
   
   # recent_activities
@@ -69,5 +70,75 @@ class User < ActiveRecord::Base
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
+  
+  def add_stars(city, stars_to_add)
+    stars_to_add.times do 
+      noob=Star.new(:user_id => self.id, :city => city, :awarded => stars_to_add)
+      noob.save
+    end
+    self.am_i_famous(city)
+  end  
+  
+  def am_i_famous(city)
+    my_count = self.stars.where(:city => city).size
+    incumbents = Title.find_all_by_city(:city) #FETCH ASSOCIATED USERS/STARS IN THIS QUERY TOO, ADD ORDER RESULTS APPROPRIATELY
+    if incumbents.nil? 
+      my_title = Title.new(:user_id => self.id, :city => city, :name => "Marshal")
+      my_title.save
+      return 
+    elsif incumbents.size < 3
+      latest_counts = get_incumbent_star_counts(incumbents, city)
+      my_place = find_my_place(my_count, latest_counts)
+      #MAKE SURE I'M CHANGING THE INCUMBENT TITLES CORRECTLY!!!!!!
+      self.assign_title(my_place)
+      return
+    elsif incumbents.size == 3
+      latest_counts = get_incumbent_star_counts(incumbents, city)
+      my_place = find_my_place(my_count, latest_counts)
+      self.assign_title(my_place)
+      return
+    end
+
+  end
+
+  def get_incumbent_star_counts(incumbents, city)
+    counts = []
+    incumbents.each do |i|
+      stars = i.user.stars.where(:city => city).count
+      counts << stars
+    end
+    return counts
+  end
+  
+  def find_my_place(my_count, latest_counts)
+    i = 1
+    latest_counts.each do |l|
+      if my_count > l
+        my_place = i
+        return my_place
+      end
+      i += 1
+    end
+  end
+  
+  def assign_title(my_place, incumbents)
+    if my_place == 1
+      my_title = Title.new(:user_id => self.id, :city => city, :name => "Marshal")
+      my_title.save
+    elsif my_place == 2
+      my_title = Title.new(:user_id => self.id, :city => city, :name => "2nd place")
+      my_title.save
+    elsif my_place == 3
+      incumbents[2].destroy
+      my_title = Title.new(:user_id => self.id, :city => city, :name => "3rd place")
+      my_title.save 
+    end
+  end 
+      
+      
+
+
+
+
 
 end

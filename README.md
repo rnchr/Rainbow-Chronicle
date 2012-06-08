@@ -36,7 +36,7 @@ On your machine, first push to the github repo:
 Then log into the server, cd to the production instance and
 
 		git pull
-Changes generally take some time to propagate unless you restart the server. Keep in mind that each time you modify the stylesheets or assets, you will need to re-compile them.
+Changes generally take some time to propagate unless you restart the server. Keep in mind that each time you modify the stylesheets or assets, you will need to re-compile them on the server (incl. env).
 
 		rake assets:precompile
 #### Trivia
