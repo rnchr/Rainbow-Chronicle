@@ -40,6 +40,7 @@ class LeadersController < ApplicationController
     end 
     @leader.user = current_user
     if @leader.save
+      current_user.add_stars(@leader.city, @leader.state, 2)
       redirect_to @leader, notice: 'Leader was successfully created.'
     else
       render action: "new"

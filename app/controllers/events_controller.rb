@@ -40,6 +40,7 @@ class EventsController < ApplicationController
     end
     @event.user = current_user
     if @event.save
+      current_user.add_stars(@event.city, @event.state, 2)
       redirect_to @event, notice: 'Event was successfully created.'
     else
       render action: "new"

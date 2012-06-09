@@ -1,5 +1,9 @@
 <div class="span3 well">
-		<span class="author"><strong>Posted by:</strong> <%= link_to obj.user.display_name, user_path(obj.user) %>
+		<span class="author"><strong>Posted by:</strong> <%= link_to obj.user.display_name, user_path(obj.user) %> 
+		<% if obj.user.titles.any? %>
+			<%= obj.user.titles.last.name %> of <%= obj.user.titles.last.city %>, <%= obj.user.titles.last.state %>
+		<% end %>	
+		(<%= if obj.user.stars.any? then obj.user.stars_count end %>)
 		</span><br />
 		<span class="tags"><strong>Category:</strong> 
 		<%= raw obj.tags.map {|tag| tag.ancestry_path.map {|t| link_to t, category_path(t, obj) }}.flatten.uniq.join(', ') %>

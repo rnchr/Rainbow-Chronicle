@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
                   :twitter_link, :bio, :fb_image
                   
   validates_length_of :bio, :maximum => 140, :message => 'Maximum length is 140 characters. Make it count!'
+  validates :display_name, :presence => true
   
   geocoded_by :location, :latitude => :lat, :longitude => :lng
   reverse_geocoded_by :lat, :lng, :address => :location
@@ -71,74 +72,106 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
   
-  def add_stars(city, stars_to_add)
+  def add_stars(city, state, stars_to_add)
     stars_to_add.times do 
-      noob=Star.new(:user_id => self.id, :city => city, :awarded => stars_to_add)
+      noob=Star.new(:user_id => self.id, :city => city, :state => state, :awarded => stars_to_add)
       noob.save
     end
-    self.am_i_famous(city)
+    self.am_i_famous(city, state)
   end  
   
-  def am_i_famous(city)
-    my_count = self.stars.where(:city => city).size
-    incumbents = Title.find_all_by_city(:city) #FETCH ASSOCIATED USERS/STARS IN THIS QUERY TOO, ADD ORDER RESULTS APPROPRIATELY
-    if incumbents.nil? 
-      my_title = Title.new(:user_id => self.id, :city => city, :name => "Marshal")
+  def am_i_famous(city, state)
+    my_count = self.stars.where(:city => city, :state => state).size
+    #it's still measuring against 1st even if 2nd and 3rd are empty!
+    #FETCH ASSOCIATED USERS/STARS AND ORDER RESULTS APPROPRIATELY
+    incumbents = Title.includes(:user => :stars).order("place ASC").find_all_by_city_and_state(city, state)
+    if incumbents.empty? 
+      my_title = Title.new(:user_id => self.id, :city => city, :state => state, :name => "Marshal", :place => 1)
       my_title.save
       return 
-    elsif incumbents.size < 3
-      latest_counts = get_incumbent_star_counts(incumbents, city)
-      my_place = find_my_place(my_count, latest_counts)
-      #MAKE SURE I'M CHANGING THE INCUMBENT TITLES CORRECTLY!!!!!!
-      self.assign_title(my_place)
-      return
-    elsif incumbents.size == 3
-      latest_counts = get_incumbent_star_counts(incumbents, city)
-      my_place = find_my_place(my_count, latest_counts)
-      self.assign_title(my_place)
-      return
+    else
+      latest_counts = get_incumbent_star_counts(incumbents, city, state)
+      my_place = self.find_my_place(my_count, latest_counts, incumbents)
+      unless my_place == 0
+        my_title = Title.new(:user_id => self.id, :city => city, :state => state, :place => my_place)
+        my_title.save
+        self.assign_title(my_title, my_place)
+      end  
     end
-
   end
 
-  def get_incumbent_star_counts(incumbents, city)
+  def get_incumbent_star_counts(incumbents, city, state)
     counts = []
     incumbents.each do |i|
-      stars = i.user.stars.where(:city => city).count
-      counts << stars
+      city_stars =[]
+      i.user.stars.each do |star|
+        if star.city == city && star.state == state
+          city_stars << star
+        end
+      end
+      counts << city_stars.size
+    end
+    if counts.size == 1
+      2.times do
+        counts << 0
+      end
+    elsif counts.size == 2
+      counts << 0
     end
     return counts
   end
   
-  def find_my_place(my_count, latest_counts)
+  def find_my_place(my_count, latest_counts, incumbents)
+    my_place = 0
     i = 1
     latest_counts.each do |l|
       if my_count > l
         my_place = i
+        self.reassign_incumbents(incumbents, my_place)
+        return my_place
+      elsif my_count == l 
+        my_place = i
+        if incumbents[i-1].user == self
+          incumbents[i-1].destroy
+        end   
         return my_place
       end
       i += 1
     end
+    return my_place
   end
   
-  def assign_title(my_place, incumbents)
-    if my_place == 1
-      my_title = Title.new(:user_id => self.id, :city => city, :name => "Marshal")
-      my_title.save
-    elsif my_place == 2
-      my_title = Title.new(:user_id => self.id, :city => city, :name => "2nd place")
-      my_title.save
-    elsif my_place == 3
-      incumbents[2].destroy
-      my_title = Title.new(:user_id => self.id, :city => city, :name => "3rd place")
-      my_title.save 
+  def reassign_incumbents(incumbents, my_place)
+    incumbents.each do |i|
+      if i.place >= my_place
+        unless i.place == 3
+          if i.user == self
+            i.destroy
+            return
+          end
+          i.place += 1
+          i.save
+          assign_title(i, i.place)
+        end
+        if i.place == 3
+          i.destroy
+        end
+      end
+    end
+  end
+    
+  
+  def assign_title(title_object, place)
+    if place == 1
+      title_object.name = "Marshal"
+      title_object.save
+    elsif place == 2
+      title_object.name = "Sheriff"
+      title_object.save
+    elsif place == 3
+      title_object.name = "Deputy"
+      title_object.save
     end
   end 
-      
-      
-
-
-
-
 
 end

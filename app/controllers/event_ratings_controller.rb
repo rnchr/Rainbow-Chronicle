@@ -22,6 +22,7 @@ class EventRatingsController < ApplicationController
     @rating.photo.assign(params[:event_rating][:photo]) if params[:event_rating]
     if @rating.save
       @event.aggregate!
+      current_user.add_stars(@event.city, @event.state, 1)
       redirect_to @event
     else
       redirect_to events_path, notice: "Unable to save your review."

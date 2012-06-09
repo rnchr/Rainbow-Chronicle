@@ -23,6 +23,7 @@ class LeaderRatingsController < ApplicationController
 
     if @rating.save
       @leader.aggregate!
+      current_user.add_stars(@leader.city, @leader.state, 1)
       redirect_to @leader
     else
       redirect_to leaders_path, notice: "Unable to save your review."

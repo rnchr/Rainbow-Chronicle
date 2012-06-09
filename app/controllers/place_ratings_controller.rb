@@ -22,6 +22,7 @@ class PlaceRatingsController < ApplicationController
     @rating.photo.assign(params[:place_rating][:photo]) if params[:place_rating]
     if @rating.save
       @place.aggregate!
+      current_user.add_stars(@place.city, @place.state, 1)
       redirect_to @place
     else
       redirect_to places_path, notice: "Unable to save your review."

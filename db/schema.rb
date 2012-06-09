@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608011015) do
+ActiveRecord::Schema.define(:version => 20120609021918) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -238,6 +238,7 @@ ActiveRecord::Schema.define(:version => 20120608011015) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "awarded"
+    t.string   "state"
   end
 
   add_index "stars", ["user_id"], :name => "index_stars_on_user_id"
@@ -248,6 +249,8 @@ ActiveRecord::Schema.define(:version => 20120608011015) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "place"
+    t.string   "state"
   end
 
   add_index "titles", ["user_id"], :name => "index_titles_on_user_id"

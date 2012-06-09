@@ -2,6 +2,7 @@ class PlacesController < ApplicationController
   before_filter :authenticate_user!, :only => [:new, :create]
   before_filter :authenticate_and_check_permission, :only => [:update, :edit, :destroy]
   before_filter :set_active
+
   def index
       set_all_index_vars
   end
@@ -41,7 +42,7 @@ class PlacesController < ApplicationController
     end      
     @place.user = current_user
     if @place.save
-      current_user.add_stars(@place.city, 2)
+      current_user.add_stars(@place.city, @place.state, 2)
       redirect_to @place, notice: 'Place was successfully created.'
     else
       render action: "new"
