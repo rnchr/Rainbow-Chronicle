@@ -378,6 +378,31 @@ table.ratings-table {
     }
 }
 
+.label,
+.badge {
+	// First Place (gold)
+	&-firstplace           { background-color: #FFD700;color: black; }
+	&-firstplace[href]     { background-color: darken(#FFD700, 10%); }
+
+	// Second Place (silver)
+	&-secondplace              { background-color: #C0C0C0;color:black; }
+	&-secondplace[href]        { background-color: darken(#C0C0C0, 10%);color: black; }
+
+	// Third place (bronze)
+	&-thirdplace           { background-color: #A67D3D;color:black; }
+	&-thirdplace[href]     { background-color: darken(#A67D3D, 10%);color: black; }
+
+	// Multiple Titles (red)
+	&-multiple         { background-color: @errorText; }
+	&-multiple[href]   { background-color: darken(@errorText, 10%); }
+}
+
+.label:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+
+}
 .page-header {
     margin-top: 20px;
     margin-left: 0;

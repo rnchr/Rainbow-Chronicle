@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120609021918) do
+ActiveRecord::Schema.define(:version => 20120609144506) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -286,6 +286,7 @@ ActiveRecord::Schema.define(:version => 20120609021918) do
     t.string   "twitter_link"
     t.string   "fb_image"
     t.integer  "stars_count"
+    t.integer  "titles_count",                          :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

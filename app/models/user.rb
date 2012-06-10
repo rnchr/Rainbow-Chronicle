@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
+  
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name,
                   :login, :first_name, :last_name, :url, :location, :avatar, :facebook_link,
                   :twitter_link, :bio, :fb_image
@@ -85,21 +86,131 @@ class User < ActiveRecord::Base
     #it's still measuring against 1st even if 2nd and 3rd are empty!
     #FETCH ASSOCIATED USERS/STARS AND ORDER RESULTS APPROPRIATELY
     incumbents = Title.includes(:user => :stars).order("place ASC").find_all_by_city_and_state(city, state)
+    my_old_rank = 0
+    
+    incumbents.each do |inc|
+      if inc.user == self 
+         my_old_rank = inc.place
+         break
+      end
+    end
+    
+    
     if incumbents.empty? 
       my_title = Title.new(:user_id => self.id, :city => city, :state => state, :name => "Marshal", :place => 1)
       my_title.save
       return 
     else
-      latest_counts = get_incumbent_star_counts(incumbents, city, state)
-      my_place = self.find_my_place(my_count, latest_counts, incumbents)
-      unless my_place == 0
-        my_title = Title.new(:user_id => self.id, :city => city, :state => state, :place => my_place)
-        my_title.save
-        self.assign_title(my_title, my_place)
+      if my_old_rank != 0
+        incumbents.delete_if {|i| i.user == self}
       end  
-    end
-  end
+      latest_counts = get_incumbent_star_counts(incumbents, city, state) 
+      unique_counts = latest_counts.uniq
+      if unique_counts.size == 2
+        unique_counts << 0
+      end
+      if unique_counts.size == 1
+        2.times do
+          unique_counts << 0 
+        end
+      end  
+      
+      counter = 1
+      unique_counts.each do |uc|
+        if my_count > uc
+          my_place = counter
+          #anything with rank==3 should be deleted here
 
+          thirds = incumbents.find_all{|i| i.place == 3}
+          unless thirds.empty?
+            thirds.each do |t|
+              t.destroy
+            end
+          end
+          
+          if my_place >= 2
+            seconds = incumbents.find_all{|i| i.place == 2}
+            unless seconds.empty?
+              seconds.each do |s|
+                s.place += 1
+                s.assign_title(3)
+                s.save
+              end
+            end
+          end  
+
+          if my_place >= 1
+            seconds = incumbents.find_all{|i| i.place == 2}
+            unless seconds.empty?
+              seconds.each do |s|
+                s.place += 1
+                s.assign_title(3)
+                s.save
+              end
+            end
+            
+            firsts = incumbents.find_all{|i| i.place == 1}
+            unless firsts.empty?
+              firsts.each do |f|
+                f.place += 1
+                f.assign_title(2)
+                f.save
+              end
+            end
+            
+          end  
+          
+          if my_old_rank != 0
+            my_old_title = Title.find_by_user_id_and_city_and_state(self.id, city, state) #why not just assign everything here??
+            my_old_title.place = my_place
+            my_old_title.assign_title(my_place)
+            my_old_title.save
+          else 
+            my_title = Title.new(:user_id => self.id, :city => city, :state => state, :place => my_place)
+            my_title.save
+            my_title.assign_title(my_place)
+          end
+          
+          break
+          
+        elsif my_count == uc
+          my_place = counter
+          seconds = incumbents.find_all{|i| i.place == 2}
+          thirds = incumbents.find_all{|i| i.place == 3}
+          if seconds.empty? && my_place != 2
+            thirds = incumbents.find_all{|i| i.place == 3}
+            thirds.each do |t|
+              t.place = 2
+              t.assign_title(2)
+              t.save
+            end
+          end
+          
+          #if thirds.empty? && my_place != 3
+            #promote some user without a title to third place spot
+          #end          
+               
+          if my_old_rank != 0
+            my_old_title = Title.find_by_user_id_and_city_and_state(self.id, city, state) #why not just assign everything here??
+            my_old_title.place = my_place
+            my_old_title.assign_title(my_place)
+            my_old_title.save
+            break
+          else 
+            my_title = Title.new(:user_id => self.id, :city => city, :state => state, :place => my_place)
+            my_title.save
+            my_title.assign_title(my_place)
+            break
+          end       
+          
+        end  
+        counter += 1
+      end
+    
+    end #incumbents not empty if
+          
+  end #method
+  
   def get_incumbent_star_counts(incumbents, city, state)
     counts = []
     incumbents.each do |i|
@@ -111,67 +222,16 @@ class User < ActiveRecord::Base
       end
       counts << city_stars.size
     end
-    if counts.size == 1
-      2.times do
-        counts << 0
-      end
-    elsif counts.size == 2
-      counts << 0
-    end
     return counts
-  end
-  
-  def find_my_place(my_count, latest_counts, incumbents)
-    my_place = 0
-    i = 1
-    latest_counts.each do |l|
-      if my_count > l
-        my_place = i
-        self.reassign_incumbents(incumbents, my_place)
-        return my_place
-      elsif my_count == l 
-        my_place = i
-        if incumbents[i-1].user == self
-          incumbents[i-1].destroy
-        end   
-        return my_place
-      end
-      i += 1
-    end
-    return my_place
-  end
-  
-  def reassign_incumbents(incumbents, my_place)
-    incumbents.each do |i|
-      if i.place >= my_place
-        unless i.place == 3
-          if i.user == self
-            i.destroy
-            return
-          end
-          i.place += 1
-          i.save
-          assign_title(i, i.place)
-        end
-        if i.place == 3
-          i.destroy
-        end
-      end
-    end
-  end
+  end  
     
-  
-  def assign_title(title_object, place)
-    if place == 1
-      title_object.name = "Marshal"
-      title_object.save
-    elsif place == 2
-      title_object.name = "Sheriff"
-      title_object.save
-    elsif place == 3
-      title_object.name = "Deputy"
-      title_object.save
-    end
-  end 
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
 end

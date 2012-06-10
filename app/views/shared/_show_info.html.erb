@@ -1,9 +1,24 @@
 <div class="span3 well">
-		<span class="author"><strong>Posted by:</strong> <%= link_to obj.user.display_name, user_path(obj.user) %> 
-		<% if obj.user.titles.any? %>
-			<%= obj.user.titles.last.name %> of <%= obj.user.titles.last.city %>, <%= obj.user.titles.last.state %>
+		<span class="author"><strong>Posted by:</strong> 
+		<% if obj.user.titles_count == 1 %>
+				<br>
+				<% label_type = "" %>
+				<% if obj.user.titles.first.place == 1 then label_type="label label-firstplace" end %>
+				<% if obj.user.titles.first.place == 2 then label_type="label label-secondplace" end %>
+				<% if obj.user.titles.first.place == 3 then label_type="label label-thirdplace" end %>
+				<%= link_to user_path(obj.user) do %>
+					<span class='<%= label_type %>'><%= obj.user.titles.first.name %> <%= obj.user.display_name%> of <%= obj.user.titles.first.city %>, <%= obj.user.titles.first.state %></span> 
+				<% end %>	
+		<% elsif obj.user.titles.count > 1 %>
+			<br>
+			<%= link_to user_path(obj.user) do %>
+				<span class='label label-multiple'>Grand Marshal <%= obj.user.display_name%></span> 
+			<% end %>
+			<a href="#" class="label label-multiple" rel="popover" title="Grand Marshal <%= obj.user.display_name %>'s Titles"
+				data-content="<%= obj.user.titles.each do |t| %> <%= t.name %> of <%= t.city  %>, <%= t.state %> <br>
+				<% end %>">Titles</a>
 		<% end %>	
-		(<%= if obj.user.stars.any? then obj.user.stars_count end %>)
+		<%= if obj.user.stars.any? then " - "+obj.user.stars_count.to_s + " stars" end %> 
 		</span><br />
 		<span class="tags"><strong>Category:</strong> 
 		<%= raw obj.tags.map {|tag| tag.ancestry_path.map {|t| link_to t, category_path(t, obj) }}.flatten.uniq.join(', ') %>
