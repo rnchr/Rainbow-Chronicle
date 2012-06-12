@@ -23,6 +23,10 @@ class PlaceRatingsController < ApplicationController
     if @rating.save
       @place.aggregate!
       current_user.add_stars(@place.city, @place.state, 1)
+      if session[:fblogin] == "yes"
+        link = root_url + "places/" + @place.id.to_s
+        current_user.announce_on_fb(@place, "rate", link)
+      end
       redirect_to @place
     else
       redirect_to places_path, notice: "Unable to save your review."

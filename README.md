@@ -38,7 +38,7 @@ Then log into the server, cd to the production instance and
 		git pull
 Changes generally take some time to propagate unless you restart the server. Keep in mind that each time you modify the stylesheets or assets, you will need to re-compile them on the server (incl. env).
 
-		rake assets:precompile
+		RAILS_ENV=production rake assets:precompile
 #### Trivia
 We are also using Redis for caching. There is no password on the instance, but in the event of a server restart, you may need to restart it as well.
 

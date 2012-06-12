@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
     self.last_name = omniauth['info']['last_name'] if last_name.blank?
     self.location = omniauth['info']['location'] if location.blank? && !omniauth['info']['location'].nil?
     self.fb_image = omniauth['info']['image'] if fb_image.blank? && !omniauth['info']['image'].nil?
+    self.fb_token = omniauth['credentials']['fb_token'] if !omniauth['credentials']['token'].nil?
     authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
   end
 
@@ -67,6 +68,12 @@ class User < ActiveRecord::Base
         user.save
       end
     end
+  end
+  
+  def self.update_token(omniauth, user_id)
+    user = User.find(user_id)
+    user.fb_token = omniauth['credentials']['token']
+    user.save  
   end
   
   def password_required?
@@ -225,7 +232,29 @@ class User < ActiveRecord::Base
     return counts
   end  
     
-    
+  def announce_on_fb(obj, event, link)
+    if event == "create"
+      begin
+        @graph = Koala::Facebook::API.new(self.fb_token)
+        @graph.put_wall_post("I just added " + obj.title + " to RainbowChronicle.com!", :link => link )
+      rescue
+      end  
+    elsif event == "rate"
+      begin
+        @graph = Koala::Facebook::API.new(self.fb_token)
+        @graph.put_wall_post("I just rated " + obj.title + " on RainbowChronicle.com!", :link => link )
+      rescue
+      end  
+    end    
+  end
+  
+  def announce_signup
+    begin
+      @graph = Koala::Facebook::API.new(self.fb_token)
+      @graph.put_wall_post("I just signed up for Rainbow Chronicle to review People, Places and Events based on LGBT friendliness", :link => root_url )
+    rescue
+    end
+  end
     
     
     

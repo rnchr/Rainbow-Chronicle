@@ -41,6 +41,10 @@ class EventsController < ApplicationController
     @event.user = current_user
     if @event.save
       current_user.add_stars(@event.city, @event.state, 2)
+      if session[:fblogin] == "yes"
+        link = root_url + "events/" + @event.id.to_s
+        current_user.announce_on_fb(@event, "create", link)
+      end
       redirect_to @event, notice: 'Event was successfully created.'
     else
       render action: "new"

@@ -24,6 +24,10 @@ class LeaderRatingsController < ApplicationController
     if @rating.save
       @leader.aggregate!
       current_user.add_stars(@leader.city, @leader.state, 1)
+      if session[:fblogin] == "yes"
+        link = root_url + "leaders/" + @leader.id.to_s
+        current_user.announce_on_fb(@leader, "rate", link)
+      end
       redirect_to @leader
     else
       redirect_to leaders_path, notice: "Unable to save your review."

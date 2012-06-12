@@ -23,6 +23,10 @@ class EventRatingsController < ApplicationController
     if @rating.save
       @event.aggregate!
       current_user.add_stars(@event.city, @event.state, 1)
+      if session[:fblogin] == "yes"
+        link = root_url + "events/" + @event.id.to_s
+        current_user.announce_on_fb(@event, "rate", link)
+      end
       redirect_to @event
     else
       redirect_to events_path, notice: "Unable to save your review."

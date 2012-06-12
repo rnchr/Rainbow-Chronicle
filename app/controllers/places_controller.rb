@@ -43,6 +43,10 @@ class PlacesController < ApplicationController
     @place.user = current_user
     if @place.save
       current_user.add_stars(@place.city, @place.state, 2)
+      if session[:fblogin] == "yes"
+        link = root_url + "places/" + @place.id.to_s
+        current_user.announce_on_fb(@place, "create", link)
+      end  
       redirect_to @place, notice: 'Place was successfully created.'
     else
       render action: "new"

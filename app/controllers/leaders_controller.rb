@@ -41,6 +41,10 @@ class LeadersController < ApplicationController
     @leader.user = current_user
     if @leader.save
       current_user.add_stars(@leader.city, @leader.state, 2)
+      if session[:fblogin] == "yes"
+        link = root_url + "leaders/" + @leader.id.to_s
+        current_user.announce_on_fb(@leader, "create", link)
+      end
       redirect_to @leader, notice: 'Leader was successfully created.'
     else
       render action: "new"

@@ -91,6 +91,9 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
+    koala (1.4.0)
+      faraday (~> 0.7.0)
+      multi_json (~> 1.0)
     less (2.0.10)
       commonjs (~> 0.2.0)
       therubyracer (~> 0.9.9)
@@ -195,6 +198,7 @@ DEPENDENCIES
   gmaps4rails
   jquery-rails
   kaminari
+  koala
   mysql
   mysql2
   newrelic_rpm
