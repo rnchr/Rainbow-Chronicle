@@ -9,7 +9,7 @@
 <%= raw show_header @place %>
 <%= render :partial => 'shared/show_info', :locals => {:obj => @place, :show => [:owner, :phone, :website, :description, :address, :hours]} %>
 
-<%= render :partial => 'shared/rating_form', :locals => {:obj => @place, :rating => @rating, :rating_questions => @rating_questions}%>
+<%= render :partial => 'shared/rating_form', :locals => {:obj => @place, :rating => @rating, :rating_questions => @rating_questions}, :type => 'place' %>
 
 <div class="show-ratings span7">
 	<h3>Ratings (<%= @place.rating_string %> overall)</h2>

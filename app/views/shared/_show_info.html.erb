@@ -1,4 +1,4 @@
-<div class="span3 well">
+<div class="span2 well">
 		<span class="author"><strong>Posted by:</strong> 
 		<% if obj.user.titles_count == 1 %>
 				<br>
@@ -49,3 +49,9 @@
 	#{obj.lat},#{obj.lng}&sensor=false" %>
 </div>
 
+<div class="span1" style="text-align:center;">
+	<div class="colored-icon">
+		<%= raw icon_for obj.cached_rating, obj.class.to_s %>
+	</div>	<br>
+	<span style="font-size:30px;"><%= obj.rating_string %></span> <br>on a scale of -5 to 5
+</div>
