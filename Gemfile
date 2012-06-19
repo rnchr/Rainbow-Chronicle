@@ -6,7 +6,12 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'mysql2'
+
+group :production do 
+#	gem 'mysql'
+#	gem 'mysql2'
+end	
+
 gem 'devise'
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -21,7 +26,7 @@ gem "paperclip", "~> 2.7"
 # gem 'iconv'
 gem 'sequel'
 gem 'awesome_print'
-gem 'mysql'
+
 gem 'newrelic_rpm'
 gem 'thin'
 gem 'omniauth'

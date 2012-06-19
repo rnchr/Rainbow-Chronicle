@@ -12,11 +12,19 @@
 	  <div class="no-profile-pic span2"><h3>This user doesn't have a picture yet!</h3></div>
 	<% end %>
 	<div class="span5 profile_body">
+			<% label_type = label_type_helper(@user) %>
+			<% title = title_name_helper(@user) %>
+			<% if @user.titles_count > 1 %>
+				<span class='<%= label_type %>'> <%= title %></span>
+			<% elsif @user.titles_count == 1 %>	
+				<span class='<%= label_type %>'> <%= title %> of <%= @user.titles.first.city %>, <%= @user.titles.first.state%></span>
+			<% end %>	
+	
 		<h2><%= @user.display_name %>'s profile</h2>
 		<% unless @user.bio.blank? %>
 			<p><strong>About Me:</strong> <%= @user.bio %></p>
 		<% end %>
-		<h3><%= if @user.stars_count.nil? then "0" else @user.stars_count end %> stars earned  <a href="#" class="btn btn-danger" rel="popover" title="New Feature: Stars and Titles" data-content="Whenever you create a place, leader or event on Rainbow Chronicle, you get two stars, and any time you add a rating you are awarded 1 star. <br><br>Titles are earned by having rated or created the most places, leaders or events in any given city. First place in any city is titled the 'Marshal', second place is the 'Sheriff' and third place is the 'Deputy'. If you have titles in multiple cities, you become a 'Grand Marshal'">What are these?</a></h3>
+		<h3><%= if @user.stars_count.nil? then "0" else @user.stars_count end %> <%= image_tag "star.png" %> earned  <a href="#" class="btn btn-danger" rel="popover" title="New Feature: Stars and Titles" data-content="Whenever you create a place, leader or event on Rainbow Chronicle, you get two stars, and any time you add a rating you are awarded 1 star. <br><br>Titles are earned by having rated or created the most places, leaders or events in any given city. First place in any city is titled the 'Marshal', second place is the 'Sheriff' and third place is the 'Deputy'. If you have titles in multiple cities, you become a 'Grand Marshal'">What are these?</a></h3>
 		 
 
 		<% unless @titles.empty? %>

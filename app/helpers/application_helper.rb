@@ -36,7 +36,30 @@ module ApplicationHelper
     end
     ret += "</ul><a id=\"show-all-cats\">Show all categories in the area.</a>"
   end
-
+  
+  def label_type_helper(user)
+    label_type = ""
+    if user.titles_count == 1 					
+			if user.titles.first.place == 1 then label_type="label label-firstplace" end
+			if user.titles.first.place == 2 then label_type="label label-secondplace" end
+			if user.titles.first.place == 3 then label_type="label label-thirdplace" end
+			return label_type
+		elsif user.titles.count > 1
+      label_type = "label label-multiple" 
+      return label_type
+    end
+  end  
+  
+  def title_name_helper(user)
+    title = ''
+    if user.titles_count == 1 					
+			title=user.titles.first.name
+			return title
+		elsif user.titles.count > 1
+      title = "Grand Marshal"
+      return title
+    end
+  end
   # This was originally to parse the rating JSON and send back a hash.
   # It should be refactored to return a full rating object.
   def rating_helper(rating)

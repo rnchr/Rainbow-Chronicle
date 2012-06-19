@@ -1,6 +1,27 @@
 <div class="single-rating well">
 	<p>
-		<strong class="user-review-name"><%= link_to rating.user.display_name, user_path(rating.user) %></strong> rated it a <%= raw color_rating(rating.overall)%> <span class="timestamp"><%= rating.created_at.strftime("%I:%m%p on %B %d, '%C") %></span>
+	<% if rating.user.titles_count == 1 %>
+		<br>
+		<% label_type = "" %>
+		<% if rating.user.titles.first.place == 1 then label_type="label label-firstplace" end %>
+		<% if rating.user.titles.first.place == 2 then label_type="label label-secondplace" end %>
+		<% if rating.user.titles.first.place == 3 then label_type="label label-thirdplace" end %>
+		<%= link_to user_path(rating.user) do %>
+		<span class='<%= label_type %>'><%= rating.user.titles.first.name %> <%= rating.user.display_name%> of <%= rating.user.titles.first.city %>, <%= rating.user.titles.first.state %></span> 
+		<% end %>	
+	<% elsif rating.user.titles.count > 1  %>
+		<br>
+		<%= link_to user_path(rating.user) do %>
+		<span class='label label-multiple'>Grand Marshal <%= rating.user.display_name%></span> 
+		<% end %>
+		<a href="#" class="label label-multiple" rel="popover" title="Grand Marshal <%= rating.user.display_name %>'s Titles"
+		data-content="<%= rating.user.titles.each do |t| %> <%= t.name %> of <%= t.city  %>, <%= t.state %> <br>
+		<% end %>">Titles</a>
+	<% else %>
+		<strong class="user-review-name"><%= link_to rating.user.display_name, user_path(rating.user) %> </strong>
+	<% end %>	
+			
+	 rated it a <%= raw color_rating(rating.overall)%> <span class="timestamp"><%= rating.created_at.strftime("%I:%m%p on %B %d, '%C") %></span>
 	</p>
 	<ul class="span6">
 		<% JSON.parse(rating.review).map do |metric| %>
