@@ -110,11 +110,11 @@ module ApplicationHelper
       return ""
     end
     file = if rating.round.eql? 0
-             "#{type}s-zero.png"
+             "#{type.downcase}s-zero.png"
            elsif rating > 0
-             "#{type}s-pos#{rating.round}.png"
+             "#{type.downcase}s-pos#{rating.round}.png"
            else
-             "#{type}s-neg#{rating.abs.round}.png"
+             "#{type.downcase}s-neg#{rating.abs.round}.png"
            end
     "<img src=\"/images/#{file}\" height=\"42\" width=\"42\" alt=\"#{rating}\" />"
   end
