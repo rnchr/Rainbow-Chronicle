@@ -8,6 +8,7 @@ RcRails::Application.routes.draw do
 
   match 'pages/:action', :controller => 'pages'
   match '/map'  => 'pages#map'
+  match 'home' => 'static#home'
   
   devise_for :users, :controllers => {:registrations => 'registrations'}
   match '/auth/:provider/callback' => 'authentications#create'
