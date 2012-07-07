@@ -26,6 +26,10 @@ To stop:
 To run migrations, be sure set the environment!
 
 		RAILS_ENV=production rake db:migrate
+		
+rake routes:
+
+		RAILS_ENV=production rake routes
 
 ### Deployment:
 The general procedure is to develop and test features on your own machine, and then push directly to production.
@@ -38,7 +42,16 @@ Then log into the server, cd to the production instance and
 		git pull
 Changes generally take some time to propagate unless you restart the server. Keep in mind that each time you modify the stylesheets or assets, you will need to re-compile them on the server (incl. env).
 
+		git pull
 		RAILS_ENV=production rake assets:precompile
+		RAILS_ENV=production rake routes
+		RAILS_ENV=production rake db:migrate
+		sudo passenger stop --pid-file tmp/pids/passenger.80.pid
+		sudo passenger start -p 80 --user=andrew -d -e production
+		
+		
+		
+		
 #### Trivia
 We are also using Redis for caching. There is no password on the instance, but in the event of a server restart, you may need to restart it as well.
 
