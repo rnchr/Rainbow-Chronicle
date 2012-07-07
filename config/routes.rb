@@ -9,12 +9,12 @@ RcRails::Application.routes.draw do
   match 'pages/:action', :controller => 'pages'
   match '/map'  => 'pages#map'
   match 'home' => 'static#home'
-  match 'hometwo' => 'static#hometwo'
+
   
   devise_for :users, :controllers => {:registrations => 'registrations'}
   match '/auth/:provider/callback' => 'authentications#create'
   
-  root :to => 'places#index'
+  root :to => 'static#home'
   
   match '/search/:query' => 'pages#search'
   match '/search' => 'pages#search', :as => 'search'

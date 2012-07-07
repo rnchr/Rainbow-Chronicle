@@ -42,6 +42,8 @@ Then log into the server, cd to the production instance and
 		git pull
 Changes generally take some time to propagate unless you restart the server. Keep in mind that each time you modify the stylesheets or assets, you will need to re-compile them on the server (incl. env).
 
+		ssh andrew@50.56.182.200
+		cd rails_apps/production/Rainbow-Chronicle
 		git pull
 		RAILS_ENV=production rake assets:precompile
 		RAILS_ENV=production rake routes
