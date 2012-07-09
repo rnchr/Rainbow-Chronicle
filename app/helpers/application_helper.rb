@@ -120,8 +120,8 @@ module ApplicationHelper
   end
   
   def show_header(obj)
-      "<div class=\"show-header\">
-      	<h2 class=\"show-name\">#{obj.title}</h2>
+      "<div class=\"show-header \">
+      	<h2 class=\"show-name \" style=\" \">#{obj.title}</h2>
       	<br style=\"clear: both;\" />
       </div>"
   end
