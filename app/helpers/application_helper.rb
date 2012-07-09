@@ -34,7 +34,7 @@ module ApplicationHelper
       ret << "</li></ul>"
       count += 1
     end
-    ret += "</ul><a id=\"show-all-cats\">Show all categories in the area.</a>"
+    ret += "</ul><a id=\"show-all-cats\">Toggle Categories</a>"
   end
   
   def label_type_helper(user)

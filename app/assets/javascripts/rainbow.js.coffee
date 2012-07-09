@@ -18,7 +18,7 @@ $("#show-nearby").click (e) ->
 
 $("#show-all-cats").click (e) ->
     console.log "clicked"
-    $(".hidden-cat").show()
+    $(".hidden-cat").toggle()
 
 geocode_it = (addr_id) ->
     geocoder = new google.maps.Geocoder
