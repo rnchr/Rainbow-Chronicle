@@ -45,6 +45,7 @@ class LeadersController < ApplicationController
         link = root_url + "leaders/" + @leader.id.to_s
         current_user.announce_on_fb(@leader, "create", link)
       end
+      session[:reviewalert]=true
       redirect_to @leader, notice: 'Leader was successfully created.'
     else
       render action: "new"

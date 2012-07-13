@@ -45,6 +45,7 @@ class EventsController < ApplicationController
         link = root_url + "events/" + @event.id.to_s
         current_user.announce_on_fb(@event, "create", link)
       end
+      session[:reviewalert]=true
       redirect_to @event, notice: 'Event was successfully created.'
     else
       render action: "new"

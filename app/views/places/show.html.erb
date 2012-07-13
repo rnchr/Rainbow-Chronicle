@@ -16,4 +16,11 @@
 	<%= render :partial => 'ratings/rating', :collection => @ratings %>
 </div>
 
+<% if session[:reviewalert] %>
+	<% session.delete(:reviewalert) %>
+	<script>
+		alert("Now that you've created a Place, don't forget to give it a review!");
+	</script>
+<% end %>
+
 

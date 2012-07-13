@@ -47,6 +47,7 @@ class PlacesController < ApplicationController
         link = root_url + "places/" + @place.id.to_s
         current_user.announce_on_fb(@place, "create", link)
       end  
+      session[:reviewalert]=true
       redirect_to @place, notice: 'Place was successfully created.'
     else
       render action: "new"

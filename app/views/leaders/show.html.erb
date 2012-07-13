@@ -10,8 +10,15 @@
 <%= render :partial => 'shared/rating_form', :locals => {:obj => @item, :rating => @rating, :rating_questions => @rating_questions}%>
 
 <div class="show-ratings span7">
-	<h3>Ratings (<%= @item.rating_string %> overall)</h2>
+	<h3><%= @testie %>Ratings (<%= @item.rating_string %> overall)</h2>
 	<%= render :partial => 'ratings/rating', :collection => @ratings %>
 </div>
+
+<% if session[:reviewalert] %>
+	<% session.delete(:reviewalert) %>
+	<script>
+		alert("Now that you've created a Leader, don't forget to give it a review!");
+	</script>
+<% end %>
 
 

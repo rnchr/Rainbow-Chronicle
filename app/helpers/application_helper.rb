@@ -159,6 +159,9 @@ module ApplicationHelper
   
   def set_show_vars
     @item = klass.find(params[:id])
+    if klass == Leader
+      
+    end
     @ratings = @item.ratings #.map {|r| rating_helper r }
     # @rating = @item.ratings.new
   end

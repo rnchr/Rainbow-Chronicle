@@ -13,3 +13,10 @@
 	<h3>Ratings (<%= @item.rating_string %> overall)</h2>
 	<%= render :partial => 'ratings/rating', :collection => @ratings %>
 </div>
+
+<% if session[:reviewalert] %>
+	<% session.delete(:reviewalert) %>
+	<script>
+		alert("Now that you've created an Event, don't forget to give it a review!");
+	</script>
+<% end %>
