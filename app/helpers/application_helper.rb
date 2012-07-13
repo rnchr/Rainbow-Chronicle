@@ -203,4 +203,29 @@ module ApplicationHelper
   def report_post(post)
     "/report/#{post.class.name.downcase}/#{post.id}"
   end
+  
+  def quippy_phrase(rating)
+    if rating <= -4 
+      return "The Most Unfriendly"
+    elsif rating <= -3
+      return "Exceptionally Unfriendly - The Dick Cheney of Gay Friendliness"
+    elsif rating <= -2
+      return "Good Old Fashioned Unfriendliness"
+    elsif rating <= -1
+      return "Smugly Unfriendly"
+    elsif rating <= 0 
+      return "Passively Unfriendly, Like a Bad Roommate"
+    elsif rating <= 1
+      return "Neutral, the decaf skim late of gay friendliness"
+    elsif rating <= 2
+      return "Sufficiently Friendly"
+    elsif rating <= 3
+      return "Pleasingly Friendly"
+    elsif rating <= 4
+      return "Pretty, Pretty, Pretty Gay Friendly"
+    elsif rating <= 5
+      return "Ludicrously Gay Friendly"
+    end
+  end
+  
 end

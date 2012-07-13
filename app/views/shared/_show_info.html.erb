@@ -49,9 +49,11 @@
 	#{obj.lat},#{obj.lng}&sensor=false" %>
 </div>
 
-<div class="span1" style="text-align:center;">
+<div class="span1" style="text-align:center;width:120px;">
 	<div class="colored-icon">
 		<%= raw icon_for obj.cached_rating, obj.class.to_s %>
 	</div>	<br>
 	<span style="font-size:30px;"><%= obj.rating_string %></span> <br>on a scale of -5 to 5
+	<br><br><span style="font-weight:bold;">The Verdict:</span><br><br>
+	<%= quippy_phrase(obj.rating_string.to_f) %>
 </div>
