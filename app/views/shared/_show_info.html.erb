@@ -16,7 +16,7 @@
 				data-content="<%= obj.user.titles.each do |t| %> <%= t.name %> of <%= t.city  %>, <%= t.state %> <br>
 				<% end %>">Titles</a>
 		<% else %>
-			<%= link_to obj.user.display_name, user_path(obj.user) %>
+			<%= link_to obj.user.display_name, user_path(obj.user) %>	
 		<% end %>	
 		<% if obj.user.stars.any? %> 
 			- 
@@ -31,14 +31,14 @@
 			<%= image_tag obj.photo.url(:medium) %>
 		<% end %>
 		
-		<dl>
+		<dl style="word-wrap: break-word;">
 			<%= raw display_if_present(obj, show) %>
 		</dl>
 		<strong>Actions: </strong>
-		<%= link_to 'Report', report_post(obj) %>
+		<%= link_to 'Flag', report_post(obj) %>
 		<% if can? [:edit, :destroy], obj %>
 			| <%= link_to 'Edit', polymorphic_url(obj, action: :edit) %> | 
-			<%= link_to 'Delete this post', obj, method: :delete, :confirm => 'Are you sure?' %>
+			<%= link_to 'Delete', obj, method: :delete, :confirm => 'Are you sure?' %>
 		<% end %>
 </div>
 

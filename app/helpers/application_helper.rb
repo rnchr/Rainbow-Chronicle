@@ -92,11 +92,11 @@ module ApplicationHelper
   
   def to_pair(o,k)
     if k.eql? :website
-      t = link_to o[k], o[k]
+      t = link_to o[k].truncate(25), o[k]
     else
       t = o[k]
     end
-    "<dt>#{k.to_s.capitalize}</dt>\n<dd>#{t}</dd>"
+    "<dt>#{k.to_s.capitalize}</dt>\n<dd>#{t}</dd><br>"
   end
 
   # return an image tag for the appropriate map icon.
