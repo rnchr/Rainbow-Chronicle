@@ -9,7 +9,7 @@
 </form>
 
 <%= gmaps({:map_options => {
-						 :center_latitude => location[:ll][0], :center_longitude => location[:ll][1], :zoom => 12
+						 :center_latitude => location[:ll][0], :center_longitude => location[:ll][1], :zoom => 15
 					 },
 					"markers" => { "data" => json, "options" => { "clusterer_maxZoom" => 1 } }
 
