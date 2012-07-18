@@ -36,8 +36,8 @@ class @Gmaps4Rails
       zoom: 9
       maxZoom: null
       minZoom: null
-      auto_adjust : true      # adjust the map to the markers if set to true
-      auto_zoom: true         # zoom given by auto-adjust
+      auto_adjust : false      # adjust the map to the markers if set to true
+      auto_zoom: false         # zoom given by auto-adjust
       bounds: []              # adjust map to these limits. Should be [{"lat": , "lng": }]    
       raw: {}                  # raw json to pass additional options
 
