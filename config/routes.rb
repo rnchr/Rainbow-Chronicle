@@ -11,6 +11,7 @@ RcRails::Application.routes.draw do
   match 'home' => 'static#home'
   match 'leaderboard' => 'rankings#index'
   match 'update-leaders' => 'rankings#update'
+  match 'hiring' => 'static#hiring'
 
   
   devise_for :users, :controllers => {:registrations => 'registrations'}
@@ -45,14 +46,6 @@ RcRails::Application.routes.draw do
     end
   end
   
-  resources :events do
-    collection do
-      get 'popular'
-      get 'unsafe'
-    end
-    resources :event_ratings
-  end
-
   resources :leaders do
     collection do
       get 'popular'

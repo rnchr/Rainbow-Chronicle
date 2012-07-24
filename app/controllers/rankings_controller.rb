@@ -1,5 +1,5 @@
 class RankingsController < ApplicationController
-  http_basic_authenticate_with :name => "admin", :password => "rainbowz"
+  http_basic_authenticate_with :name => "rcmafia", :password => "rainbowz"
   def index
     @leaders = User.order('stars_count DESC').limit(20)
   end
@@ -13,7 +13,7 @@ class RankingsController < ApplicationController
       end
       i += 1
     end
-    if holder.length < 1 || holder.length > 5
+    if holder.length < 1 || holder.length > 6
       session[:verify_leaderboard] = true
       @leaders = User.order('stars_count DESC').limit(20)
       render :index

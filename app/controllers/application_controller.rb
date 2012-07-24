@@ -14,14 +14,7 @@ class ApplicationController < ActionController::Base
   end
   
   def load_leaderboard
-    leaders = Ranking.all
-    @leaderboard = []
-    leaders.each do |l|
-      place = l.place
-      user = User.find(l.user_id)
-      string = place.to_s+". "+user.display_name+" - "+user.stars_count.to_s+" stars"
-      @leaderboard << string
-    end        
+    @rankings = Ranking.includes(:user).all        
   end
   
   def not_found

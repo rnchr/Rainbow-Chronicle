@@ -55,7 +55,6 @@
 				<li id="News"><a href="<%= news_index_path %>">News</a></li>
 				<li id="Place"><a href="<%= places_path %>">Places</a></li>
 				<li id="Leader"><a href="<%= leaders_path %>">Leaders</a></li>
-				<li id="Event"><a href="<%= events_path %>">Events</a></li>
 				<li id="Map"><a href="<%= map_path %>">Rainbow Map</a></li>
 				<li id="User" class="dropdown">
 					<% unless user_signed_in? %>
@@ -94,16 +93,29 @@
 			<div class="span7 main-content" style="margin-bottom:50px;">
 				<%= yield %>
 			</div>
+			<div class="span3 sidebar-nav" onclick="window.location='/hiring';" style="cursor:pointer;margin-bottom:10px;">
+				<h2 class="sidebar-title" style="background-color:blue;text-align:center;">Rainbow Chronicle is Hiring</h2>
+			</div>	
 			<div class="span3 sidebar-nav" >
-				<h2 class="sidebar-title">Leaderboard</h2>
-				<% if @leaderboard.empty? %>
+				<h2 class="sidebar-title" style="text-align:center;">User Leaderboard &nbsp;&nbsp;&nbsp;<span style="font-size:12px;"><a href="javascript:void(0);" rel="popover" title="New Feature: Leaderboard" data-content="Rainbow Chronicle is holding a competition for adding content to the site. Whoever adds the most content wins an Amazon Kindle. The next three runners-up will win $25 Amazon Gift Cards. The competition will last from now till then." data-placement="bottom" style="text-decoration:none;color:white;vertical-align:top;">?</a></span></h2>
+				<% if @rankings.empty? %>
 					<br><br><br><br>
 				<% else %>	
-					<ul class="nav nav-list">
-						<% @leaderboard.each do |ranker| %>
-							<%= ranker %><br>
-						<% end %>	
-					</ul>
+				<br>
+				<div class="well" style="font-weight:bold;font-size:16px;">				
+					<% @rankings.each do |ranker| %>
+						 <%= ranker.place %>. <%= ranker.user.display_name %><br>
+						 <div style="width:100%;padding-left:15px;">
+							<%= ranker.user.stars_count %><a href="javascript:void(0);" rel="popover" title="New Feature: Stars and Titles" data-content="Whenever you create a place, leader or event on Rainbow Chronicle, you get two stars, and any time you add a rating you are awarded 1 star. <br><br>Titles are earned by having rated or created the most places, leaders or events in any given city. First place in any city is titled the 'Marshal', second place is the 'Sheriff' and third place is the 'Deputy'. If you have titles in multiple cities, you become a 'Grand Marshal'"><%= image_tag "star.png" %></a>
+							<% unless ranker.user.location.blank? %>
+								<br><%= ranker.user.location%>
+							<% end %>	
+							<br><br>
+						  </div>
+												
+					<% end %>	
+
+				</div>	
 				<% end %>	
 			</div>
 			<div class="span3 sidebar-nav" >

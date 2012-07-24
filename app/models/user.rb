@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   has_many :titles
   has_many :stars
   has_many :comments
-  
+  has_one :ranking
   # recent_activities
   # takes optional argument n, for how many results to return 
   # returns list of n most recent site actions
