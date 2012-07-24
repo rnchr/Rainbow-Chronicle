@@ -94,8 +94,19 @@
 			<div class="span7 main-content" style="margin-bottom:50px;">
 				<%= yield %>
 			</div>
-			<br><br><br><br>
-			<div class="span3 sidebar-nav">
+			<div class="span3 sidebar-nav" >
+				<h2 class="sidebar-title">Leaderboard</h2>
+				<% if @leaderboard.empty? %>
+					<br><br><br><br>
+				<% else %>	
+					<ul class="nav nav-list">
+						<% @leaderboard.each do |ranker| %>
+							<%= ranker %><br>
+						<% end %>	
+					</ul>
+				<% end %>	
+			</div>
+			<div class="span3 sidebar-nav" >
 					<h2 class="sidebar-title">Recent News</h2>
 					<ul class="nav nav-list">
 						<% @recent.each do |news| %>

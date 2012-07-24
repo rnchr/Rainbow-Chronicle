@@ -6,10 +6,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :load_recent_news
+  before_filter :load_leaderboard
   before_filter :load_location
   
   def load_recent_news
     @recent = News.recent
+  end
+  
+  def load_leaderboard
+    leaders = Ranking.all
+    @leaderboard = []
+    leaders.each do |l|
+      place = l.place
+      user = User.find(l.user_id)
+      string = place.to_s+". "+user.display_name+" - "+user.stars_count.to_s+" stars"
+      @leaderboard << string
+    end        
   end
   
   def not_found

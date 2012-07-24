@@ -9,6 +9,8 @@ RcRails::Application.routes.draw do
   match 'pages/:action', :controller => 'pages'
   match '/map'  => 'pages#map'
   match 'home' => 'static#home'
+  match 'leaderboard' => 'rankings#index'
+  match 'update-leaders' => 'rankings#update'
 
   
   devise_for :users, :controllers => {:registrations => 'registrations'}

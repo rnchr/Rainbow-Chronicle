@@ -1,0 +1,36 @@
+<% if session[:verify_leaderboard] %>
+	<script>
+		alert("Please choose between 1 and 5 leaders");
+	</script>
+	<% session.delete(:verify_leaderboard) %>
+<% end %>	
+
+<strong>Check the boxes to select the top 5 users for the leaderboard. After you make your selection, the old leaderboard will be erased and a new one created based on your selection.</strong>
+<br><br>
+<div class="table table-striped" >
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Star Count</th>
+			<th>Email</th>
+			<th>Add to Leaderboard</th>
+		</tr>	
+	<%= form_tag '/update-leaders' do %>
+
+	<% i = 1 %>
+	<% @leaders.each do |s| %>
+		<tr>
+			<td><%= s.display_name %></td>
+			<td><%= s.stars_count %> stars</td>
+			<td><%= s.email %></td> 
+			<td><%= check_box_tag i, s.id  %></td>
+		</tr>	
+		<% i += 1 %>
+	<% end %>	
+	</table>
+	<br><br>
+	<%= submit_tag 'Save Leaderboard', :class => 'btn btn-success' %>
+
+	<% end %>
+	
+</div>	
