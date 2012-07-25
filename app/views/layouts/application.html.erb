@@ -94,14 +94,14 @@
 				<%= yield %>
 			</div>
 			<div class="span3 sidebar-nav" onclick="window.location='/hiring';" style="cursor:pointer;margin-bottom:10px;">
-				<h2 class="sidebar-title" style="background-color:blue;text-align:center;">Rainbow Chronicle is Hiring</h2>
+				<h2 class="sidebar-title" style="background-color:blue;text-align:center;">Rainbow Chronicle<br>is Hiring</h2>
 			</div>	
+		
 			<div class="span3 sidebar-nav" >
-				<h2 class="sidebar-title" style="text-align:center;">User Leaderboard &nbsp;&nbsp;&nbsp;<span style="font-size:12px;"><a href="javascript:void(0);" rel="popover" title="New Feature: Leaderboard" data-content="Rainbow Chronicle is holding a competition for adding content to the site. Whoever adds the most content wins an Amazon Kindle. The next three runners-up will win $25 Amazon Gift Cards. The competition will last from now till then." data-placement="bottom" style="text-decoration:none;color:white;vertical-align:top;">?</a></span></h2>
+				<h2 class="sidebar-title" style="text-align:center;"><a href="javascript:void(0);" rel="popover" title="New Feature: Leaderboard" data-content="Rainbow Chronicle is holding a competition for adding content to the site. Whoever adds the most content wins an Amazon Kindle. The next three runners-up will win $25 Amazon Gift Cards. The competition will last from now till then." data-placement="top" style="color:white;text-decoration:none;">User Leaderboard</a></h2>
 				<% if @rankings.empty? %>
 					<br><br><br><br>
 				<% else %>	
-				<br>
 				<div class="well" style="font-weight:bold;font-size:16px;">				
 					<% @rankings.each do |ranker| %>
 						 <%= ranker.place %>. <%= ranker.user.display_name %><br>

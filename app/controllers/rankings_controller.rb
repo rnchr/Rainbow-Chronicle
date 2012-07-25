@@ -1,13 +1,13 @@
 class RankingsController < ApplicationController
   http_basic_authenticate_with :name => "rcmafia", :password => "rainbowz"
   def index
-    @leaders = User.order('stars_count DESC').limit(20)
+    @leaders = User.order('stars_count DESC').limit(40)
   end
   
   def update
     i=1
     holder = []
-    20.times do 
+    40.times do 
       unless params[i.to_s].nil?
         holder << params[i.to_s].to_i
       end
@@ -15,7 +15,7 @@ class RankingsController < ApplicationController
     end
     if holder.length < 1 || holder.length > 6
       session[:verify_leaderboard] = true
-      @leaders = User.order('stars_count DESC').limit(20)
+      @leaders = User.order('stars_count DESC').limit(40)
       render :index
     else
       Ranking.destroy_all

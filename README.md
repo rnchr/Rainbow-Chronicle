@@ -44,6 +44,7 @@ Changes generally take some time to propagate unless you restart the server. Kee
 
 		ssh andrew@50.56.182.200
 		cd rails_apps/production/Rainbow-Chronicle
+		Staging: cd rails_apps/Rainbow-Chronicle
 		git pull
 		RAILS_ENV=production rake assets:precompile
 		RAILS_ENV=production rake routes
