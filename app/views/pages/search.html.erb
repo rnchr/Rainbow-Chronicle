@@ -16,8 +16,4 @@
 		<h3>Leaders</h3>
 		<%= render :partial => 'search_list', :locals => {:list => @leaders} %>
 	<% end %>
-	<% if @events.count.nonzero? %>
-		<h3>Events</h3>
-		<%= render :partial => 'search_list', :locals => {:list => @events} %>
-	<% end %>
 <% end %>
