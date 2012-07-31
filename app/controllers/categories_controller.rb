@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   def show
     @category = params[:category]
     @path = @klass.where(:name => @category).first.ancestry_path
-    @all = @klass.related_to(@category, @location[:ll]).sort {|a,b| a.distance <=> b.distance }
+    @all = @klass.related_to(@category, @location[:ll]).sort_by { |a| a.category_featured ? 0 : 1 }
     @json = @all.to_gmaps4rails
     @items = Kaminari.paginate_array(@all).page(params[:page]).per(10)
   end

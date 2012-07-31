@@ -36,6 +36,7 @@
 
 	<div class="listed-items">
 		<h3 class="list-title" style="display:inline-block;"><%= collection %></h3>
+		<% items = items.order('city_featured DESC') %>
 		<%= render items %>
 		<br style="clear: both;" />
 		<%= paginate items %>

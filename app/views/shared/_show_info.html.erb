@@ -40,6 +40,22 @@
 			| <%= link_to 'Edit', polymorphic_url(obj, action: :edit) %> | 
 			<%= link_to 'Delete', obj, method: :delete, :confirm => 'Are you sure?' %>
 		<% end %>
+		<br>
+		<% if verify_rc_elite %> 
+			<% already_city = obj.city_featured %>
+			<% already_category = obj.category_featured %><br><br>
+			<% if already_city %>
+				<%= link_to "Remove from City Featured", cityfeatured_path(:type => obj.class, :obj_id => obj.id, :bool_time => false) %><br>
+			<% else %>	
+				<%= link_to "Feature in City", cityfeatured_path(:type => obj.class, :obj_id => obj.id, :bool_time => true) %><br>
+			<% end %>	
+			<% if already_category %>
+				<%= link_to "Remove from Category Featured", categoryfeatured_path(:type => obj.class, :obj_id => obj.id, :bool_time => false) %>
+			<% else %>	
+				<%= link_to "Feature in Category", categoryfeatured_path(:type => obj.class, :obj_id => obj.id, :bool_time => true) %>
+			<% end %>
+
+		<% end %>
 </div>
 
 

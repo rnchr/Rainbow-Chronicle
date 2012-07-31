@@ -148,8 +148,8 @@ module ApplicationHelper
     "?location=#{loc}"
   end
   
-  def set_all_index_vars
-    @all_items = klass.near(@location[:ll], default_distance)
+  def set_all_index_vars    
+    @all_items = klass.near(@location[:ll], default_distance)  
     @items = @all_items.page(params[:page]).per(10)
     @json = @all_items.to_gmaps4rails
     @state_items = klass.where(:state => @location[:state]).ordered_cities
@@ -171,6 +171,18 @@ module ApplicationHelper
     @json = @all_items.to_gmaps4rails
     @items = @all_items.page(params[:page]).per(10)
     @heading = "Hall of Fame"
+  end
+  
+  def verify_rc_elite
+    begin
+      if current_user.id == 1 || current_user.id == 775
+        return true
+      else
+        return false
+      end
+    rescue
+      return false
+    end  
   end
   
   def set_unsafe_vars

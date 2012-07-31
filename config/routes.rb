@@ -12,8 +12,9 @@ RcRails::Application.routes.draw do
   match 'leaderboard' => 'rankings#index'
   match 'update-leaders' => 'rankings#update'
   match 'hiring' => 'static#hiring'
+  match 'cityfeatured' => 'featured#city_featured'
+  match 'categoryfeatured' => 'featured#category_featured'
 
-  
   devise_for :users, :controllers => {:registrations => 'registrations'}
   match '/auth/:provider/callback' => 'authentications#create'
   
