@@ -108,11 +108,15 @@
 						<% @rankings.each do |ranker| %>
 							 <div style="border:2px solid black;margin: 5px 0px;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;padding:5px;">
 								 <%= ranker.place %>. <%= ranker.user.display_name %><br>
-								 <div style="width:100%;text-align:center;">
-									<%= ranker.user.stars_count %><a href="javascript:void(0);" rel="popover" title="New Feature: Stars and Titles" data-content="Whenever you create a place, leader or event on Rainbow Chronicle, you get two stars, and any time you add a rating you are awarded 1 star. <br><br>Titles are earned by having rated or created the most places, leaders or events in any given city. First place in any city is titled the 'Marshal', second place is the 'Sheriff' and third place is the 'Deputy'. If you have titles in multiple cities, you become a 'Grand Marshal'" data-placement="left"><%= image_tag "star.png" %></a>
+								 <div style="width:100%;">
+									<div style="margin-top:5px;">	
+									<%= ranker.user.stars_count %><a href="javascript:void(0);" rel="popover" title="New Feature: Stars and Titles" data-content="Whenever you create a place, leader or event on Rainbow Chronicle, you get two stars, and any time you add a rating you are awarded 1 star. <br><br>Titles are earned by having rated or created the most places, leaders or events in any given city. First place in any city is titled the 'Marshal', second place is the 'Sheriff' and third place is the 'Deputy'. If you have titles in multiple cities, you become a 'Grand Marshal'" data-placement="left"><%= image_tag "star.png", :style => ("width:15px;height:15px;") %></a>
+									</div>
 									</div>
 									<% unless ranker.user.location.blank? %>
-										<br><%= ranker.user.location%>
+										<div style="margin-top:5px;">
+										<%= ranker.user.location%>
+										</div>
 									<% end %>									  
 							 </div>					
 						<% end %>	
