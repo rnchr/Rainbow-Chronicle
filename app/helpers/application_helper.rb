@@ -175,7 +175,7 @@ module ApplicationHelper
   
   def verify_rc_elite
     begin
-      if current_user.id == 1 || current_user.id == 775
+      if current_user.id == 1 || current_user.id == 775 || current_user.id == 3 || current_user.id == 4
         return true
       else
         return false
