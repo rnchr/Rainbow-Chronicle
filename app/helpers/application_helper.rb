@@ -148,8 +148,12 @@ module ApplicationHelper
     "?location=#{loc}"
   end
   
-  def set_all_index_vars    
-    @all_items = klass.near(@location[:ll], default_distance)  
+  def set_all_index_vars
+    if klass == Place || klass == Leader
+      @all_items = klass.order("city_featured DESC").near(@location[:ll], default_distance)
+    else 
+      @all_items = klass.near(@location[:ll], default_distance)  
+    end  
     @items = @all_items.page(params[:page]).per(10)
     @json = @all_items.to_gmaps4rails
     @state_items = klass.where(:state => @location[:state]).ordered_cities

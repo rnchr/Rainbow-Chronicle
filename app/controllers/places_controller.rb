@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
   def index
       set_all_index_vars
   end
-
+  
   def show
     @place = Place.find(params[:id])
     @ratings = @place.ratings #.map {|r| rating_helper r }
